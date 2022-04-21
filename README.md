@@ -1,33 +1,34 @@
-# Brick Breaker
-## Topic
+# **Team Project - BrickBreaker (Null Pointer Exception)**
 
-## Team Members
-Anshul Shandilya </br>
-Boteng Yuan </br>
-Rafic Hasbini </br>
-Varun Teja Maguluri </br>
-## Summary
+### **The Topic of your team's project**
 
-## UML Diagrams
+--- Insert topic here ---
 
-## Links for Journals
-### Week 1
-Anshul Shandilya
+### **Link to your team's project Videos**
 
-Boteng Yuan
-</br>
-https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week1.md
-</br>
+--- Link to video here ---
 
-Rafic Hasbini
+### **Our Team**
+* Anshul Kumar Shandilya
+* Boteng Yuan
+* Rafic Hasbini
+* Varun Teja Maguluri
 
-Varun Teja Maguluri
-<br>
-https://github.com/nguyensjsu/sp22-202-null-pointer-exception/tree/main/Journals/Varun
-</br>
+### **Individual Journals**
+**(Note: Please enter your OWN journal links here). Must be on github as a markdown.**
+* Anshul Kumar Shandilya's Journal
+* Boteng Yuan's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week1.md)
+* Rafic Hasbini's Journal
+* Varun Teja Maguluri's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/tree/main/Journals/Varun)
+  
+### **Summarizing our game**
 
-### Week 2
-### Week 3
-### Week 4
+--- Insert summary here ---
 
-## Links for Videos
+### **A High Level Architecture Diagram**
+
+--- First we can come up with the initial idea itself ---
+
+### **A summary of the key features (include any special design ideas implemented)**
+
+--- Insert all the **WORKING** key features that we added and implemented to the game. (Must be credible enough for it to go here) ---
