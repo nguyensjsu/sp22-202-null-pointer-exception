@@ -78,7 +78,7 @@ public class ThemeMenu extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
-        var g2d = (Graphics2D) g;
+        Graphics2D g2d = (Graphics2D) g;
 
         try {
             drawText(g2d);
