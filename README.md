@@ -22,6 +22,9 @@ https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals
 Rafic Hasbini
 
 Varun Teja Maguluri
+<br>
+https://github.com/nguyensjsu/sp22-202-null-pointer-exception/tree/main/Journals/Varun
+</br>
 
 ### Week 2
 ### Week 3
