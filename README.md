@@ -16,7 +16,7 @@
 
 ### **Individual Journals**
 **(Note: Please enter your OWN journal links here). Must be on github as a markdown.**
-* Anshul Kumar Shandilya's Journal
+* Anshul Kumar Shandilya's Journal - [Week 1](Journals/Anshul/Week1.md)
 * Boteng Yuan's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week1.md)
 * Rafic Hasbini's Journal
 * Varun Teja Maguluri's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/tree/main/Journals/Varun)
