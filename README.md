@@ -16,7 +16,7 @@ Anshul Shandilya
 
 Boteng Yuan
 </br>
-https://github.com/nguyensjsu/sp22-202-null-pointer-exception/tree/main/Journals/Boteng
+https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week1.md
 </br>
 
 Rafic Hasbini
