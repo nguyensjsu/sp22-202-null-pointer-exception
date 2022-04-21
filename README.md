@@ -1,7 +1,5 @@
 # **Team Project - BrickBreaker (Null Pointer Exception)**
 
-# **BRICK BREAKER**
-
 # GAME INTRODUCTION AND PLAN
 We are implementing a  simple brick breaker game which will be having layers of bricks and ball with which to break the layers. The player moves the paddle from left to right to keep the ball from falling. A life is used when the player fails to hit the ball with paddle. The paddle doesn’t bounce the ball like a mirror, although it does so when the ball hits right in the middle. The closer the bounce take place to the left end of the paddle, a more significant left turn is added to an expected mirror bouncing. 
 
