@@ -4,4 +4,4 @@
 
 Varun Teja Maguluri
 
-### **Research and Analysis of game requirements**
+### **Research and Analysis of game requirements:**
