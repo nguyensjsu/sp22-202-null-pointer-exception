@@ -3,3 +3,5 @@
 ### **Team Member Name (Individual)**<br>
 
 Varun Teja Maguluri
+
+### **Discussion and insights of game to develop **
