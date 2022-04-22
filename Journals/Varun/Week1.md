@@ -16,5 +16,15 @@ As this is the first step in developing the project, the main tasks that we focu
 ### **Core XP value - (Feedback):**
 So, the feedback that I have chosen mainly focuses on the previous efforts that were implemented in the previous span of work and to analyze it and come to a conclusion and what to do to make the particular feature more reliable and elevate the feature. Through constant feedback about the previous efforts, our team can identify areas for improvement and revise the practices and implement a good and more flexible code. Feedback also supports simple designs as well as complex designs and elevates them in a timely manner. And if me or my teammates build something, the feedback plan that will be implemented here is to gather feedback on the design developed and implementation, and then adjust the product going forward. Every iteration of commitment will be taken seriously for delivering a working game. The game in the coming weeks should be undergoing a lot of testing and feedback is taken so that necessary changes can be made if needed. The value of the feedback is a continuously running system that delivers information about the game in a reliable way.
 
-### **Referred Videos and Websites:**
-"[X]""(https://www.makeuseof.com/tag/simple-brick-breaker-the-old-classic-game-remains-as-addictive-as-it-was-before-iphone/)"
+### **Referred Videos and Websites for Analysis of Game:**
+### **Websites:**
+https://www.makeuseof.com/tag/simple-brick-breaker-the-old-classic-game-remains-as-addictive-as-it-was-before-iphone/
+
+https://www.skyfilabs.com/project-ideas/brick-breaker-game-development-project
+
+### **Video Links:**
+https://www.youtube.com/watch?v=SJpoom-topw
+
+https://www.youtube.com/watch?v=-G-lVYtxsEo
+
+
