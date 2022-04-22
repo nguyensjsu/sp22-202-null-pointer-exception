@@ -1,4 +1,4 @@
-# Null Pointer Exception Sprint #1
+# Null Pointer Exception Week #1
 
 ### **Team Member Name (Individual)**<br>
 
