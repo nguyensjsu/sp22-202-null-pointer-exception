@@ -4,4 +4,4 @@
 
 Varun Teja Maguluri
 
-### **Discussion and insights of game to develop **
+### **Discussion and insights of game to develop**
