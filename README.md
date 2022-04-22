@@ -20,7 +20,7 @@ A regular brick disappears when it’s hit by the ball, or breaks a little if it
 * Anshul Kumar Shandilya's Journal - [Week 1](Journals/Anshul/Week1.md)
 * Boteng Yuan's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week1.md)
 * Rafic Hasbini's Journal
-* Varun Teja Maguluri's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/tree/main/Journals/Varun)
+* Varun Teja Maguluri's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week1.md)
   
 ### **Summarizing our game**
 
