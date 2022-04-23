@@ -22,11 +22,12 @@ The first roadblock that I have encountered in this application is to make paddl
 
 ### **Coding Screenshots:**
 
-<img width="1033" alt="Screen Shot 2022-04-23 at 12 53 54 AM" src="https://user-images.githubusercontent.com/98674002/164885757-79462d89-71ce-4df9-9562-cdd7cc55feb7.png">
+<img width="1029" alt="Screen Shot 2022-04-23 at 12 53 54 AM" src="https://user-images.githubusercontent.com/98674002/164885961-eabd9b7b-e977-4dd6-b813-f86578cba88a.png">
 
-<img width="1017" alt="Screen Shot 2022-04-23 at 12 54 17 AM" src="https://user-images.githubusercontent.com/98674002/164885759-21cc83ee-b7f3-4312-9963-6c4a995c78d2.png">
+<img width="1012" alt="Screen Shot 2022-04-23 at 12 54 17 AM" src="https://user-images.githubusercontent.com/98674002/164885964-9b0fe0d6-0ee1-45a7-9c1e-29774fd1f861.png">
 
-<img width="1019" alt="Screen Shot 2022-04-23 at 12 54 28 AM" src="https://user-images.githubusercontent.com/98674002/164885761-8123d624-e5f6-4506-a2cd-09a531c1f2cb.png">
+<img width="1013" alt="Screen Shot 2022-04-23 at 12 54 28 AM" src="https://user-images.githubusercontent.com/98674002/164885965-81c102ad-e877-4723-9362-f86dac814691.png">
+
 
 
 
