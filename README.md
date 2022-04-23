@@ -16,20 +16,19 @@ A regular brick disappears when it’s hit by the ball, or breaks a little if it
 * Varun Teja Maguluri
 
 ### **Individual Journals**
-**(Note: Please enter your OWN journal links here). Must be on github as a markdown.**
+
 * Anshul Kumar Shandilya's Journal - [Week 1](Journals/Anshul/Week1.md)
 * Boteng Yuan's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week1.md)
 * Rafic Hasbini's Journal
 * Varun Teja Maguluri's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week1.md), [Week 2](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week2.md)
   
 ### **Summarizing our game**
-
---- Insert summary here ---
+The game that we as a team developing is Brick Breaker. So, the main concept of this game is, the player will be given a ball and all the time the ball will be in motion. And the player will just be controlling the paddle at the bottom which he can just move that paddle left and right. The main task of the player is to hit the ball with paddle and also make sure the ball hits the bricks at top. If he fails to hit any brick or fails to hit the ball with his paddle, then one life of the player will be lost. By default, each player will be given 3 lives. So, in this game, there were extended features like special bricks whose functionality is whenever the user hits this special brick, a new ball will be added to the game and if he managed to hit that ball, his paddle length will be increased. And also another extra feature that is planned to implement in this game is background music for this game.
 
 ### **A High Level Architecture Diagram**
+------ IN PROGRESS ------
 
---- First we can come up with the initial idea itself ---
 
 ### **A summary of the key features (include any special design ideas implemented)**
 
---- Insert all the **WORKING** key features that we added and implemented to the game. (Must be credible enough for it to go here) ---
+------ IN PROGRESS ------
