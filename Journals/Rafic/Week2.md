@@ -5,6 +5,7 @@
 <b>What have I been working on?</b> 
 <br>
 This week I have been actively working to change the gameplay rules for a ball bouncing on the top border. This included becoming familiar with the Ball.java class and Gameboard.java class to dictate the condition if the ball hits the top border. To make this change, I have removed the condition to stop the game if the ball hits the top in Gameboard.java class, and have implemented a new condition in the move method of the ball class to change reverse the x-direction of the ball touches the top border. Images of the updated code for the ball and gameboard is attached below: 
+<br>
 <img width="360" alt="BallMoveMethod" src="https://user-images.githubusercontent.com/98677825/164889564-6aac2d99-c3e4-4301-bb1c-d48fc324dc32.png">
 <br>
 In the Gameboard.java class, the following line was removed to allow for the new ball.move() implementation to dictate condition of ball hitting top border.
