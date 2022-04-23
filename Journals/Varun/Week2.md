@@ -4,6 +4,9 @@
 
 Varun Teja Maguluri
 
+### **Overview:**
+The main tasks that I have worked on for this week is to design and implement the paddle that will be a key component in our game and also the position maintainence and keep tracking of each and every UI component that will be involved in the game development. To achieve this, I have used java geom.Rectangle2D package and java swing package. So, for paddle to move left and right, I have imported java keyEvent package. And also designed the paddle images with small, medium and larger lengths. So, I will be explaining the flow and logic that I have implemented during this week below.
+
 ### **Design and Implementation:**
 First thing that I have planned to do is to design and develop the paddle and implement the logic for it to be able to move from left to right or viceversa by the direction in which the user is making it to go. So, to do that I have choosen java awt package and java swing packages. And then I have taken 3 types of images to implement the paddle logic which were of different sizes because these different sizes will be implemented according to the functionality and execution of game. Then I have imported these images into my project and have retrieved their dimensions. Because these dimensions are very useful to keep track of and the final design will be relying on these dimensions for each and every UI component. Then I have  implemented the code in such a way that the initial paddle that will be used by the user is a small one. But once the player hits a special brick, and catches a red ball, then the paddle size is set to medium one. And similarly if the player hits another red ball, then I have written logic to change the paddle to large one.
 
