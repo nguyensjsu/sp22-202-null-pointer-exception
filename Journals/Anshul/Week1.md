@@ -6,21 +6,24 @@ Anshul Kumar Shandilya
 
 ### **What have I been working on?**
 
- For week 1 sprint, our team decided on what product we need to deliver. So, majority of week one has been finding the feasibility of implementing BrickBreaker game in java. 
+ For week 1 sprint, our team decided on what product we need to deliver. So, majority of week one has been finding what project to do. We decided on a famous game called the brick breaker. The initial part was determining the feasibility of implementing BrickBreaker game in java. 
+Among our group, we went through various videos and examples of the brick breaker game to know the basic concepts of the game. 
+Based on whatever  examples we went through, I brought up various features that would be appropriate for implementing in the game along with all the ones that were already existing.
  We found an open source example for our idea to build upon, from [brickbreaker](https://github.com/cis3296s22/Java-Brick-Breaker-Game). So far, our objective was to build 
  upon the existing source code, but that would simply add features to an existing code. So the team decided to break the code and re-write it in our own words since adding
  features to the existing code base is difficult since the existing example was tightly coupled.
- 
+
 ### **What I plan to do today/this week?**
 
 For the next sprint and iteration, we plan to refactor the existing code using proper design patterns. By doing this, we plan to make the code base more independent of various
 components, ie making it more loosely coupled. This would ensure that changing one aspect of the code does not break other parts of the code, thus making the base follow more
 of an OOP approach. Thus, our major task is to refactor the code base while ensuring it follows the OOP rules and also implement design patterns in the code while doing so to
 make it easier to implement more features and make design changes to the code without breaking other parts of the code. 
+After that, going through the design for the code, we have decided to split the implementations for the code between us, and apart from trying to figuring out refactoring issues, I will work on implementing the classes assigned to me. 
 
 ### **What are my blockers?**
 
-At the current moment, there are no blockers for me.
+For this sprint, I had no blockers for me.
 
 ### **Core XP value - (Communication)**
 
