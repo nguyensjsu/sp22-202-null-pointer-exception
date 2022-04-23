@@ -9,7 +9,8 @@ This week I have been actively working to change the gameplay rules for a ball b
 <img width="360" alt="BallMoveMethod" src="https://user-images.githubusercontent.com/98677825/164889564-6aac2d99-c3e4-4301-bb1c-d48fc324dc32.png">
 <br>
 In the Gameboard.java class, the following line was removed to allow for the new ball.move() implementation to dictate condition of ball hitting top border.
-    if(ball.getRect().getMaxY() < Configurations.TOP_EDGE){stopGame();}
+<br>
+if(ball.getRect().getMaxY() < Configurations.TOP_EDGE){stopGame();}
 
 A separate branch was created in the repo to commit these changes, before they can be carried into the master branch. The changes was also tested and works as intended.
 
