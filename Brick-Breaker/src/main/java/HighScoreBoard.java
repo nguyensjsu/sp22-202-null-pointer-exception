@@ -48,7 +48,7 @@ public class HighScoreBoard extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
-        var g2d = (Graphics2D) g;
+        Graphics2D g2d = (Graphics2D) g;
 
         try {
             drawScores(g2d);
@@ -61,7 +61,7 @@ public class HighScoreBoard extends JPanel{
         FileReader in = new FileReader("ScoreList.txt");
         BufferedReader br = new BufferedReader(in);
 
-        var font = new Font("Verdana", Font.BOLD, 18);
+        Font font = new Font("Verdana", Font.BOLD, 18);
         FontMetrics fontMetrics = this.getFontMetrics(font);
 
         g2d.setColor(Color.RED);
@@ -75,7 +75,7 @@ public class HighScoreBoard extends JPanel{
         int y = 100;
 
         if(line == null){
-            var font3 = new Font("Verdana", Font.BOLD, 15);
+            Font font3 = new Font("Verdana", Font.BOLD, 15);
             g2d.setColor(Color.BLACK);
             g2d.setFont(font3);
             g2d.drawString("No Scores yet!", 40, y);
@@ -107,7 +107,7 @@ public class HighScoreBoard extends JPanel{
                 scores.add(0);;
             }
             scores.sort(Collections.reverseOrder());
-            var font2 = new Font("Verdana", Font.BOLD, 15);
+            Font font2 = new Font("Verdana", Font.BOLD, 15);
             g2d.setColor(Color.BLACK);
             g2d.setFont(font2);
             for (int i = 0; i < 5; i++) {

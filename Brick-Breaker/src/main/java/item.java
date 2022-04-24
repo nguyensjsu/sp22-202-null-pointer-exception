@@ -27,7 +27,7 @@ public class item extends Sprite {
 
     private void loadImage() throws IOException {
 
-        var ii = new ImageIcon(ImageIO.read(Ball.class.getResource("/images/itemDrop.png")));
+        ImageIcon ii = new ImageIcon(ImageIO.read(Ball.class.getResource("/images/itemDrop.png")));
         image = ii.getImage();
     }
 

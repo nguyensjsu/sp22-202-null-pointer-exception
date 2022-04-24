@@ -49,19 +49,19 @@ public class Brick extends Sprite
     private void loadImage(int index) throws IOException {
 
         if (index == 0) {
-            var ii = new ImageIcon(ImageIO.read(Brick.class.getResource("/images/brick.png")));
+            ImageIcon ii = new ImageIcon(ImageIO.read(Brick.class.getResource("/images/brick.png")));
             image = ii.getImage();
         } else if (index == 1) {
-            var ii = new ImageIcon(ImageIO.read(Brick.class.getResource("/images/brick_cracked_1.png")));
+            ImageIcon ii = new ImageIcon(ImageIO.read(Brick.class.getResource("/images/brick_cracked_1.png")));
             image = ii.getImage();
         } else if (index == 2) {
-            var ii = new ImageIcon(ImageIO.read(Brick.class.getResource("/images/brick_cracked_2.png")));
+            ImageIcon ii = new ImageIcon(ImageIO.read(Brick.class.getResource("/images/brick_cracked_2.png")));
             image = ii.getImage();
         } else if (index == 3) {
-            var ii = new ImageIcon(ImageIO.read(Brick.class.getResource("/images/cement.png")));
+            ImageIcon ii = new ImageIcon(ImageIO.read(Brick.class.getResource("/images/cement.png")));
             image = ii.getImage();
         } else if (index == 4){
-            var ii = new ImageIcon(ImageIO.read(Brick.class.getResource("/images/itemBrick.png")));
+            ImageIcon ii = new ImageIcon(ImageIO.read(Brick.class.getResource("/images/itemBrick.png")));
             image = ii.getImage();
         }else {
             System.out.println("Bad index passed to Brick loadImage");

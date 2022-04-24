@@ -102,13 +102,13 @@ public class MenuScreen extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
-        var g2d = (Graphics2D) g;
+        Graphics2D g2d = (Graphics2D) g;
 
         drawTitle(g2d);
     }
 
     private void drawTitle(Graphics2D g2d) {
-        var font = new Font("Verdana", Font.BOLD, 30);
+        Font font = new Font("Verdana", Font.BOLD, 30);
         FontMetrics fontMetrics = this.getFontMetrics(font);
 
         g2d.setColor(Color.GRAY);
