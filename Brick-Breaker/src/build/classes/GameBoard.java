@@ -129,7 +129,7 @@ public class GameBoard extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        Graphics2D g2d = (Graphics2D) g;
+        var g2d = (Graphics2D) g;
         Image im = new ImageIcon(GameBoard.class.getResource("/images/lava.gif")).getImage();
         g.drawImage(im, 0, 365, null);
 
@@ -159,7 +159,7 @@ public class GameBoard extends JPanel {
     }
 
     private void drawObjects(Graphics2D g2d) throws IOException {
-        Font font = new Font("Verdana", Font.BOLD, 15);
+        var font = new Font("Verdana", Font.BOLD, 15);
         FontMetrics fontMetrics = this.getFontMetrics(font);
 
         g2d.setColor(Color.black);
@@ -201,7 +201,7 @@ public class GameBoard extends JPanel {
 
     private void gameFinished(Graphics2D g2d) throws IOException {
 
-        Font font = new Font("Verdana", Font.BOLD, 18);
+        var font = new Font("Verdana", Font.BOLD, 18);
         FontMetrics fontMetrics = this.getFontMetrics(font);
 
         g2d.setColor(Color.BLACK);
@@ -379,9 +379,6 @@ public class GameBoard extends JPanel {
             stopGame();
         }
 
-        // game over when the ball hit the top edge
-        if(ball.getRect().getMaxY() < Configurations.TOP_EDGE){stopGame();}
-
         // Speeds up the ball every time
         // 5 bricks are destroyed until the 15th destroyed brick
         if(score >= 5 && score < 10){
@@ -460,9 +457,6 @@ public class GameBoard extends JPanel {
             if(random < 50) {
                 racketType = 1;
             }
-            else if(random > 50 && random < 80){
-                livesLeft++;
-            }
             //case 2: shorten paddle
             else {
                 racketType = 2;
@@ -486,10 +480,10 @@ public class GameBoard extends JPanel {
                 int ballWidth = (int) ball.getRect().getWidth();
                 int ballTop = (int) ball.getRect().getMinY();
 
-                Point pointLeft = new Point(ballLeft - 1, ballTop);
-                Point pointTop = new Point(ballLeft, ballTop - 1);
-                Point pointBottom = new Point(ballLeft, ballTop + ballHeight + 1);
-                Point pointRight = new Point(ballWidth - 1, ballTop);
+                var pointRight = new Point(ballLeft + ballWidth + 1, ballTop);
+                var pointLeft = new Point(ballLeft - 1, ballTop);
+                var pointTop = new Point(ballLeft, ballTop - 1);
+                var pointBottom = new Point(ballLeft, ballTop + ballHeight + 1);
 
                 if (!bricks[i].isDestroyed()) {
 
