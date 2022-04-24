@@ -19,6 +19,9 @@ And also based on the player's standard of game, the score of the player and liv
 ### **Roadblocks Encountered:**
 The first roadblock that I have encountered in this application is to make paddle move in directions that the player wanted to. So, at the starting, it was a bit of roadblock, but I have managed to cope up with this problem and used java keyEvent package which made my work easy to implement this scenario in our application. Then, the second roadblock that I have came across is to keep track of X coordinates, Y coordinates, Widths and Heights of each and every UI element. This was a bit challenging task for me at the start, but after my research, I managed to find a solution for this issue. The third and final roadblock that I have encountered is to create a button and make that button actionb enabled. So, for this task I have used java ActionListener and java ActionEvent packages. Apart from these three problems, there were no roadblocks for me in this total week of my work. 
 
+### **Core XP value - (Feedback):**
+The core XP value that I have choosen for my project development is Feedback. So, for this week I have 
+
 
 ### **Coding Screenshots:**
 
