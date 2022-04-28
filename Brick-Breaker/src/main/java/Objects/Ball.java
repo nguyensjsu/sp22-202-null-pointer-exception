@@ -1,8 +1,13 @@
+package main.java.Objects;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import main.java.Config.Configurations;
+
+import java.io.File;
 import java.io.IOException;
 
-public class Ball extends Sprite {
+public class Ball extends Movable {
 
     private double xdir;
     private double ydir;
@@ -24,52 +29,42 @@ public class Ball extends Sprite {
 
     private void loadImage() throws IOException {
 
-        var ii = new ImageIcon(ImageIO.read(Ball.class.getResource("/images/ball.png")));
+        var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/ball.png")));
         image = ii.getImage();
+
     }
 
-    void move() {
+    public void move() {
 
-        x += xdir;
-        y += ydir;
+        setLocation(getX() + xdir, getY() + ydir);
 
-
-        if(x + 2 >= (Configurations.WIDTH)){
-            xdir*=-1;
-            setXDir(xdir);
-        }
-        else if(x <= 0){
+        if (getX() + 2 >= (Configurations.WIDTH)) {
             xdir *= -1;
-            x = xdir;
-        }
-        else if(y <= 0){
+            setXDir(xdir);
+        } else if (getX() <= 0) {
+            xdir *= -1;
+            setX(xdir);
+        } else if (getY() <= 0) {
             ydir *= -1;
-            y = ydir;
-        }
-
-        if ( y + 2 >= Configurations.HEIGHT ) {
-            ydir *= -1 ;
-            setYDir( ydir ) ;
+            setY(ydir);
         }
     }
 
     private void resetState() {
-
-        x = Configurations.INIT_BALL_X;
-        y = Configurations.INIT_BALL_Y;
+        setLocation(Configurations.INIT_BALL_X, Configurations.INIT_BALL_Y);
     }
 
-    void setXDir(double x) {
+    public void setXDir(double x) {
 
         xdir = x;
     }
 
-    void setYDir(double y) {
+    public void setYDir(double y) {
 
         ydir = y;
     }
 
-    double getYDir() {
+    public double getYDir() {
 
         return ydir;
     }
