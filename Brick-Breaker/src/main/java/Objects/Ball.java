@@ -48,6 +48,11 @@ public class Ball extends Movable {
             ydir *= -1;
             setY(ydir);
         }
+
+        if ( getY() + 2 >= (Configurations.HEIGHT) ) {
+            ydir *= -1 ;
+            setYDir( ydir ) ;
+        }
     }
 
     private void resetState() {
