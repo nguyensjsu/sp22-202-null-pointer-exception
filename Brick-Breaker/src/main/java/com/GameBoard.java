@@ -54,7 +54,7 @@ public class GameBoard extends JPanel {
         ASWDKeyHandler aswdKeyHandler = new ASWDKeyHandler();
 
         // Read from BackGroundColor.txt to get background color
-        FileReader fr = new FileReader("src\\BackGroundColor.txt");
+        FileReader fr = new FileReader("BackGroundColor.txt");
         BufferedReader br = new BufferedReader(fr);
         String color = br.readLine();
 
