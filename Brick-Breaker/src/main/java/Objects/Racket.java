@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 import main.java.Config.Configurations;
 import main.java.Interfaces.ISteerable;
 
-public class Racket extends Movable implements ISteerable {
+public class Racket extends Sprite {
 
     private int dx;
 
@@ -104,6 +104,8 @@ public class Racket extends Movable implements ISteerable {
     }
 
     private void resetState() {
-        setLocation(Configurations.INIT_PADDLE_X, Configurations.INIT_PADDLE_Y);
+       // setLocation(Configurations.INIT_PADDLE_X, Configurations.INIT_PADDLE_Y);
+       x = Configurations.INIT_PADDLE_X;
+        y = Configurations.INIT_PADDLE_Y;
     }
 }

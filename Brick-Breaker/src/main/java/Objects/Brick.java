@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 
 import java.io.IOException;
 
-public class Brick extends Fixed {
+public class Brick extends Sprite {
 
     private boolean destroyed;
     private int health;
@@ -19,7 +19,9 @@ public class Brick extends Fixed {
 
     private void initBrick(int x, int y) throws IOException {
 
-        setLocation(x, y);
+        //setLocation(x, y);
+        this.x = x;
+        this.y = y;
 
         destroyed = false;
         cement = false;

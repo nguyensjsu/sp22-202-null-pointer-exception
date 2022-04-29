@@ -7,7 +7,7 @@ import main.java.Config.Configurations;
 import java.io.File;
 import java.io.IOException;
 
-public class Ball extends Movable {
+public class Ball extends Sprite  {
 
     private double xdir;
     private double ydir;
@@ -36,27 +36,32 @@ public class Ball extends Movable {
 
     public void move() {
 
-        setLocation(getX() + xdir, getY() + ydir);
+        x += xdir ;
+        y += ydir ;
 
-        if (getX() + 2 >= (Configurations.WIDTH)) {
+        // setLocation(getX() + xdir, getY() + ydir);
+
+        if (x + 2 >= (Configurations.WIDTH)) {
             xdir *= -1;
             setXDir(xdir);
-        } else if (getX() <= 0) {
+        } else if (x <= 0) {
             xdir *= -1;
-            setX(xdir);
-        } else if (getY() <= 0) {
+            x = xdir;
+        } else if (y <= 0) {
             ydir *= -1;
-            setY(ydir);
+            y = ydir ;
         }
 
-        if ( getY() + 2 >= (Configurations.HEIGHT) ) {
+        if (y + 2 >= (Configurations.HEIGHT) ) {
             ydir *= -1 ;
-            setYDir( ydir ) ;
+           y = ydir ;
         }
     }
 
     private void resetState() {
-        setLocation(Configurations.INIT_BALL_X, Configurations.INIT_BALL_Y);
+       // setLocation(Configurations.INIT_BALL_X, Configurations.INIT_BALL_Y);
+       x = Configurations.INIT_BALL_X ;
+       y = Configurations.INIT_BALL_Y ;
     }
 
     public void setXDir(double x) {

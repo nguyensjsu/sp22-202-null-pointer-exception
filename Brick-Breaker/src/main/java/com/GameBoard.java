@@ -2,7 +2,7 @@ package main.java.com;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
+import java.lang.Object;
 import main.java.Config.Configurations;
 import main.java.Objects.*;
 
@@ -509,7 +509,9 @@ public class GameBoard extends JPanel {
                     // if it should drop an item
                     if (bricks[i].hasItem()) {
                         itemDrop = true;
-                        drop = new Item(bricks[i].getX(), bricks[i].getY());
+                        // drop = new Item(bricks[i].getX(), bricks[i].getY());
+                        drop = new Item(bricks[i].x, bricks[i].y);
+                        
                     }
 
                     bricks[i].doDamage();

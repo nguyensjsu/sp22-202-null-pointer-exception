@@ -2,10 +2,12 @@ package main.java.Objects;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+
 import main.java.Config.Configurations;
+
 import java.io.IOException;
 
-public class Item extends Movable {
+public class Item extends Sprite {
 
     private double xdir = 1;
     private double ydir = 1;
@@ -18,21 +20,24 @@ public class Item extends Movable {
 
     private void initItem(double x, double y) throws IOException {
 
-        setX(getX() + 20);
-        setY(getY() + 10);
+        this.x = x +20;
+        this.y = y +10;
+
+
         loadImage();
         getImageDimensions();
+
 
     }
 
     private void loadImage() throws IOException {
 
-        var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/itemDrop.png")));
+        ImageIcon ii = new ImageIcon(ImageIO.read(Ball.class.getResource("/images/itemDrop.png")));
         image = ii.getImage();
     }
 
     public void move() {
-        setY(ydir);
+        y += ydir;
 
     }
 
@@ -46,17 +51,13 @@ public class Item extends Movable {
         ydir = y;
     }
 
-    double getXDir() {
-
-        return xdir;
-    }
-
     double getYDir() {
 
         return ydir;
     }
+    private void resetState() {
 
-    public void resetState() {
-        setLocation(Configurations.INIT_ITEM_X, Configurations.INIT_ITEM_Y);
+        x = Configurations.INIT_ITEM_X;
+        y = Configurations.INIT_ITEM_Y;
     }
 }

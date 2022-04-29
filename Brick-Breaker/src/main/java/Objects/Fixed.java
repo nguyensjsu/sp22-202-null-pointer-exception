@@ -1,39 +1,39 @@
-package main.java.Objects;
+// package main.java.Objects;
 
-public abstract class Fixed extends GameObject {
-	// Attributes for the class Fixed----------------------------------------
+// public abstract class Fixed extends GameObject {
+// 	// Attributes for the class Fixed----------------------------------------
 
-	private static int uId = 1;
-	private int id;
+// 	private static int uId = 1;
+// 	private int id;
 
-	// Behaviours for the class Fixed----------------------------------------
+// 	// Behaviours for the class Fixed----------------------------------------
 
-	// Default constructor
-	public Fixed() {
+// 	// Default constructor
+// 	public Fixed() {
 
-		id = uId;
-		uId++;
+// 		id = uId;
+// 		uId++;
 
-	}
+// 	}
 
-	// Method to override the toString method for the class Fixed
-	public String toString() {
+// 	// Method to override the toString method for the class Fixed
+// 	public String toString() {
 
-		return super.toString();
+// 		return super.toString();
 
-	}
+// 	}
 
-	// Getter method for id
-	public int getId() {
+// 	// Getter method for id
+// 	public int getId() {
 
-		return id;
+// 		return id;
 
-	}
+// 	}
 
-	// Method to set the location of the object
-	public void setLocation(double x, double y) {
+// 	// Method to set the location of the object
+// 	public void setLocation(double x, double y) {
 
-		super.setLocation(x, y);
+// 		super.setLocation(x, y);
 
-	}
-}
+// 	}
+// }
