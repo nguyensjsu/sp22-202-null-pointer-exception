@@ -1,15 +1,15 @@
-// package main.java.Interfaces;
+package main.java.Interfaces;
 
-// import main.java.Objects.GameObject;
+import main.java.Objects.GameObject;
 
-// public interface ICollection {
+public interface ICollection {
 
-// 	public boolean add(GameObject obj);
+	public boolean add(GameObject obj);
 
-// 	public IIterator getIterator();
+	public IIterator getIterator();
 
-// 	public boolean remove(GameObject obj);
+	public boolean remove(GameObject obj);
 
-// 	public int size();
+	public int size();
 
-// }
+}
