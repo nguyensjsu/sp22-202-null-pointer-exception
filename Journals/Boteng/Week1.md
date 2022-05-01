@@ -20,4 +20,4 @@ I don't have any blockers right now, everything goes well for the first week.
 
 ### **Core XP value - (Courage)**
 
-From my perspective, courage in extreme programming is the braveness to adapt to changes, take responsibilities, and tell the truth abou progress and estimates. For our team, the courage aspect went smoothly through the first sprint. When we discussed about the ideas fo project, all of us can actively point out the defects of other's opinions and take responsibilities for the project.
+From my perspective, courage in extreme programming is the braveness to adapt to changes, take responsibilities, and tell the truth about progress and estimates. For our team, the courage aspect went smoothly through the first sprint. When we discussed about the ideas fo project, all of us can actively point out the defects of other's opinions and take responsibilities for the project.
