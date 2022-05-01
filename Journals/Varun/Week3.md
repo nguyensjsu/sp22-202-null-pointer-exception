@@ -21,10 +21,10 @@ The first road block that I have encountered during this week while implementing
 ### **Core XP value - (Feedback):**
 For week3, regarding some features that were included in the game. So, as my responsibility for this project is to review the output and performance of the application and analyze it and try to remove any unwanted features from the application to make it work more effectively. So, I did reported to my team on this and suggested them to remove some of the unwanted features from the game as they were effecting the game's performance. And this feedback helped me and my team to remove complex situations and use the simple and effective solutions to speed up the game without crashing it. Every iteration of commitment will be taken seriously for delivering a working game. The game in the coming weeks should be undergoing a lot of testing and feedback is taken so that necessary changes can be made if needed. The value of the feedback is a continuously running system that delivers information about the game in a reliable way.
 
-### **CODING SCREENSHOT FOR PADDLE IMPLEMENTATION :**
+### **Coding screenshot for paddle implementation :**
 
 <img width="1200" alt="Screen Shot 2022-04-30 at 11 48 45 PM" src="https://user-images.githubusercontent.com/98674002/166135442-cc0a234d-f23a-4d60-82f0-cd3c39062f2b.png">
 
-### **IMPLEMENTATION TO CHANGE BACKGROUND COLOR OF GAME :**
+### **Implementation to change background color of game :**
 
 <img width="1201" alt="Screen Shot 2022-04-30 at 11 50 17 PM" src="https://user-images.githubusercontent.com/98674002/166135496-2ad52948-c49b-43b4-b865-416c994f2237.png">
