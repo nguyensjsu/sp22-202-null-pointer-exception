@@ -18,3 +18,4 @@ But there is a small caution in this feature. After getting one redball in the g
 ### ENCOUNTERED ROADBLOCKS :
 The first road block that I have encountered during this week while implementing the new features is changing the paddle sizes. I have a plan to change the paddles sizes from the starting of the development, but have no idea where to implement this logic. So, it took some time to figure out a way to apply this. But after a long discussion with my team, I have came up with a plan to initialize a special brick concept in our game. So, I have implemented this logic there. Then the second roadblock that I encountered was adding the background sounds for each and every utility that is in motion during the game. So, after some research, I figured out a way to implement this feature using java audio stream packages. Apart from these two roadblocks, everything went smooth during this week's work.
 
+### **Core XP value - (Feedback):**
