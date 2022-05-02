@@ -453,7 +453,7 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
 
         for (int i = 0, j = 0; i < Configurations.N_OF_BRICKS; i++) {
             int n_of_cement = numCementBricks( bricks ) ;
-            int breakableBricks = Configurations.N_OF_BRICKS - n_of_cement ;
+            int breakableBricks = Configurations.N_OF_BRICKS - n_of_cement;
             if (bricks[i].isDestroyed()) {
                 j++;
             }
@@ -573,6 +573,18 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
                         
                     }
 
+                    if (bricks[i].removeLife()) {
+                        if (livesLeft == 1) {
+                            inGame = false;
+                            timer.stop();
+                        }
+                        else
+                        {
+                            livesLeft--; 
+                        }
+                     
+                    }
+
                     bricks[i].doDamage();
                 }
             }
@@ -581,14 +593,15 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
 
     public int numCementBricks( Brick[] bricks ) {
         int numCement = 0 ;
+       
         for ( int i = 0; i < Configurations.N_OF_BRICKS; i++ ) {
             if (bricks[i].isCement() ) {
                 numCement += 1 ;
             }
+           
         }
         return numCement ;
     }
     
-   
     
 }
