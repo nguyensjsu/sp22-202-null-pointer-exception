@@ -1,1 +1,1 @@
-java.awt.Color[r=102,g=255,b=204]
+java.awt.Color[r=204,g=204,b=204]

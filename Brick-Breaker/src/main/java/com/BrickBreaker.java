@@ -51,18 +51,36 @@ public class BrickBreaker extends JFrame {
             game.setVisible(true);
         });
     }
+    
 
-    public static void playMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException
+    public static  void playMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException
     {
-        File audioFile = new File("./Brick-Breaker/src/main/java/music/music_bg.wav").getAbsoluteFile();
-AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
-Clip clip = AudioSystem.getClip();
-clip.open(audioInputStream);
-//Plays audio once
-clip.start();
-clip.loop(Clip.LOOP_CONTINUOUSLY);
+        File audioFile = new File("main/java/music/music_bg.wav").getAbsoluteFile();
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        //Plays audio once
+        clip.start();
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+
+
+//     public static  void playMusicForDog() throws UnsupportedAudioFileException, IOException, LineUnavailableException
+//     {
+//         File audioFile = new File("./Brick-Breaker/src/main/java/music/dog_music.wav").getAbsoluteFile();
+// AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+// Clip clip = AudioSystem.getClip();
+// clip.open(audioInputStream);
+// //Plays audio once
+// clip.start();
+// clip.loop(Clip.LOOP_CONTINUOUSLY);
     
     
        
+//     }
+
+    public static  void stopMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException
+    {
+        
     }
 }
