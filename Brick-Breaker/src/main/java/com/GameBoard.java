@@ -249,12 +249,24 @@ public class GameBoard extends JPanel {
 //Gif Image
 
 Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage();
+
         g2d.setColor(Color.BLACK);
         g2d.setFont(font);
         g2d.drawString(message,
                 (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2,
                 Configurations.WIDTH / 2);
-        g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 20, Configurations.WIDTH / 2 + 20, null);
+
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING,
+                RenderingHints.VALUE_RENDER_QUALITY);
+
+        
+
+      
+            g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 20, Configurations.WIDTH / 2 + 20, null);
+        
 
         FileWriter out = new FileWriter("ScoreList.txt", true);
         BufferedWriter bw = new BufferedWriter(out);

@@ -20,8 +20,8 @@ public class Brick extends Sprite {
     private void initBrick(int x, int y) throws IOException {
 
         //setLocation(x, y);
-        this.x = x;
-        this.y = y;
+        this.x = x ;
+        this.y = y ;
 
         destroyed = false;
         cement = false;
@@ -52,19 +52,19 @@ public class Brick extends Sprite {
     private void loadImage(int index) throws IOException {
 
         if (index == 0) {
-            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/brick.png")));
+            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/brick1.jpg")));
             image = ii.getImage();
         } else if (index == 1) {
-            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/brick_cracked_1.png")));
+            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/brick_cracked_1_copy.jpg")));
             image = ii.getImage();
         } else if (index == 2) {
-            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/brick_cracked_2.png")));
+            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/brick_cracked_2_copy.jpg")));
             image = ii.getImage();
         } else if (index == 3) {
-            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/cement.png")));
+            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/cement1.png")));
             image = ii.getImage();
         } else if (index == 4) {
-            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/itemBrick.png")));
+            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/itemBrick.jpg")));
             image = ii.getImage();
         } else {
             System.out.println("Bad index passed to Brick loadImage");
