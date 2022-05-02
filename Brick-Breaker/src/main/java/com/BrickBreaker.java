@@ -55,16 +55,13 @@ public class BrickBreaker extends JFrame {
 
     public static  void playMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException
     {
-        File audioFile = new File("./Brick-Breaker/src/main/java/music/music_bg.wav").getAbsoluteFile();
-AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
-Clip clip = AudioSystem.getClip();
-clip.open(audioInputStream);
-//Plays audio once
-clip.start();
-clip.loop(Clip.LOOP_CONTINUOUSLY);
-    
-    
-       
+        File audioFile = new File("main/java/music/music_bg.wav").getAbsoluteFile();
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        //Plays audio once
+        clip.start();
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
 
