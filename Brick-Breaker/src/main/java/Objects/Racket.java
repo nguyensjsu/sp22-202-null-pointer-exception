@@ -13,15 +13,12 @@ public class Racket extends Sprite {
     private int dx;
 
     public Racket(int racket) throws IOException {
-
         initRacket(racket);
     }
 
     private void initRacket(int racket) throws IOException {
-
         loadImage(racket);
         getImageDimensions();
-
         resetState();
     }
 

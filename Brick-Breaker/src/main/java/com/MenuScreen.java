@@ -52,7 +52,7 @@ public class MenuScreen extends JPanel {
                 setLayout(new FlowLayout());
                 revalidate();
                 repaint();
-                GameBoard gameBoard = new GameBoard();
+                GameBoard gameBoard = new GameBoard("one");
                 add(gameBoard);
                 gameBoard.requestFocusInWindow();
                 remove(HSButton);
@@ -116,7 +116,20 @@ public class MenuScreen extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            
+            try {
+                setLayout(new FlowLayout());
+                revalidate();
+                repaint();
+                GameBoard gameBoard = new GameBoard("two");
+                add(gameBoard);
+                gameBoard.requestFocusInWindow();
+                remove(HSButton);
+                remove(StartButton);
+                remove(ThemeButton);
+                remove(TwoPlayerButton);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

@@ -1,14 +1,8 @@
 package main.java.com;
 
-import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
-import java.lang.Object;
-import java.net.URL;
 
 import main.java.Config.Configurations;
 import main.java.Objects.*;
@@ -24,10 +18,15 @@ import java.util.Scanner;
 
 public class GameBoard extends JPanel {
 
+    interface IGameModeStrategy {
+        void gameInit() throws IOException;
+    }
+
     private Timer timer;
     private String message = "Game Over!";
     private Ball ball;
-    public Racket racket;
+    public Racket racket1;
+    public Racket racket2;
     public Brick[] bricks;
     private Item drop;
     private boolean itemDrop;
@@ -42,19 +41,74 @@ public class GameBoard extends JPanel {
     boolean restartClicked = false;
     JButton arrowButton = new JButton("Arrow");
     JButton aswdButton = new JButton("ASWD");
-    int keySelect = 0;
+    private IGameModeStrategy currentMode;
+    int keySelect1 = 0;
+    int keySelect2 = 1;
     int jCount = 0 ;
     int breakableBricksCount = 0 ;
+    private final IGameModeStrategy onePlayerMode = () -> {
+        bricks = new Brick[Configurations.N_OF_BRICKS];
+
+        ball = new Ball();
+        racket1 = new Racket(racketType);
+
+        int k = 0;
+
+        livesLeft = 3;
+
+        for (int i = 0; i < 5; i++) {
+
+            for (int j = 0; j < 6; j++) {
+
+                bricks[k] = new Brick(j * 40 + 30, i * 10 + 50);
+                k++;
+            }
+        }
+
+        timer = new Timer(Configurations.PERIOD, new GameCycle());
+        timer.start();
+    };
+
+    private final IGameModeStrategy twoPlayerMode = () -> {
+        bricks = new Brick[Configurations.N_OF_BRICKS];
+
+        ball = new Ball();
+        racket1 = new Racket(racketType);
+        racket2 = new Racket(racketType);
+
+        int k = 0;
+
+        livesLeft = 3;
+
+        for (int i = 0; i < 5; i++) {
+
+            for (int j = 0; j < 6; j++) {
+
+                bricks[k] = new Brick(j * 40 + 30, i * 10 + 50);
+                k++;
+            }
+        }
+
+        timer = new Timer(Configurations.PERIOD, new GameCycle());
+        timer.start();
+
+        aswdButton.setText("Switch");
+        arrowButton.setText("Switch");
+    };
+
 
     public int livesLeft;
 
-    public GameBoard() throws IOException {
-
-        initBoard();
-
+    public GameBoard(String gameMode) throws IOException {
+        if (gameMode.equalsIgnoreCase("two")) {
+            currentMode = twoPlayerMode;
+        } else {
+            currentMode = onePlayerMode;
+        }
+        initBoard(currentMode);
     }
 
-    private void initBoard() throws IOException {
+    private void initBoard(IGameModeStrategy gameMode) throws IOException {
 
         PauseHandler settingHandler = new PauseHandler();
         ResumeHandler resumeHandler = new ResumeHandler();
@@ -99,8 +153,8 @@ public class GameBoard extends JPanel {
         pauseButton.addActionListener(settingHandler);
         resumeButton.addActionListener(resumeHandler);
         restartButton.addActionListener(restartHandler);
-        arrowButton.addActionListener(arrowKeyHandler);
         aswdButton.addActionListener(aswdKeyHandler);
+        arrowButton.addActionListener(arrowKeyHandler);
 
         pauseButton.setFocusable(false);
         restartButton.setFocusable(false);
@@ -111,39 +165,8 @@ public class GameBoard extends JPanel {
         addKeyListener(new TAdapter());
         setFocusable(true);
         setPreferredSize(new Dimension(Configurations.WIDTH, Configurations.HEIGHT));
-        gameInit();
-
+        currentMode.gameInit();
     }
-
-    private void gameInit() throws IOException {
-
-        bricks = new Brick[Configurations.N_OF_BRICKS];
-
-        ball = new Ball();
-        racket = new Racket(racketType);
-
-        int k = 0;
-
-        livesLeft = 3;
-
-        for (int i = 0; i < 5; i++) {
-
-            for (int j = 0; j < 6; j++) {
-
-                bricks[k] = new Brick(j * 40 + 30, i * 10 + 50);
-                k++;
-            }
-        }
-
-        timer = new Timer(Configurations.PERIOD, new GameCycle());
-        timer.start();
-
-
-
-    }
-
-
-    
 
     @Override
     public void paintComponent(Graphics g) {
@@ -170,9 +193,6 @@ public class GameBoard extends JPanel {
         } else {
 
             try {
-
-               
-
       
     gameFinished(g2d);
    
@@ -207,14 +227,22 @@ public class GameBoard extends JPanel {
             speedLevel = "x1";
             itemDrop = false;
             restartClicked = false;
-            racket = new Racket(racketType);
+            racket1 = new Racket(racketType);
+            if (currentMode == twoPlayerMode) {
+                racket2 = new Racket(racketType);
+            }
         }
 
         g2d.drawString("Speed: " + speedLevel, 10, 390);
         g2d.drawImage(ball.getImage(), (int) ball.getX(), (int) ball.getY(),
                 ball.getImageWidth(), ball.getImageHeight(), this);
-        g2d.drawImage(racket.getImage(), (int) racket.getX(), (int) racket.getY(),
-                racket.getImageWidth(), racket.getImageHeight(), this);
+        g2d.drawImage(racket1.getImage(), (int) racket1.getX(), (int) racket1.getY(),
+                racket1.getImageWidth(), racket1.getImageHeight(), this);
+
+        if (currentMode == twoPlayerMode) {
+            g2d.drawImage(racket2.getImage(), (int) racket2.getX(), (int) racket2.getY(),
+                    racket2.getImageWidth(), racket2.getImageHeight(), this);
+        }
 
         if (itemDrop) {
             g2d.drawImage(drop.getImage(), (int) drop.getX(), (int) drop.getY(),
@@ -284,14 +312,18 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
 
         @Override
         public void keyReleased(KeyEvent e) {
-
-            racket.keyReleased(e, keySelect);
+            racket1.keyReleased(e, keySelect1);
+            if (currentMode == twoPlayerMode) {
+                racket2.keyReleased(e, keySelect2);
+            }
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
-
-            racket.keyPressed(e, keySelect);
+            racket1.keyPressed(e, keySelect1);
+            if (currentMode == twoPlayerMode) {
+                racket2.keyPressed(e, keySelect2);
+            }
         }
     }
 
@@ -311,7 +343,10 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
     private void doGameCycle() throws IOException {
 
         ball.move();
-        racket.move();
+        racket1.move();
+        if (currentMode == twoPlayerMode) {
+            racket2.move();
+        }
         if (itemDrop) {
             drop.move();
             if (drop.getY() > Configurations.INIT_PADDLE_Y) {
@@ -333,7 +368,10 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
         }
 
         ball = new Ball();
-        racket = new Racket(racketType);
+        racket1 = new Racket(racketType);
+        if (currentMode == twoPlayerMode) {
+            racket2 = new Racket(racketType);
+        }
 
         timer.stop();
         timer = new Timer(Configurations.PERIOD, new GameCycle());
@@ -389,7 +427,7 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
                 restartClicked = true;
                 inGame = true;
                 timer.stop();
-                gameInit();
+                currentMode.gameInit();
             } catch (IOException er) {
                 er.printStackTrace();
             }
@@ -401,7 +439,10 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
         @Override
         public void actionPerformed(ActionEvent e) {
             selectArrowKey();
-            --keySelect;
+            --keySelect1;
+            if (currentMode == twoPlayerMode) {
+                ++keySelect2;
+            }
         }
     }
 
@@ -418,7 +459,10 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
         @Override
         public void actionPerformed(ActionEvent e) {
             selectASWDKey();
-            ++keySelect;
+            ++keySelect1;
+            if (currentMode == twoPlayerMode) {
+                --keySelect2;
+            }
         }
     }
 
@@ -464,74 +508,19 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
                 jCount = j ;
                 breakableBricksCount = breakableBricks ;
                 message = "Victory";
-                
-                
                 stopGame();
             }
         }
 
-        if ((ball.getRect()).intersects(racket.getRect())) {
-
-            int paddleLPos = (int) racket.getRect().getMinX();
-            int ballLPos = (int) ball.getRect().getMinX();
-
-            int first = paddleLPos + 8;
-            int second = paddleLPos + 16;
-            int third = paddleLPos + 24;
-            int fourth = paddleLPos + 32;
-
-            if (ballLPos < first) {
-
-                ball.setXDir(-speed);
-                ball.setYDir(-speed);
-            }
-
-            if (ballLPos >= first && ballLPos < second) {
-
-                ball.setXDir(-speed);
-                ball.setYDir(-speed * ball.getYDir());
-            }
-
-            if (ballLPos >= second && ballLPos < third) {
-
-                ball.setXDir(0);
-                ball.setYDir(-speed);
-            }
-
-            if (ballLPos >= third && ballLPos < fourth) {
-
-                ball.setXDir(speed);
-                ball.setYDir(-speed * ball.getYDir());
-            }
-
-            if (ballLPos > fourth) {
-
-                ball.setXDir(speed);
-                ball.setYDir(-speed);
-            }
+        checkIntersects(racket1);
+        if (currentMode == twoPlayerMode) {
+            checkIntersects(racket2);
         }
 
         // check if the user caught a dropped item
-        if (itemDrop && (drop.getRect()).intersects(racket.getRect())) {
-            int random = (int) (Math.random() * 100) + 1;
-
-            // case 1: lengthen paddle
-            if (random < 50) {
-                racketType = 1;
-            }
-            // case 2: shorten paddle
-            else {
-                racketType = 2;
-            }
-
-            // have new racket appear under ball
-            double temp = ball.getX();
-            racket = new Racket(racketType);
-            racket.setX(temp);
-
-            // reset itemDrop condition
-            itemDrop = false;
-
+        checkCaught(racket1);
+        if (currentMode == twoPlayerMode) {
+            checkCaught(racket2);
         }
 
         for (int i = 0; i < Configurations.N_OF_BRICKS; i++) {
@@ -584,9 +573,74 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
                         }
                      
                     }
-
                     bricks[i].doDamage();
                 }
+            }
+        }
+    }
+
+    private void checkCaught(Racket racket) throws IOException {
+        if (itemDrop && (drop.getRect()).intersects(racket.getRect())) {
+            int random = (int) (Math.random() * 100) + 1;
+
+            // case 1: lengthen paddle
+            if (random < 50) {
+                racketType = 1;
+            }
+            // case 2: shorten paddle
+            else {
+                racketType = 2;
+            }
+
+            // have new racket appear under ball
+            double temp = ball.getX();
+            racket = new Racket(racketType);
+            racket.setX(temp);
+
+            // reset itemDrop condition
+            itemDrop = false;
+
+        }
+    }
+
+    private void checkIntersects(Racket racket) {
+        if ((ball.getRect()).intersects(racket.getRect())) {
+
+            int paddleLPos = (int) racket.getRect().getMinX();
+            int ballLPos = (int) ball.getRect().getMinX();
+
+            int first = paddleLPos + 8;
+            int second = paddleLPos + 16;
+            int third = paddleLPos + 24;
+            int fourth = paddleLPos + 32;
+
+            if (ballLPos < first) {
+
+                ball.setXDir(-speed);
+                ball.setYDir(-speed);
+            }
+
+            if (ballLPos >= first && ballLPos < second) {
+
+                ball.setXDir(-speed);
+                ball.setYDir(-speed * ball.getYDir());
+            }
+
+            if (ballLPos >= second && ballLPos < third) {
+
+                ball.setXDir(0);
+                ball.setYDir(-speed);
+            }
+
+            if (ballLPos >= third && ballLPos < fourth) {
+
+                ball.setXDir(speed);
+                ball.setYDir(-speed * ball.getYDir());
+            }
+
+            if (ballLPos > fourth) {
+                ball.setXDir(speed);
+                ball.setYDir(-speed);
             }
         }
     }
