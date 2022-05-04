@@ -31,8 +31,9 @@ public class GameBoard extends JPanel {
     public Brick[] bricks;
     private Item drop;
     private boolean itemDrop;
-    public int racketType = 0;
+    public int racketType;
     private boolean inGame = true;
+    private int arrowDir = 0 ;
     int score = 0;
     double speed = 1;
     String speedLevel = "x1";
@@ -61,6 +62,7 @@ public class GameBoard extends JPanel {
         RestartHandler restartHandler = new RestartHandler();
         ArrowKeyHandler arrowKeyHandler = new ArrowKeyHandler();
         ASWDKeyHandler aswdKeyHandler = new ASWDKeyHandler();
+        arrowDir = 0 ;
 
         // Read from BackGroundColor.txt to get background color
         FileReader fr = new FileReader("BackGroundColor.txt");
@@ -170,13 +172,7 @@ public class GameBoard extends JPanel {
         } else {
 
             try {
-
-               
-
-      
-    gameFinished(g2d);
-   
-               
+                gameFinished(g2d);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (UnsupportedAudioFileException e) {
@@ -246,9 +242,8 @@ public class GameBoard extends JPanel {
 
         var font = new Font("Verdana", Font.BOLD, 18);
         FontMetrics fontMetrics = this.getFontMetrics(font);
-//Gif Image
-
-Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage();
+        //Gif Image
+        Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage();
 
         g2d.setColor(Color.BLACK);
         g2d.setFont(font);
@@ -334,6 +329,7 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
 
         ball = new Ball();
         racket = new Racket(racketType);
+        arrowDir = 0;
 
         timer.stop();
         timer = new Timer(Configurations.PERIOD, new GameCycle());
@@ -583,6 +579,16 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
                             livesLeft--; 
                         }
                      
+                    }
+
+                    if (bricks[i].isSwitchDirectionBrick()) {
+                        if ( arrowDir == 0 ) {
+                            arrowDir = 1 ;
+                        }
+                        else if ( arrowDir == 1 ) {
+                            arrowDir = 0 ;
+                        }
+                        racket.setDirectionState(arrowDir);
                     }
 
                     bricks[i].doDamage();
