@@ -172,3 +172,10 @@ out/production/sp22-202-null-pointer-exception/ScoreList.txt
 sp22-202-null-pointer-exception.iml
 *.class
 
+out/production/sp22-202-null-pointer-exception/images/bonusLevelBrick.jpg
+out/production/sp22-202-null-pointer-exception/images/itemBrick2.jpg
+out/production/sp22-202-null-pointer-exception/main/java/com/images/bonusLevelBrick.jpg
+out/production/sp22-202-null-pointer-exception/src/images/bonusLevelBrick.jpg
+out/production/sp22-202-null-pointer-exception/src/images/itemBrick2.jpg
+out/production/sp22-202-null-pointer-exception/src/main/java/com/images/bonusLevelBrick.jpg
+.idea/uiDesigner.xml
