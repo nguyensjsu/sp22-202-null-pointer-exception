@@ -3,31 +3,30 @@ package main.java.Objects;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.naming.directory.DirContext;
 import javax.swing.ImageIcon;
 
 import main.java.Config.Configurations;
 import main.java.Interfaces.IKeyDirection;
-import main.java.Interfaces.ISteerable;
-import main.java.com.normalDirectionState;
-import main.java.com.switchedDirectionState;
+import main.java.com.NormalDirectionState;
+import main.java.com.SwitchedDirectionState;
 
 public class Racket extends Sprite {
 
     private int dx;
     private IKeyDirection directionState ;
+    NormalDirectionState normalDirectionState;
+    SwitchedDirectionState switchedDirectionState;
 
     public Racket(int racket) throws IOException {
-
         initRacket(racket);
-        directionState = new normalDirectionState();
+        normalDirectionState = new NormalDirectionState();
+        switchedDirectionState = new SwitchedDirectionState();
+        directionState = normalDirectionState;
     }
 
     private void initRacket(int racket) throws IOException {
-
         loadImage(racket);
         getImageDimensions();
-
         resetState();
     }
 
@@ -48,58 +47,47 @@ public class Racket extends Sprite {
 
         setX(getX() + dx);
         if (getX() <= 0) {
-
             setX(0);
         }
 
         if (getX() >= Configurations.WIDTH - getImageWidth()) {
-
             setX(Configurations.WIDTH - getImageWidth());
         }
     }
 
     public void keyPressed(KeyEvent e, int select) {
-        dx = directionState.specificMove(e, select);
+        dx = directionState.specificMove(e.getKeyCode(), select);
     }
 
     public void keyReleased(KeyEvent e, int select) {
-
         int key = e.getKeyCode();
         if (select == 0) {
             if (key == KeyEvent.VK_LEFT) {
-
+                dx = 0;
+            } else if (key == KeyEvent.VK_RIGHT) {
                 dx = 0;
             }
-
-            if (key == KeyEvent.VK_RIGHT) {
-
-                dx = 0;
-            }
-        } else {
+        } else if (select == 1){
             if (key == KeyEvent.VK_A) {
-
                 dx = 0;
-            }
-
-            if (key == KeyEvent.VK_D) {
-
+            } else if (key == KeyEvent.VK_D) {
                 dx = 0;
             }
         }
+        System.err.println("Key Released");
     }
 
     public void setDirectionState( int val ) {
         if ( val == 0 ) {
-            directionState = new normalDirectionState() ;
-        }
-        else if ( val == 1 ) {
-            directionState = new switchedDirectionState() ;
+            directionState = normalDirectionState ;
+        } else if ( val == 1 ) {
+            directionState = switchedDirectionState ;
         }
     }
 
     private void resetState() {
        // setLocation(Configurations.INIT_PADDLE_X, Configurations.INIT_PADDLE_Y);
        x = Configurations.INIT_PADDLE_X;
-        y = Configurations.INIT_PADDLE_Y;
+       y = Configurations.INIT_PADDLE_Y;
     }
 }
