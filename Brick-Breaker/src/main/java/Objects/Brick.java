@@ -54,7 +54,7 @@ public class Brick extends Sprite {
             containsItem = true;
             loadImage(4);
         }
-        else if (random < 5) {
+        else if (random >= 3 && random <= 5) {
             
             if (noOfDangerBricks<3)
             {
@@ -62,7 +62,9 @@ public class Brick extends Sprite {
                 dangerBrick = true ;
                 removeLife = true;
                 loadImage(1);
+
             }
+
 
             else
             {
@@ -71,6 +73,11 @@ public class Brick extends Sprite {
             getImageDimensions();
             }
             
+        }
+        else if ( random < 3 ) 
+        {
+            loadImage(5);
+            getImageDimensions();
         }
     }
 
@@ -91,6 +98,9 @@ public class Brick extends Sprite {
         } else if (index == 4) {
             var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/itemBrick.jpg")));
             image = ii.getImage();
+        } else if ( index == 5 ) {
+            var ii = new ImageIcon( ImageIO.read( getClass().getResource("/images/bonusLevelBrick.jpg" ) ) ) ;
+            image = ii.getImage() ;
         } else {
             System.out.println("Bad index passed to Brick loadImage");
         }

@@ -196,3 +196,4 @@ sp22-202-null-pointer-exception.iml
 .idea/workspace.xml
 out/production/sp22-202-null-pointer-exception/main/java/com/MenuScreen$TwoPlayerHandler.class
 out/production/sp22-202-null-pointer-exception/main/java/com/GameBoard$IGameModeStrategy.class
+*.class

@@ -30,8 +30,9 @@ public class GameBoard extends JPanel {
     public Brick[] bricks;
     private Item drop;
     private boolean itemDrop;
-    public int racketType = 0;
+    public int racketType;
     private boolean inGame = true;
+    private int arrowDir = 0 ;
     int score = 0;
     double speed = 1;
     String speedLevel = "x1";
@@ -115,13 +116,14 @@ public class GameBoard extends JPanel {
         RestartHandler restartHandler = new RestartHandler();
         ArrowKeyHandler arrowKeyHandler = new ArrowKeyHandler();
         ASWDKeyHandler aswdKeyHandler = new ASWDKeyHandler();
+        arrowDir = 0 ;
 
         // Read from BackGroundColor.txt to get background color
         FileReader fr = new FileReader("BackGroundColor.txt");
         BufferedReader br = new BufferedReader(fr);
         String color = br.readLine();
 
-        
+
         // Read Color object String and convert to Color object
         final Scanner scan = new Scanner(color);
         scan.useDelimiter("(r|\\,g|\\,b)=|\\]").next(); // Use proper delimiter and ignore first part (which is the
@@ -185,7 +187,7 @@ public class GameBoard extends JPanel {
         if (inGame) {
 
             try {
-                
+
                 drawObjects(g2d);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -193,10 +195,7 @@ public class GameBoard extends JPanel {
         } else {
 
             try {
-      
-    gameFinished(g2d);
-   
-               
+                gameFinished(g2d);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (UnsupportedAudioFileException e) {
@@ -274,9 +273,8 @@ public class GameBoard extends JPanel {
 
         var font = new Font("Verdana", Font.BOLD, 18);
         FontMetrics fontMetrics = this.getFontMetrics(font);
-//Gif Image
-
-Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage();
+        //Gif Image
+        Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage();
 
         g2d.setColor(Color.BLACK);
         g2d.setFont(font);
@@ -290,11 +288,11 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING,
                 RenderingHints.VALUE_RENDER_QUALITY);
 
-        
 
-      
+
+
             g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 20, Configurations.WIDTH / 2 + 20, null);
-        
+
 
         FileWriter out = new FileWriter("ScoreList.txt", true);
         BufferedWriter bw = new BufferedWriter(out);
@@ -368,6 +366,7 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
         }
 
         ball = new Ball();
+        arrowDir = 0;
         racket1 = new Racket(racketType);
         if (currentMode == twoPlayerMode) {
             racket2 = new Racket(racketType);
@@ -559,7 +558,7 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
                         itemDrop = true;
                         // drop = new Item(bricks[i].getX(), bricks[i].getY());
                         drop = new Item(bricks[i].x, bricks[i].y);
-                        
+
                     }
 
                     if (bricks[i].removeLife()) {
@@ -569,10 +568,21 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
                         }
                         else
                         {
-                            livesLeft--; 
+                            livesLeft--;
                         }
-                     
+
                     }
+
+                    if (bricks[i].isSwitchDirectionBrick()) {
+                        if ( arrowDir == 0 ) {
+                            arrowDir = 1 ;
+                        }
+                        else if ( arrowDir == 1 ) {
+                            arrowDir = 0 ;
+                        }
+                        racket.setDirectionState(arrowDir);
+                    }
+
                     bricks[i].doDamage();
                 }
             }
@@ -647,15 +657,15 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
 
     public int numCementBricks( Brick[] bricks ) {
         int numCement = 0 ;
-       
+
         for ( int i = 0; i < Configurations.N_OF_BRICKS; i++ ) {
             if (bricks[i].isCement() ) {
                 numCement += 1 ;
             }
-           
+
         }
         return numCement ;
     }
-    
-    
+
+
 }

@@ -1,94 +1,94 @@
-package main.java.Collection;
+// package main.java.Collection;
 
-import java.util.ArrayList;
-import main.java.Interfaces.ICollection;
-import main.java.Interfaces.IIterator;
-import main.java.Objects.GameObject;
+// import java.util.ArrayList;
+// import main.java.Interfaces.ICollection;
+// import main.java.Interfaces.IIterator;
+// import main.java.Objects.GameObject;
 
-//Class for a user defined collection for the Iterator design Pattern
-public class GameCollection implements ICollection {
+// //Class for a user defined collection for the Iterator design Pattern
+// public class GameCollection implements ICollection {
 
-    private ArrayList<GameObject> objCollection;
+//     private ArrayList<GameObject> objCollection;
 
-    public GameCollection() {
+//     public GameCollection() {
 
-        objCollection = new ArrayList<GameObject>();
+//         objCollection = new ArrayList<GameObject>();
 
-    }
+//     }
 
-    // Method to add
-    @Override
-    public boolean add(GameObject obj) {
+//     // Method to add
+//     @Override
+//     public boolean add(GameObject obj) {
 
-        if (obj != null) {
+//         if (obj != null) {
 
-            objCollection.add(obj);
-            return true;
+//             objCollection.add(obj);
+//             return true;
 
-        } else
-            return false;
+//         } else
+//             return false;
 
-    }
+//     }
 
-    // method to return an iterator over the collection
-    @Override
-    public IIterator getIterator() {
+//     // method to return an iterator over the collection
+//     @Override
+//     public IIterator getIterator() {
 
-        return new ArrayIterator();
+//         return new ArrayIterator();
 
-    }
+//     }
 
-    // method to remove from collection
-    @Override
-    public boolean remove(GameObject obj) {
+//     // method to remove from collection
+//     @Override
+//     public boolean remove(GameObject obj) {
 
-        if (obj != null) {
+//         if (obj != null) {
 
-            objCollection.remove(obj);
-            return true;
+//             objCollection.remove(obj);
+//             return true;
 
-        } else
-            return false;
-    }
+//         } else
+//             return false;
+//     }
 
-    // Inner class
-    private class ArrayIterator implements IIterator {
+//     // Inner class
+//     private class ArrayIterator implements IIterator {
 
-        private int currentIndex;
+//         private int currentIndex;
 
-        public ArrayIterator() {
+//         public ArrayIterator() {
 
-            currentIndex = -1;
+//             currentIndex = -1;
 
-        }
+//         }
 
-        @Override
-        public boolean hasNext() {
+//         @Override
+//         public boolean hasNext() {
 
-            if (objCollection.size() <= 0)
-                return false;
-            if (currentIndex == objCollection.size() - 1)
-                return false;
-            else
-                return true;
+//             if (objCollection.size() <= 0)
+//                 return false;
+//             if (currentIndex == objCollection.size() - 1)
+//                 return false;
+//             else
+//                 return true;
 
-        }
+//         }
 
-        @Override
-        public GameObject getNext() {
+//         @Override
+//         public GameObject getNext() {
 
-            currentIndex++;
-            return objCollection.get(currentIndex);
+//             currentIndex++;
+//             return objCollection.get(currentIndex);
 
-        }
+//         }
 
-    }
+//     }
 
-    // returns size of the collection
-    @Override
-    public int size() {
+//     // returns size of the collection
+//     @Override
+//     public int size() {
 
-        return objCollection.size();
-    }
+//         return objCollection.size();
+//     }
 
-}
+// }
