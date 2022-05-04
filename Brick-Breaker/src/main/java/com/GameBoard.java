@@ -39,13 +39,6 @@ public class GameBoard extends JPanel {
     public int racketType;
     private boolean inGame = true;
     private int arrowDir = 0;
-
-
-
-    //int score = 0;
-
-
-
     double speed = 1;
     JButton pauseButton = new JButton("Pause");
     JButton resumeButton = new JButton("Resume");
@@ -59,8 +52,6 @@ public class GameBoard extends JPanel {
     int jCount = 0;
     int breakableBricksCount = 0;
 
-    //-----------------------------Setting observer and stuff-----------------------------------------------------
-    // String speedLevel = "x1";
     private SubjectSpeed speedLevel = new SubjectSpeed("x1");
     private SubjectLives livesLeft = new SubjectLives(3);
     private SubjectScore score = new SubjectScore(0);
@@ -79,8 +70,6 @@ public class GameBoard extends JPanel {
         racket1 = new Racket(racketType);
 
         int k = 0;
-
-        //livesLeft = 3;
 
         for (int i = 0; i < 5; i++) {
 
@@ -107,8 +96,6 @@ public class GameBoard extends JPanel {
 
         int k = 0;
 
-        //livesLeft = 3;
-
         for (int i = 0; i < 5; i++) {
 
             for (int j = 0; j < 6; j++) {
@@ -124,8 +111,6 @@ public class GameBoard extends JPanel {
         aswdButton.setText("Switch");
         arrowButton.setText("Switch");
     };
-
-    //public int livesLeft;
 
     public GameBoard(String gameMode) throws IOException {
         if (gameMode.equalsIgnoreCase("two")) {
@@ -225,10 +210,8 @@ public class GameBoard extends JPanel {
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (UnsupportedAudioFileException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (LineUnavailableException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -244,23 +227,13 @@ public class GameBoard extends JPanel {
         g2d.setFont(font);
         // Draw current score at bottom of panel
 
-
-
-
-
         g2d.drawString("Score: " + scoreObserver.getScore(), 120, 390);
         g2d.drawString("Lives: " + livesObserver.getLives(), 230, 390);
-
-
-
-
-
 
         if (restartClicked) {
             racketType = 0;
             speed = 1;
 
-            // speedLevel = "x1";
             speedLevel.setState("x1");
 
             itemDrop = false;
@@ -322,20 +295,11 @@ public class GameBoard extends JPanel {
         FileWriter out = new FileWriter("ScoreList.txt", true);
         BufferedWriter bw = new BufferedWriter(out);
 
-
-
-
-
         int temp = scoreObserver.getScore();
         if (temp != 0) {
             bw.write(Integer.toString(temp));
             bw.newLine();
         }
-
-
-
-
-
 
         bw.close();
         out.close();
@@ -392,14 +356,10 @@ public class GameBoard extends JPanel {
 
     private void stopGame() throws IOException {
 
-        //livesLeft--;
         int tempLives = livesObserver.getLives();
         livesLeft.setState(tempLives - 1);
-
         itemDrop = false;
         racketType = 0;
-
-
 
         if (livesObserver.getLives() == 0) {
             inGame = false;
@@ -463,10 +423,7 @@ public class GameBoard extends JPanel {
         public void actionPerformed(ActionEvent e) {
             try {
                 speed = 1;
-
-                // speedLevel = "x1";
                 speedLevel.setState("x1");
-
                 restartClicked = true;
                 inGame = true;
                 timer.stop();
@@ -521,7 +478,6 @@ public class GameBoard extends JPanel {
     public void checkCollision() throws IOException {
 
         if (ball.getRect().getMaxY() > Configurations.BOTTOM_EDGE) {
-
             stopGame();
         }
 
@@ -531,20 +487,14 @@ public class GameBoard extends JPanel {
         // 5 bricks are destroyed until the 15th destroyed brick
         if (tempScore >= 5 && tempScore < 10) {
             speed = 1.2;
-
-            // speedLevel = "x1.2";
             speedLevel.setState("x1.2");
 
         } else if (tempScore >= 10 && tempScore < 15) {
             speed = 1.5;
-
-            // speedLevel = "x1.5";
             speedLevel.setState("x1.5");
 
         } else if (tempScore >= 15) {
             speed = 2;
-
-            // speedLevel = "x2";
             speedLevel.setState("x2");
         }
 
@@ -555,22 +505,10 @@ public class GameBoard extends JPanel {
                 j++;
             }
 
-
-
-
-
-
             // added score keeper
-            //score = j;
             score.setState(j);
 
-
-
-
-
-
             if (j == breakableBricks) {
-
                 jCount = j;
                 breakableBricksCount = breakableBricks;
                 message = "Victory";
@@ -624,12 +562,11 @@ public class GameBoard extends JPanel {
                     if (bricks[i].hasItem()) {
                         itemDrop = true;
                         drop = new Item(bricks[i].x, bricks[i].y);
-
                     }
 
                     if (bricks[i].containsLife()) {
                         int tempLife = livesObserver.getLives();
-                        livesLeft.setState(tempLife + 1);;
+                        livesLeft.setState(tempLife + 1);
                     }
 
                     if (bricks[i].removeLife()) {
@@ -638,9 +575,9 @@ public class GameBoard extends JPanel {
                             timer.stop();
                         } else {
                             int tempLife = livesObserver.getLives();
-                            livesLeft.setState(tempLife - 1);;
+                            livesLeft.setState(tempLife - 1);
+                            ;
                         }
-
                     }
 
                     if (bricks[i].isSwitchDirectionBrick()) {
@@ -697,25 +634,21 @@ public class GameBoard extends JPanel {
             int fourth = paddleLPos + 32;
 
             if (ballLPos < first) {
-
                 ball.setXDir(-speed);
                 ball.setYDir(-speed);
             }
 
             if (ballLPos >= first && ballLPos < second) {
-
                 ball.setXDir(-speed);
                 ball.setYDir(-speed * ball.getYDir());
             }
 
             if (ballLPos >= second && ballLPos < third) {
-
                 ball.setXDir(0);
                 ball.setYDir(-speed);
             }
 
             if (ballLPos >= third && ballLPos < fourth) {
-
                 ball.setXDir(speed);
                 ball.setYDir(-speed * ball.getYDir());
             }
@@ -739,7 +672,8 @@ public class GameBoard extends JPanel {
         return numCement;
     }
 
-    private void initializeDisplayInfo(){
+    // Function to set the observer pattern
+    private void initializeDisplayInfo() {
 
         speedLevel.attach(speedObserver);
         livesLeft.attach(livesObserver);
