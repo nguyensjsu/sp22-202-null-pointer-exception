@@ -74,7 +74,6 @@ public class Racket extends Sprite {
                 dx = 0;
             }
         }
-        System.err.println("Key Released");
     }
 
     public void setDirectionState( int val ) {
