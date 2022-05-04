@@ -170,3 +170,5 @@ out/production/sp22-202-null-pointer-exception/main/main.iml
 out/production/sp22-202-null-pointer-exception/MakeFile
 out/production/sp22-202-null-pointer-exception/ScoreList.txt
 sp22-202-null-pointer-exception.iml
+*.class
+
