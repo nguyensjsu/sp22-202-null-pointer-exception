@@ -43,8 +43,8 @@ public class GameBoard extends JPanel {
     JButton arrowButton = new JButton("Arrow");
     JButton aswdButton = new JButton("ASWD");
     int keySelect = 0;
-    int jCount = 0 ;
-    int breakableBricksCount = 0 ;
+    int jCount = 0;
+    int breakableBricksCount = 0;
 
     public int livesLeft;
 
@@ -67,7 +67,6 @@ public class GameBoard extends JPanel {
         BufferedReader br = new BufferedReader(fr);
         String color = br.readLine();
 
-        
         // Read Color object String and convert to Color object
         final Scanner scan = new Scanner(color);
         scan.useDelimiter("(r|\\,g|\\,b)=|\\]").next(); // Use proper delimiter and ignore first part (which is the
@@ -138,12 +137,7 @@ public class GameBoard extends JPanel {
         timer = new Timer(Configurations.PERIOD, new GameCycle());
         timer.start();
 
-
-
     }
-
-
-    
 
     @Override
     public void paintComponent(Graphics g) {
@@ -162,7 +156,7 @@ public class GameBoard extends JPanel {
         if (inGame) {
 
             try {
-                
+
                 drawObjects(g2d);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -171,12 +165,8 @@ public class GameBoard extends JPanel {
 
             try {
 
-               
+                gameFinished(g2d);
 
-      
-    gameFinished(g2d);
-   
-               
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (UnsupportedAudioFileException e) {
@@ -232,23 +222,26 @@ public class GameBoard extends JPanel {
         }
     }
 
-    // private void gameWon(Graphics2D g2d) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    // private void gameWon(Graphics2D g2d) throws IOException,
+    // UnsupportedAudioFileException, LineUnavailableException {
 
-    //     var font = new Font("Verdana", Font.BOLD, 18);
-    //             FontMetrics fontMetrics = this.getFontMetrics(font);
-    //             Image icon = new ImageIcon(getClass().getResource("/images/mario.gif")).getImage();
-    //             g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 20, Configurations.WIDTH / 2 + 20, null);
-
+    // var font = new Font("Verdana", Font.BOLD, 18);
+    // FontMetrics fontMetrics = this.getFontMetrics(font);
+    // Image icon = new
+    // ImageIcon(getClass().getResource("/images/mario.gif")).getImage();
+    // g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message))
+    // / 2 - 20, Configurations.WIDTH / 2 + 20, null);
 
     // }
 
-    private void gameFinished(Graphics2D g2d) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    private void gameFinished(Graphics2D g2d)
+            throws IOException, UnsupportedAudioFileException, LineUnavailableException {
 
         var font = new Font("Verdana", Font.BOLD, 18);
         FontMetrics fontMetrics = this.getFontMetrics(font);
-//Gif Image
+        // Gif Image
 
-Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage();
+        Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage();
 
         g2d.setColor(Color.BLACK);
         g2d.setFont(font);
@@ -256,17 +249,14 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
                 (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2,
                 Configurations.WIDTH / 2);
 
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING,
                 RenderingHints.VALUE_RENDER_QUALITY);
 
-        
-
-      
-            g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 20, Configurations.WIDTH / 2 + 20, null);
-        
+        g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 20,
+                Configurations.WIDTH / 2 + 20, null);
 
         FileWriter out = new FileWriter("ScoreList.txt", true);
         BufferedWriter bw = new BufferedWriter(out);
@@ -452,7 +442,7 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
         }
 
         for (int i = 0, j = 0; i < Configurations.N_OF_BRICKS; i++) {
-            int n_of_cement = numCementBricks( bricks ) ;
+            int n_of_cement = numCementBricks(bricks);
             int breakableBricks = Configurations.N_OF_BRICKS - n_of_cement;
             if (bricks[i].isDestroyed()) {
                 j++;
@@ -461,11 +451,10 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
             score = j;
             if (j == breakableBricks) {
 
-                jCount = j ;
-                breakableBricksCount = breakableBricks ;
+                jCount = j;
+                breakableBricksCount = breakableBricks;
                 message = "Victory";
-                
-                
+
                 stopGame();
             }
         }
@@ -568,21 +557,23 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
                     // if it should drop an item
                     if (bricks[i].hasItem()) {
                         itemDrop = true;
-                        // drop = new Item(bricks[i].getX(), bricks[i].getY());
                         drop = new Item(bricks[i].x, bricks[i].y);
-                        
+
+                    }
+
+                    if(bricks[i].containsLife()){
+                        livesLeft++;
+                        System.out.println("Increased Life");
                     }
 
                     if (bricks[i].removeLife()) {
                         if (livesLeft == 1) {
                             inGame = false;
                             timer.stop();
+                        } else {
+                            livesLeft--;
                         }
-                        else
-                        {
-                            livesLeft--; 
-                        }
-                     
+
                     }
 
                     bricks[i].doDamage();
@@ -591,17 +582,16 @@ Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage()
         }
     }
 
-    public int numCementBricks( Brick[] bricks ) {
-        int numCement = 0 ;
-       
-        for ( int i = 0; i < Configurations.N_OF_BRICKS; i++ ) {
-            if (bricks[i].isCement() ) {
-                numCement += 1 ;
+    public int numCementBricks(Brick[] bricks) {
+        int numCement = 0;
+
+        for (int i = 0; i < Configurations.N_OF_BRICKS; i++) {
+            if (bricks[i].isCement()) {
+                numCement += 1;
             }
-           
+
         }
-        return numCement ;
+        return numCement;
     }
-    
-    
+
 }
