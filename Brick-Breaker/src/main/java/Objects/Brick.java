@@ -3,6 +3,7 @@ package main.java.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Brick extends Sprite {
@@ -86,22 +87,22 @@ public class Brick extends Sprite {
     private void loadImage(int index) throws IOException {
 
         if (index == 0) {
-            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/brick1.jpg")));
+            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/brick1.jpg")));
             image = ii.getImage();
         } else if (index == 1) {
-            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/redBrick.jpg")));
+            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/redBrick.jpg")));
             image = ii.getImage();
         } else if (index == 2) {
-            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/brick_cracked_2_copy.jpg")));
+            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/brick_cracked_2_copy.jpg")));
             image = ii.getImage();
         } else if (index == 3) {
-            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/cement1.png")));
+            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/cement1.png")));
             image = ii.getImage();
         } else if (index == 4) {
-            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/itemBrick.jpg")));
+            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/itemBrick.jpg")));
             image = ii.getImage();
         } else if ( index == 5 ) {
-            var ii = new ImageIcon( ImageIO.read( getClass().getResource("/images/switchDirectionBrick.jpg" ) ) ) ;
+            var ii = new ImageIcon( ImageIO.read( new File("Brick-Breaker/src/images/switchDirectionBrick.jpg" ))) ;
             image = ii.getImage() ;
         } else {
             System.out.println("Bad index passed to Brick loadImage");

@@ -11,9 +11,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class MenuScreen extends JPanel {
-    JButton StartButton = new JButton("Start Game");
+    JButton StartButton = new JButton("1 Player");
     JButton HSButton = new JButton("High Scores");
     JButton ThemeButton = new JButton("Change Theme");
+    JButton TwoPlayerButton = new JButton("2 Players");
 
     public MenuScreen() {
         initMenu();
@@ -25,17 +26,21 @@ public class MenuScreen extends JPanel {
 
         setLayout(null);
         StartButton.setBounds((Configurations.WIDTH - 120) / 2, 100, 120, 40);
-        HSButton.setBounds((Configurations.WIDTH - 120) / 2, 150, 120, 40);
-        ThemeButton.setBounds((Configurations.WIDTH - 120) / 2, 200, 120, 40);
+        HSButton.setBounds((Configurations.WIDTH - 120) / 2, 200, 120, 40);
+        ThemeButton.setBounds((Configurations.WIDTH - 120) / 2, 250, 120, 40);
+        TwoPlayerButton.setBounds((Configurations.WIDTH - 120) / 2, 150, 120, 40);
         add(StartButton);
         add(HSButton);
         add(ThemeButton);
+        add(TwoPlayerButton);
         StartHandler stHandler = new StartHandler();
         StartButton.addActionListener(stHandler);
         HSHandler hsHandler = new HSHandler();
         HSButton.addActionListener(hsHandler);
         ThemeHandler THandler = new ThemeHandler();
         ThemeButton.addActionListener(THandler);
+        TwoPlayerHandler tpHandler = new TwoPlayerHandler();
+        TwoPlayerButton.addActionListener(tpHandler);
     }
 
     // Click listener for Start Button
@@ -47,12 +52,13 @@ public class MenuScreen extends JPanel {
                 setLayout(new FlowLayout());
                 revalidate();
                 repaint();
-                GameBoard gameBoard = new GameBoard();
+                GameBoard gameBoard = new GameBoard("one");
                 add(gameBoard);
                 gameBoard.requestFocusInWindow();
                 remove(HSButton);
                 remove(StartButton);
                 remove(ThemeButton);
+                remove(TwoPlayerButton);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -74,6 +80,7 @@ public class MenuScreen extends JPanel {
                 remove(HSButton);
                 remove(StartButton);
                 remove(ThemeButton);
+                remove(TwoPlayerButton);
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
             }
@@ -96,10 +103,33 @@ public class MenuScreen extends JPanel {
                 remove(HSButton);
                 remove(StartButton);
                 remove(ThemeButton);
+                remove(TwoPlayerButton);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
 
+        }
+    }
+
+    // Click Listener for Two Player mode
+    private class TwoPlayerHandler implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                setLayout(new FlowLayout());
+                revalidate();
+                repaint();
+                GameBoard gameBoard = new GameBoard("two");
+                add(gameBoard);
+                gameBoard.requestFocusInWindow();
+                remove(HSButton);
+                remove(StartButton);
+                remove(ThemeButton);
+                remove(TwoPlayerButton);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
