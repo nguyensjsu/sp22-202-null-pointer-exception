@@ -580,7 +580,10 @@ public class GameBoard extends JPanel {
                         else if ( arrowDir == 1 ) {
                             arrowDir = 0 ;
                         }
-                        racket.setDirectionState(arrowDir);
+                        racket1.setDirectionState(arrowDir);
+                        if (currentMode == twoPlayerMode) {
+                            racket2.setDirectionState(arrowDir);
+                        }
                     }
 
                     bricks[i].doDamage();
