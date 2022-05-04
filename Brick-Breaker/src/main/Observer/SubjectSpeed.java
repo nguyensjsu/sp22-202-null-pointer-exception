@@ -9,8 +9,8 @@ public class SubjectSpeed implements ISubject {
     private String subjectState;
     private ArrayList<IObserver> observers = new ArrayList<IObserver>();
 
-    public SubjectSpeed(){
-        subjectState = "";
+    public SubjectSpeed(String str){
+        subjectState = str;
     }
 
     public void setState(String status) {

@@ -5,9 +5,14 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
+import main.Observer.LivesObserver;
+import main.Observer.ScoreObserver;
+import main.Observer.SpeedObserver;
+import main.Observer.SubjectLives;
+import main.Observer.SubjectScore;
+import main.Observer.SubjectSpeed;
 import main.java.Config.Configurations;
 import main.java.Objects.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,9 +39,14 @@ public class GameBoard extends JPanel {
     public int racketType;
     private boolean inGame = true;
     private int arrowDir = 0;
-    int score = 0;
+
+
+
+    //int score = 0;
+
+
+
     double speed = 1;
-    String speedLevel = "x1";
     JButton pauseButton = new JButton("Pause");
     JButton resumeButton = new JButton("Resume");
     JButton restartButton = new JButton("Restart");
@@ -48,7 +58,21 @@ public class GameBoard extends JPanel {
     int keySelect2 = 1;
     int jCount = 0;
     int breakableBricksCount = 0;
+
+    //-----------------------------Setting observer and stuff-----------------------------------------------------
+    // String speedLevel = "x1";
+    private SubjectSpeed speedLevel = new SubjectSpeed("x1");
+    private SubjectLives livesLeft = new SubjectLives(3);
+    private SubjectScore score = new SubjectScore(0);
+
+    private LivesObserver livesObserver = new LivesObserver(livesLeft);
+    private ScoreObserver scoreObserver = new ScoreObserver(score);
+    private SpeedObserver speedObserver = new SpeedObserver(speedLevel);
+
     private final IGameModeStrategy onePlayerMode = () -> {
+
+        initializeDisplayInfo();
+
         bricks = new Brick[Configurations.N_OF_BRICKS];
 
         ball = new Ball();
@@ -56,7 +80,7 @@ public class GameBoard extends JPanel {
 
         int k = 0;
 
-        livesLeft = 3;
+        //livesLeft = 3;
 
         for (int i = 0; i < 5; i++) {
 
@@ -72,6 +96,9 @@ public class GameBoard extends JPanel {
     };
 
     private final IGameModeStrategy twoPlayerMode = () -> {
+
+        initializeDisplayInfo();
+
         bricks = new Brick[Configurations.N_OF_BRICKS];
 
         ball = new Ball();
@@ -80,7 +107,7 @@ public class GameBoard extends JPanel {
 
         int k = 0;
 
-        livesLeft = 3;
+        //livesLeft = 3;
 
         for (int i = 0; i < 5; i++) {
 
@@ -98,7 +125,7 @@ public class GameBoard extends JPanel {
         arrowButton.setText("Switch");
     };
 
-    public int livesLeft;
+    //public int livesLeft;
 
     public GameBoard(String gameMode) throws IOException {
         if (gameMode.equalsIgnoreCase("two")) {
@@ -216,13 +243,26 @@ public class GameBoard extends JPanel {
         g2d.setColor(Color.black);
         g2d.setFont(font);
         // Draw current score at bottom of panel
-        g2d.drawString("Score: " + score, 120, 390);
-        g2d.drawString("Lives: " + livesLeft, 230, 390);
+
+
+
+
+
+        g2d.drawString("Score: " + scoreObserver.getScore(), 120, 390);
+        g2d.drawString("Lives: " + livesObserver.getLives(), 230, 390);
+
+
+
+
+
 
         if (restartClicked) {
             racketType = 0;
             speed = 1;
-            speedLevel = "x1";
+
+            // speedLevel = "x1";
+            speedLevel.setState("x1");
+
             itemDrop = false;
             restartClicked = false;
             racket1 = new Racket(racketType);
@@ -231,7 +271,9 @@ public class GameBoard extends JPanel {
             }
         }
 
-        g2d.drawString("Speed: " + speedLevel, 10, 390);
+        /** Change this part to get the speedLevel from observer */
+        g2d.drawString("Speed: " + speedObserver.getSpeed(), 10, 390);
+
         g2d.drawImage(ball.getImage(), (int) ball.getX(), (int) ball.getY(),
                 ball.getImageWidth(), ball.getImageHeight(), this);
         g2d.drawImage(racket1.getImage(), (int) racket1.getX(), (int) racket1.getY(),
@@ -258,18 +300,6 @@ public class GameBoard extends JPanel {
         }
     }
 
-    // private void gameWon(Graphics2D g2d) throws IOException,
-    // UnsupportedAudioFileException, LineUnavailableException {
-
-    // var font = new Font("Verdana", Font.BOLD, 18);
-    // FontMetrics fontMetrics = this.getFontMetrics(font);
-    // Image icon = new
-    // ImageIcon(getClass().getResource("/images/mario.gif")).getImage();
-    // g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message))
-    // / 2 - 20, Configurations.WIDTH / 2 + 20, null);
-
-    // }
-
     private void gameFinished(Graphics2D g2d)
             throws IOException, UnsupportedAudioFileException, LineUnavailableException {
 
@@ -292,10 +322,20 @@ public class GameBoard extends JPanel {
         FileWriter out = new FileWriter("ScoreList.txt", true);
         BufferedWriter bw = new BufferedWriter(out);
 
-        if (score != 0) {
-            bw.write(Integer.toString(score));
+
+
+
+
+        int temp = scoreObserver.getScore();
+        if (temp != 0) {
+            bw.write(Integer.toString(temp));
             bw.newLine();
         }
+
+
+
+
+
 
         bw.close();
         out.close();
@@ -352,10 +392,16 @@ public class GameBoard extends JPanel {
 
     private void stopGame() throws IOException {
 
-        livesLeft--;
+        //livesLeft--;
+        int tempLives = livesObserver.getLives();
+        livesLeft.setState(tempLives - 1);
+
         itemDrop = false;
         racketType = 0;
-        if (livesLeft == 0) {
+
+
+
+        if (livesObserver.getLives() == 0) {
             inGame = false;
             timer.stop();
         }
@@ -417,7 +463,10 @@ public class GameBoard extends JPanel {
         public void actionPerformed(ActionEvent e) {
             try {
                 speed = 1;
-                speedLevel = "x1";
+
+                // speedLevel = "x1";
+                speedLevel.setState("x1");
+
                 restartClicked = true;
                 inGame = true;
                 timer.stop();
@@ -476,17 +525,27 @@ public class GameBoard extends JPanel {
             stopGame();
         }
 
+        int tempScore = scoreObserver.getScore();
+
         // Speeds up the ball every time
         // 5 bricks are destroyed until the 15th destroyed brick
-        if (score >= 5 && score < 10) {
+        if (tempScore >= 5 && tempScore < 10) {
             speed = 1.2;
-            speedLevel = "x1.2";
-        } else if (score >= 10 && score < 15) {
+
+            // speedLevel = "x1.2";
+            speedLevel.setState("x1.2");
+
+        } else if (tempScore >= 10 && tempScore < 15) {
             speed = 1.5;
-            speedLevel = "x1.5";
-        } else if (score >= 15) {
+
+            // speedLevel = "x1.5";
+            speedLevel.setState("x1.5");
+
+        } else if (tempScore >= 15) {
             speed = 2;
-            speedLevel = "x2";
+
+            // speedLevel = "x2";
+            speedLevel.setState("x2");
         }
 
         for (int i = 0, j = 0; i < Configurations.N_OF_BRICKS; i++) {
@@ -495,8 +554,21 @@ public class GameBoard extends JPanel {
             if (bricks[i].isDestroyed()) {
                 j++;
             }
+
+
+
+
+
+
             // added score keeper
-            score = j;
+            //score = j;
+            score.setState(j);
+
+
+
+
+
+
             if (j == breakableBricks) {
 
                 jCount = j;
@@ -556,15 +628,17 @@ public class GameBoard extends JPanel {
                     }
 
                     if (bricks[i].containsLife()) {
-                        livesLeft++;
+                        int tempLife = livesObserver.getLives();
+                        livesLeft.setState(tempLife + 1);;
                     }
 
                     if (bricks[i].removeLife()) {
-                        if (livesLeft == 1) {
+                        if (livesObserver.getLives() == 1) {
                             inGame = false;
                             timer.stop();
                         } else {
-                            livesLeft--;
+                            int tempLife = livesObserver.getLives();
+                            livesLeft.setState(tempLife - 1);;
                         }
 
                     }
@@ -663,6 +737,14 @@ public class GameBoard extends JPanel {
 
         }
         return numCement;
+    }
+
+    private void initializeDisplayInfo(){
+
+        speedLevel.attach(speedObserver);
+        livesLeft.attach(livesObserver);
+        score.attach(scoreObserver);
+
     }
 
 }
