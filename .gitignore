@@ -172,3 +172,4 @@ out/production/sp22-202-null-pointer-exception/ScoreList.txt
 sp22-202-null-pointer-exception.iml
 *.class
 
+.idea/uiDesigner.xml
