@@ -2,8 +2,6 @@ package main.java.Objects;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-
-import java.io.File;
 import java.io.IOException;
 
 public class Brick extends Sprite {
@@ -17,6 +15,7 @@ public class Brick extends Sprite {
     private boolean containsLife;
     private int createdHealthBrick = 0;
     int noOfDangerBricks = 0;
+    private boolean switchArrowDirction;
 
     public Brick(int x, int y) throws IOException {
         noOfDangerBricks = 0;
@@ -30,6 +29,7 @@ public class Brick extends Sprite {
         destroyed = false;
         cement = false;
         dangerBrick = false;
+        switchArrowDirction = false;
         health = 1;
         containsLife = false;
 
@@ -72,16 +72,18 @@ public class Brick extends Sprite {
         } else if (random == 3 || random == 2) {
             loadImage(5);
             getImageDimensions();
-        } else if (random < 2) {
 
-            if (createdHealthBrick < 1) 
-            {
+        } else if (random < 2) { // Possibility of creating a health brick (1% and only one brick can exist at
+                                 // once)
+
+            if (createdHealthBrick < 1) {
                 createdHealthBrick++;
                 containsLife = true;
                 loadImage(6);
                 getImageDimensions();
             }
 
+            switchArrowDirction = true;
         }
     }
 
@@ -102,11 +104,11 @@ public class Brick extends Sprite {
         } else if (index == 4) {
             var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/itemBrick.jpg")));
             image = ii.getImage();
-        } else if (index == 5) {
-            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/bonusLevelBrick.jpg")));
-            image = ii.getImage();
         } else if (index == 6) {
             var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/itemBrick2.jpg")));
+            image = ii.getImage();
+        } else if (index == 5) {
+            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/switchDirectionBrick.jpg")));
             image = ii.getImage();
         } else {
             System.out.println("Bad index passed to Brick loadImage");
@@ -165,4 +167,9 @@ public class Brick extends Sprite {
     public boolean containsLife() {
         return containsLife;
     }
+
+    public boolean isSwitchDirectionBrick() {
+        return switchArrowDirction;
+    }
+
 }
