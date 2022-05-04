@@ -1,7 +1,7 @@
-package main.java.com ;
+package main.java.com;
 
-import java.awt.event.KeyEvent ;
-import main.java.Interfaces.IKeyDirection ;
+import java.awt.event.KeyEvent;
+import main.java.Interfaces.IKeyDirection;
 
 public class NormalDirectionState implements IKeyDirection {
 
