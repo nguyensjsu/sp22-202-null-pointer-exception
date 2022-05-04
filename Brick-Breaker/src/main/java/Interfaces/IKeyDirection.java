@@ -4,6 +4,5 @@ import java.awt.event.KeyEvent;
 
 public interface IKeyDirection {
 
-    int specificMove(KeyEvent e, int select) ;
-
+    int specificMove(int key, int select) ;
 }

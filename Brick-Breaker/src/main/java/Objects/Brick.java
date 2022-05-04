@@ -102,7 +102,7 @@ public class Brick extends Sprite {
             var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/itemBrick.jpg")));
             image = ii.getImage();
         } else if ( index == 5 ) {
-            var ii = new ImageIcon( ImageIO.read( getClass().getResource("/images/switchDirectionBrick.jpg" ) ) ) ;
+            var ii = new ImageIcon( ImageIO.read( new File("Brick-Breaker/src/images/switchDirectionBrick.jpg" ))) ;
             image = ii.getImage() ;
         } else {
             System.out.println("Bad index passed to Brick loadImage");

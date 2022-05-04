@@ -1,5 +1,6 @@
 package main.java.com;
 
+import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
@@ -274,24 +275,17 @@ public class GameBoard extends JPanel {
         var font = new Font("Verdana", Font.BOLD, 18);
         FontMetrics fontMetrics = this.getFontMetrics(font);
         //Gif Image
-        Image icon = new ImageIcon(getClass().getResource("/images/dog.gif")).getImage();
+        Image icon = new ImageIcon(ImageIO.read (new File("Brick-Breaker/src/images/dog.gif"))).getImage();
 
         g2d.setColor(Color.BLACK);
         g2d.setFont(font);
         g2d.drawString(message,
                 (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2,
                 Configurations.WIDTH / 2);
-
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING,
-                RenderingHints.VALUE_RENDER_QUALITY);
-
-
-
-
-            g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 20, Configurations.WIDTH / 2 + 20, null);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 20, Configurations.WIDTH / 2 + 20, null);
 
 
         FileWriter out = new FileWriter("ScoreList.txt", true);
