@@ -197,3 +197,9 @@ sp22-202-null-pointer-exception.iml
 out/production/sp22-202-null-pointer-exception/main/java/com/MenuScreen$TwoPlayerHandler.class
 out/production/sp22-202-null-pointer-exception/main/java/com/GameBoard$IGameModeStrategy.class
 *.class
+out/production/sp22-202-null-pointer-exception/images/switchDirectionBrick.jpg
+out/production/sp22-202-null-pointer-exception/main/java/com/images/switchDirectionBrick.jpg
+out/production/sp22-202-null-pointer-exception/run.bat
+out/production/sp22-202-null-pointer-exception/src/images/switchDirectionBrick.jpg
+out/production/sp22-202-null-pointer-exception/src/main/java/com/images/switchDirectionBrick.jpg
+out/production/sp22-202-null-pointer-exception/src/run.bat
