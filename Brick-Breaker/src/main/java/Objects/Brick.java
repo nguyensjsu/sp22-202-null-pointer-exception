@@ -14,6 +14,7 @@ public class Brick extends Sprite {
     private boolean dangerBrick;
     private boolean containsItem;
     private boolean removeLife;
+    private boolean switchArrowDirction; 
     int noOfDangerBricks = 0 ;
     public Brick(int x, int y) throws IOException {
         noOfDangerBricks = 0 ;
@@ -29,6 +30,7 @@ public class Brick extends Sprite {
         destroyed = false;
         cement = false;
         dangerBrick = false ;
+        switchArrowDirction = false; 
         health = 1;
        
         // boolean for item drop bricks
@@ -78,6 +80,7 @@ public class Brick extends Sprite {
         {
             loadImage(5);
             getImageDimensions();
+            switchArrowDirction = true ;
         }
     }
 
@@ -99,7 +102,7 @@ public class Brick extends Sprite {
             var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/itemBrick.jpg")));
             image = ii.getImage();
         } else if ( index == 5 ) {
-            var ii = new ImageIcon( ImageIO.read( getClass().getResource("/images/bonusLevelBrick.jpg" ) ) ) ;
+            var ii = new ImageIcon( ImageIO.read( getClass().getResource("/images/switchDirectionBrick.jpg" ) ) ) ;
             image = ii.getImage() ;
         } else {
             System.out.println("Bad index passed to Brick loadImage");
@@ -157,6 +160,10 @@ public class Brick extends Sprite {
 
     public boolean removeLife() {
         return removeLife;
+    }
+
+    public boolean isSwitchDirectionBrick() {
+        return switchArrowDirction ;
     }
 
 }
