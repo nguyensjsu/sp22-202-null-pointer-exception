@@ -15,12 +15,11 @@ public class Brick extends Sprite {
     private boolean containsItem;
     private boolean removeLife;
     private boolean containsLife;
-    private int createdHealthBrick;
+    private int createdHealthBrick = 0;
     int noOfDangerBricks = 0;
 
     public Brick(int x, int y) throws IOException {
         noOfDangerBricks = 0;
-        createdHealthBrick = 0;
         initBrick(x, y);
     }
 
@@ -32,11 +31,11 @@ public class Brick extends Sprite {
         cement = false;
         dangerBrick = false;
         health = 1;
+        containsLife = false;
 
         // boolean for item drop bricks
         containsItem = false;
         removeLife = false;
-        containsLife = false;
 
         loadImage(0);
         getImageDimensions();
@@ -52,17 +51,16 @@ public class Brick extends Sprite {
             cement = true;
             loadImage(3);
             getImageDimensions();
-        } else if (random > 5 && random <= 20) {
+        } else if (random > 5 && random < 20) {
             containsItem = true;
             loadImage(4);
-        } else if (random >= 3 && random <= 5) {
+        } else if (random > 3 && random <= 5) {
 
             if (noOfDangerBricks < 3) {
                 noOfDangerBricks += 1;
                 dangerBrick = true;
                 removeLife = true;
                 loadImage(1);
-
             }
 
             else {
@@ -71,45 +69,46 @@ public class Brick extends Sprite {
                 getImageDimensions();
             }
 
-        } else if (random == 3) {
+        } else if (random == 3 || random == 2) {
             loadImage(5);
             getImageDimensions();
-        }
-        else{
-            if(createdHealthBrick == 0){
+        } else if (random < 2) {
+
+            if (createdHealthBrick < 1) 
+            {
                 createdHealthBrick++;
                 containsLife = true;
                 loadImage(6);
                 getImageDimensions();
             }
+
         }
     }
 
     private void loadImage(int index) throws IOException {
 
         if (index == 0) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/brick1.jpg")));
+            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/brick1.jpg")));
             image = ii.getImage();
         } else if (index == 1) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/redBrick.jpg")));
+            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/redBrick.jpg")));
             image = ii.getImage();
         } else if (index == 2) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/brick_cracked_2_copy.jpg")));
+            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/brick_cracked_2_copy.jpg")));
             image = ii.getImage();
         } else if (index == 3) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/cement1.png")));
+            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/cement1.png")));
             image = ii.getImage();
         } else if (index == 4) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/itemBrick.jpg")));
+            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/itemBrick.jpg")));
             image = ii.getImage();
         } else if (index == 5) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/bonusLevelBrick.jpg")));
+            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/bonusLevelBrick.jpg")));
             image = ii.getImage();
         } else if (index == 6) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/itemBrick2.jpg")));
+            var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/itemBrick2.jpg")));
             image = ii.getImage();
-        }
-        else {
+        } else {
             System.out.println("Bad index passed to Brick loadImage");
         }
 
@@ -163,7 +162,7 @@ public class Brick extends Sprite {
         return removeLife;
     }
 
-    public boolean containsLife(){
+    public boolean containsLife() {
         return containsLife;
     }
 }
