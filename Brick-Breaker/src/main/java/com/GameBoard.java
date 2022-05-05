@@ -20,7 +20,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.*;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class GameBoard extends JPanel {
 
@@ -67,7 +69,7 @@ public class GameBoard extends JPanel {
         bricks = new Brick[Configurations.N_OF_BRICKS];
 
         ball = new Ball();
-        racket1 = new Racket(racketType);
+        racket1 = new Racket(racketType, keySelect1);
 
         int k = 0;
 
@@ -91,8 +93,8 @@ public class GameBoard extends JPanel {
         bricks = new Brick[Configurations.N_OF_BRICKS];
 
         ball = new Ball();
-        racket1 = new Racket(racketType);
-        racket2 = new Racket(racketType);
+        racket1 = new Racket(racketType, keySelect1);
+        racket2 = new Racket(racketType, keySelect2);
 
         int k = 0;
 
@@ -176,6 +178,7 @@ public class GameBoard extends JPanel {
         aswdButton.setFocusable(false);
 
         addKeyListener(new TAdapter());
+
         setFocusable(true);
         setPreferredSize(new Dimension(Configurations.WIDTH, Configurations.HEIGHT));
         currentMode.gameInit();
@@ -238,9 +241,9 @@ public class GameBoard extends JPanel {
 
             itemDrop = false;
             restartClicked = false;
-            racket1 = new Racket(racketType);
+            racket1 = new Racket(racketType, keySelect1);
             if (currentMode == twoPlayerMode) {
-                racket2 = new Racket(racketType);
+                racket2 = new Racket(racketType, keySelect2);
             }
         }
 
@@ -368,9 +371,9 @@ public class GameBoard extends JPanel {
 
         ball = new Ball();
         arrowDir = 0;
-        racket1 = new Racket(racketType);
+        racket1 = new Racket(racketType, keySelect1);
         if (currentMode == twoPlayerMode) {
-            racket2 = new Racket(racketType);
+            racket2 = new Racket(racketType, keySelect2);
         }
 
         timer.stop();
@@ -522,9 +525,9 @@ public class GameBoard extends JPanel {
         }
 
         // check if the user caught a dropped item
-        checkCaught(racket1);
+        checkCaught(racket1, keySelect1);
         if (currentMode == twoPlayerMode) {
-            checkCaught(racket2);
+            checkCaught(racket2, keySelect2);
         }
 
         for (int i = 0; i < Configurations.N_OF_BRICKS; i++) {
@@ -598,7 +601,7 @@ public class GameBoard extends JPanel {
         }
     }
 
-    private void checkCaught(Racket racket) throws IOException {
+    private void checkCaught(Racket racket, int keySelect) throws IOException {
         if (itemDrop && (drop.getRect()).intersects(racket.getRect())) {
             int random = (int) (Math.random() * 100) + 1;
 
@@ -613,7 +616,7 @@ public class GameBoard extends JPanel {
 
             // have new racket appear under ball
             double temp = ball.getX();
-            racket = new Racket(racketType);
+            racket = new Racket(racketType, keySelect);
             racket.setX(temp);
 
             // reset itemDrop condition

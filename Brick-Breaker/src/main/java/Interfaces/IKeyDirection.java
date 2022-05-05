@@ -1,8 +1,8 @@
 package main.java.Interfaces ;
 
-import java.awt.event.KeyEvent;
+import main.java.Objects.Racket;
 
 public interface IKeyDirection {
 
-    int specificMove(int key, int select) ;
+    void specificMove(int key, int select, Racket racket) ;
 }
