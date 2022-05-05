@@ -33,13 +33,19 @@ public class BrickBreaker extends JFrame {
 
             BrickBreaker game = null;
             try {
-                playMusic();
+                DataSet dataset = new DataSet() ;
+                //playMusic();
+     dataset.changeStrategy(new GameMusic());
+    dataset.doSort();
                 game = new BrickBreaker();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (UnsupportedAudioFileException e) {
                 e.printStackTrace();
             } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             game.setVisible(true);

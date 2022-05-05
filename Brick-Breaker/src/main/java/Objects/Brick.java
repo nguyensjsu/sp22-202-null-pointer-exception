@@ -100,13 +100,13 @@ public class Brick extends Sprite {
             var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/brick_cracked_2_copy.jpg")));
             image = ii.getImage();
         } else if (index == 3) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/cement1.png")));
+            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/cement.jpg")));
             image = ii.getImage();
         } else if (index == 4) {
             var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/itemBrick.jpg")));
             image = ii.getImage();
         } else if (index == 6) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/itemBrick2.jpg")));
+            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/greenBrick.jpg")));
             image = ii.getImage();
         } else if (index == 5) {
             var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/switchDirectionBrick.jpg")));

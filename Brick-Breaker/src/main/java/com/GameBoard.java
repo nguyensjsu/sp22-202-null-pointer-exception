@@ -1,6 +1,9 @@
 package main.java.com;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
@@ -29,8 +32,11 @@ public class GameBoard extends JPanel {
     interface IGameModeStrategy {
         void gameInit() throws IOException;
     }
-
-    private Timer timer;
+    private static AudioInputStream as = null ;
+    private static File f = null;
+    private static Clip c = null ;
+    DataSet dataset = new DataSet() ;
+    private static Timer timer;
     private String message = "Game Over!";
     private Ball ball;
     public Racket racket1;
@@ -41,7 +47,7 @@ public class GameBoard extends JPanel {
     public int racketType;
     private boolean inGame = true;
     private int arrowDir = 0;
-    double speed = 1;
+    double speed = 2;
     JButton pauseButton = new JButton("Pause");
     JButton resumeButton = new JButton("Resume");
     JButton restartButton = new JButton("Restart");
@@ -79,7 +85,7 @@ public class GameBoard extends JPanel {
 
             for (int j = 0; j < 6; j++) {
 
-                bricks[k] = new Brick(j * 40 + 30, i * 10 + 50);
+                bricks[k] = new Brick(j * 85 + 30, i * 25 + 50);
                 k++;
             }
         }
@@ -106,7 +112,7 @@ public class GameBoard extends JPanel {
 
             for (int j = 0; j < 6; j++) {
 
-                bricks[k] = new Brick(j * 40 + 30, i * 10 + 50);
+                bricks[k] = new Brick(j * 85 + 30, i * 25 + 50);
                 k++;
             }
         }
@@ -194,7 +200,13 @@ public class GameBoard extends JPanel {
 
         var g2d = (Graphics2D) g;
         Image im = new ImageIcon(getClass().getResource("/images/lava.gif")).getImage();
-        g.drawImage(im, 0, 365, null);
+        g.drawImage(im, 0, 600, null);
+        g.drawImage(im, 100, 600, null);
+        g.drawImage(im, 250, 600, null);
+
+        g.drawImage(im, 0, 580, null);
+        g.drawImage(im, 100, 580, null);
+        g.drawImage(im, 250, 580, null);
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
@@ -220,6 +232,9 @@ public class GameBoard extends JPanel {
                 e.printStackTrace();
             } catch (LineUnavailableException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
         }
 
@@ -234,12 +249,12 @@ public class GameBoard extends JPanel {
         g2d.setFont(font);
         // Draw current score at bottom of panel
 
-        g2d.drawString("Score: " + scoreObserver.getScore(), 120, 390);
-        g2d.drawString("Lives: " + livesObserver.getLives(), 230, 390);
+        g2d.drawString("Score: " + scoreObserver.getScore(), 230, 620);
+        g2d.drawString("Lives: " + livesObserver.getLives(), 350, 620);
 
         if (restartClicked) {
             racketType = 0;
-            speed = 1;
+            speed = 2;
 
             speedLevel.setState("x1");
 
@@ -252,7 +267,7 @@ public class GameBoard extends JPanel {
         }
 
         /** Change this part to get the speedLevel from observer */
-        g2d.drawString("Speed: " + speedObserver.getSpeed(), 10, 390);
+        g2d.drawString("Speed: " + speedObserver.getSpeed(),  120, 620);
 
         g2d.drawImage(ball.getImage(), (int) ball.getX(), (int) ball.getY(),
                 ball.getImageWidth(), ball.getImageHeight(), this);
@@ -273,7 +288,7 @@ public class GameBoard extends JPanel {
 
             if (!bricks[i].isDestroyed()) {
 
-                g2d.drawImage(bricks[i].getImage(), (int) bricks[i].getX(),
+                g2d.drawImage(bricks[i].getImage(), (int) bricks[i].getX() - 8  ,
                         (int) bricks[i].getY(), bricks[i].getImageWidth(),
                         bricks[i].getImageHeight(), this);
             }
@@ -281,7 +296,7 @@ public class GameBoard extends JPanel {
     }
 
     private void gameFinished(Graphics2D g2d)
-            throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+            throws Exception {
 
         var font = new Font("Verdana", Font.BOLD, 18);
         FontMetrics fontMetrics = this.getFontMetrics(font);
@@ -310,6 +325,12 @@ public class GameBoard extends JPanel {
 
         bw.close();
         out.close();
+
+        timer.stop();
+        dataset.changeStrategy(new DogMusic());
+        dataset.doSort();
+      timer = new Timer(Configurations.PERIOD, new GameCycle());
+      timer.start();
     }
 
     private class TAdapter extends KeyAdapter {
@@ -398,6 +419,12 @@ public class GameBoard extends JPanel {
     // method to pause game
     private void pauseGame() {
         Container parent = pauseButton.getParent();
+        try {
+            GameBoard.stopMusic();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         parent.add(resumeButton, 0, 0);
         parent.remove(pauseButton);
         parent.revalidate();
@@ -415,6 +442,12 @@ public class GameBoard extends JPanel {
 
     private void resumeGame() {
         Container parent = resumeButton.getParent();
+        try {
+            dataset.doSort();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } 
         parent.add(pauseButton, 0, 0);
         parent.remove(resumeButton);
         parent.revalidate();
@@ -429,15 +462,23 @@ public class GameBoard extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                speed = 1;
+                speed = 2;
                 speedLevel.setState("x1");
                 restartClicked = true;
                 inGame = true;
                 timer.stop();
                 currentMode.gameInit();
+                dataset.changeStrategy(new GameMusic());
+                try {
+                    dataset.doSort();
+                } catch (Exception e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             } catch (IOException er) {
                 er.printStackTrace();
             }
+           
         }
     }
 
@@ -493,15 +534,15 @@ public class GameBoard extends JPanel {
         // Speeds up the ball every time
         // 5 bricks are destroyed until the 15th destroyed brick
         if (tempScore >= 5 && tempScore < 10) {
-            speed = 1.2;
+            speed = 2.2;
             speedLevel.setState("x1.2");
 
         } else if (tempScore >= 10 && tempScore < 15) {
-            speed = 1.5;
+            speed = 2.5;
             speedLevel.setState("x1.5");
 
         } else if (tempScore >= 15) {
-            speed = 2;
+            speed = 2.8;
             speedLevel.setState("x2");
         }
 
@@ -693,5 +734,49 @@ public class GameBoard extends JPanel {
         score.attach(scoreObserver);
 
     }
+
+
+    
+    public static  void playMusicForDog() throws UnsupportedAudioFileException, IOException, LineUnavailableException
+    {
+     
+f = new File("./Brick-Breaker/src/main/java/music/dog_music.wav").getAbsoluteFile();
+
+ as = AudioSystem.getAudioInputStream(f);
+c = AudioSystem.getClip();
+c.open(as);
+//Plays audio once
+c.start();
+c.loop(Clip.LOOP_CONTINUOUSLY);
+    timer.stop() ;
+      
+   }
+
+   public static  void playMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException
+   {
+      f = new File("./Brick-Breaker/src/main/java/music/music_bg.wav").getAbsoluteFile();
+as = AudioSystem.getAudioInputStream(f);
+c = AudioSystem.getClip();
+c.open(as);
+//Plays audio once
+c.start();
+c.loop(Clip.LOOP_CONTINUOUSLY);
+   
+   
+      
+   }
+
+
+   
+   public static  void stopMusic() throws Exception
+   {
+      
+       if (c!=null) //do not nest it to the previous condition ...
+       {
+         c.stop();
+         c.flush();
+         c.close();
+       }
+   }
 
 }
