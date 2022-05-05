@@ -5,9 +5,14 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
+import main.Observer.LivesObserver;
+import main.Observer.ScoreObserver;
+import main.Observer.SpeedObserver;
+import main.Observer.SubjectLives;
+import main.Observer.SubjectScore;
+import main.Observer.SubjectSpeed;
 import main.java.Config.Configurations;
 import main.java.Objects.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,10 +40,8 @@ public class GameBoard extends JPanel {
     private boolean itemDrop;
     public int racketType;
     private boolean inGame = true;
-    private int arrowDir = 0 ;
-    int score = 0;
+    private int arrowDir = 0;
     double speed = 1;
-    String speedLevel = "x1";
     JButton pauseButton = new JButton("Pause");
     JButton resumeButton = new JButton("Resume");
     JButton restartButton = new JButton("Restart");
@@ -48,17 +51,27 @@ public class GameBoard extends JPanel {
     private IGameModeStrategy currentMode;
     int keySelect1 = 0;
     int keySelect2 = 1;
-    int jCount = 0 ;
-    int breakableBricksCount = 0 ;
+    int jCount = 0;
+    int breakableBricksCount = 0;
+
+    private SubjectSpeed speedLevel = new SubjectSpeed("x1");
+    private SubjectLives livesLeft = new SubjectLives(3);
+    private SubjectScore score = new SubjectScore(0);
+
+    private LivesObserver livesObserver = new LivesObserver(livesLeft);
+    private ScoreObserver scoreObserver = new ScoreObserver(score);
+    private SpeedObserver speedObserver = new SpeedObserver(speedLevel);
+
     private final IGameModeStrategy onePlayerMode = () -> {
+
+        initializeDisplayInfo();
+
         bricks = new Brick[Configurations.N_OF_BRICKS];
 
         ball = new Ball();
         racket1 = new Racket(racketType, keySelect1);
 
         int k = 0;
-
-        livesLeft = 3;
 
         for (int i = 0; i < 5; i++) {
 
@@ -74,6 +87,9 @@ public class GameBoard extends JPanel {
     };
 
     private final IGameModeStrategy twoPlayerMode = () -> {
+
+        initializeDisplayInfo();
+
         bricks = new Brick[Configurations.N_OF_BRICKS];
 
         ball = new Ball();
@@ -81,8 +97,6 @@ public class GameBoard extends JPanel {
         racket2 = new Racket(racketType, keySelect2);
 
         int k = 0;
-
-        livesLeft = 3;
 
         for (int i = 0; i < 5; i++) {
 
@@ -100,9 +114,6 @@ public class GameBoard extends JPanel {
         arrowButton.setText("Switch");
     };
 
-
-    public int livesLeft;
-
     public GameBoard(String gameMode) throws IOException {
         if (gameMode.equalsIgnoreCase("two")) {
             currentMode = twoPlayerMode;
@@ -119,13 +130,12 @@ public class GameBoard extends JPanel {
         RestartHandler restartHandler = new RestartHandler();
         ArrowKeyHandler arrowKeyHandler = new ArrowKeyHandler();
         ASWDKeyHandler aswdKeyHandler = new ASWDKeyHandler();
-        arrowDir = 0 ;
+        arrowDir = 0;
 
         // Read from BackGroundColor.txt to get background color
         FileReader fr = new FileReader("BackGroundColor.txt");
         BufferedReader br = new BufferedReader(fr);
         String color = br.readLine();
-
 
         // Read Color object String and convert to Color object
         final Scanner scan = new Scanner(color);
@@ -203,10 +213,8 @@ public class GameBoard extends JPanel {
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (UnsupportedAudioFileException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (LineUnavailableException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -221,13 +229,16 @@ public class GameBoard extends JPanel {
         g2d.setColor(Color.black);
         g2d.setFont(font);
         // Draw current score at bottom of panel
-        g2d.drawString("Score: " + score, 120, 390);
-        g2d.drawString("Lives: " + livesLeft, 230, 390);
+
+        g2d.drawString("Score: " + scoreObserver.getScore(), 120, 390);
+        g2d.drawString("Lives: " + livesObserver.getLives(), 230, 390);
 
         if (restartClicked) {
             racketType = 0;
             speed = 1;
-            speedLevel = "x1";
+
+            speedLevel.setState("x1");
+
             itemDrop = false;
             restartClicked = false;
             racket1 = new Racket(racketType, keySelect1);
@@ -236,7 +247,9 @@ public class GameBoard extends JPanel {
             }
         }
 
-        g2d.drawString("Speed: " + speedLevel, 10, 390);
+        /** Change this part to get the speedLevel from observer */
+        g2d.drawString("Speed: " + speedObserver.getSpeed(), 10, 390);
+
         g2d.drawImage(ball.getImage(), (int) ball.getX(), (int) ball.getY(),
                 ball.getImageWidth(), ball.getImageHeight(), this);
         g2d.drawImage(racket1.getImage(), (int) racket1.getX(), (int) racket1.getY(),
@@ -263,39 +276,31 @@ public class GameBoard extends JPanel {
         }
     }
 
-    // private void gameWon(Graphics2D g2d) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-
-    //     var font = new Font("Verdana", Font.BOLD, 18);
-    //             FontMetrics fontMetrics = this.getFontMetrics(font);
-    //             Image icon = new ImageIcon(getClass().getResource("/images/mario.gif")).getImage();
-    //             g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 20, Configurations.WIDTH / 2 + 20, null);
-
-
-    // }
-
-    private void gameFinished(Graphics2D g2d) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    private void gameFinished(Graphics2D g2d)
+            throws IOException, UnsupportedAudioFileException, LineUnavailableException {
 
         var font = new Font("Verdana", Font.BOLD, 18);
         FontMetrics fontMetrics = this.getFontMetrics(font);
-        //Gif Image
-        Image icon = new ImageIcon(ImageIO.read (new File("Brick-Breaker/src/images/dog.gif"))).getImage();
+        // Gif Image
+        Image icon = new ImageIcon(ImageIO.read(getClass().getResource("/images/dog.gif"))).getImage();
 
         g2d.setColor(Color.BLACK);
         g2d.setFont(font);
         g2d.drawString(message,
                 (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2,
                 Configurations.WIDTH / 2);
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 20, Configurations.WIDTH / 2 + 20, null);
-
+        g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 20,
+                Configurations.WIDTH / 2 + 20, null);
 
         FileWriter out = new FileWriter("ScoreList.txt", true);
         BufferedWriter bw = new BufferedWriter(out);
 
-        if (score != 0) {
-            bw.write(Integer.toString(score));
+        int temp = scoreObserver.getScore();
+        if (temp != 0) {
+            bw.write(Integer.toString(temp));
             bw.newLine();
         }
 
@@ -354,10 +359,12 @@ public class GameBoard extends JPanel {
 
     private void stopGame() throws IOException {
 
-        livesLeft--;
+        int tempLives = livesObserver.getLives();
+        livesLeft.setState(tempLives - 1);
         itemDrop = false;
         racketType = 0;
-        if (livesLeft == 0) {
+
+        if (livesObserver.getLives() == 0) {
             inGame = false;
             timer.stop();
         }
@@ -419,7 +426,7 @@ public class GameBoard extends JPanel {
         public void actionPerformed(ActionEvent e) {
             try {
                 speed = 1;
-                speedLevel = "x1";
+                speedLevel.setState("x1");
                 restartClicked = true;
                 inGame = true;
                 timer.stop();
@@ -477,31 +484,36 @@ public class GameBoard extends JPanel {
             stopGame();
         }
 
+        int tempScore = scoreObserver.getScore();
+
         // Speeds up the ball every time
         // 5 bricks are destroyed until the 15th destroyed brick
-        if (score >= 5 && score < 10) {
+        if (tempScore >= 5 && tempScore < 10) {
             speed = 1.2;
-            speedLevel = "x1.2";
-        } else if (score >= 10 && score < 15) {
+            speedLevel.setState("x1.2");
+
+        } else if (tempScore >= 10 && tempScore < 15) {
             speed = 1.5;
-            speedLevel = "x1.5";
-        } else if (score >= 15) {
+            speedLevel.setState("x1.5");
+
+        } else if (tempScore >= 15) {
             speed = 2;
-            speedLevel = "x2";
+            speedLevel.setState("x2");
         }
 
         for (int i = 0, j = 0; i < Configurations.N_OF_BRICKS; i++) {
-            int n_of_cement = numCementBricks( bricks ) ;
+            int n_of_cement = numCementBricks(bricks);
             int breakableBricks = Configurations.N_OF_BRICKS - n_of_cement;
             if (bricks[i].isDestroyed()) {
                 j++;
             }
-            // added score keeper
-            score = j;
-            if (j == breakableBricks) {
 
-                jCount = j ;
-                breakableBricksCount = breakableBricks ;
+            // added score keeper
+            score.setState(j);
+
+            if (j == breakableBricks) {
+                jCount = j;
+                breakableBricksCount = breakableBricks;
                 message = "Victory";
                 stopGame();
             }
@@ -552,29 +564,30 @@ public class GameBoard extends JPanel {
                     // if it should drop an item
                     if (bricks[i].hasItem()) {
                         itemDrop = true;
-                        // drop = new Item(bricks[i].getX(), bricks[i].getY());
                         drop = new Item(bricks[i].x, bricks[i].y);
+                    }
 
+                    if (bricks[i].containsLife()) {
+                        int tempLife = livesObserver.getLives();
+                        livesLeft.setState(tempLife + 1);
                     }
 
                     if (bricks[i].removeLife()) {
-                        if (livesLeft == 1) {
+                        if (livesObserver.getLives() == 1) {
                             inGame = false;
                             timer.stop();
+                        } else {
+                            int tempLife = livesObserver.getLives();
+                            livesLeft.setState(tempLife - 1);
+                            ;
                         }
-                        else
-                        {
-                            livesLeft--;
-                        }
-
                     }
 
                     if (bricks[i].isSwitchDirectionBrick()) {
-                        if ( arrowDir == 0 ) {
-                            arrowDir = 1 ;
-                        }
-                        else if ( arrowDir == 1 ) {
-                            arrowDir = 0 ;
+                        if (arrowDir == 0) {
+                            arrowDir = 1;
+                        } else if (arrowDir == 1) {
+                            arrowDir = 0;
                         }
                         racket1.setDirectionState(arrowDir);
                         if (currentMode == twoPlayerMode) {
@@ -624,25 +637,21 @@ public class GameBoard extends JPanel {
             int fourth = paddleLPos + 32;
 
             if (ballLPos < first) {
-
                 ball.setXDir(-speed);
                 ball.setYDir(-speed);
             }
 
             if (ballLPos >= first && ballLPos < second) {
-
                 ball.setXDir(-speed);
                 ball.setYDir(-speed * ball.getYDir());
             }
 
             if (ballLPos >= second && ballLPos < third) {
-
                 ball.setXDir(0);
                 ball.setYDir(-speed);
             }
 
             if (ballLPos >= third && ballLPos < fourth) {
-
                 ball.setXDir(speed);
                 ball.setYDir(-speed * ball.getYDir());
             }
@@ -654,17 +663,25 @@ public class GameBoard extends JPanel {
         }
     }
 
-    public int numCementBricks( Brick[] bricks ) {
-        int numCement = 0 ;
+    public int numCementBricks(Brick[] bricks) {
+        int numCement = 0;
 
-        for ( int i = 0; i < Configurations.N_OF_BRICKS; i++ ) {
-            if (bricks[i].isCement() ) {
-                numCement += 1 ;
+        for (int i = 0; i < Configurations.N_OF_BRICKS; i++) {
+            if (bricks[i].isCement()) {
+                numCement += 1;
             }
 
         }
-        return numCement ;
+        return numCement;
     }
 
+    // Function to set the observer pattern
+    private void initializeDisplayInfo() {
+
+        speedLevel.attach(speedObserver);
+        livesLeft.attach(livesObserver);
+        score.attach(scoreObserver);
+
+    }
 
 }
