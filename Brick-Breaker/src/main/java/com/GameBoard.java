@@ -8,14 +8,15 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
-import main.Observer.LivesObserver;
-import main.Observer.ScoreObserver;
-import main.Observer.SpeedObserver;
-import main.Observer.SubjectLives;
-import main.Observer.SubjectScore;
-import main.Observer.SubjectSpeed;
 import main.java.Config.Configurations;
 import main.java.Objects.*;
+import main.java.Observer.LivesObserver;
+import main.java.Observer.ScoreObserver;
+import main.java.Observer.SpeedObserver;
+import main.java.Observer.SubjectLives;
+import main.java.Observer.SubjectScore;
+import main.java.Observer.SubjectSpeed;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
