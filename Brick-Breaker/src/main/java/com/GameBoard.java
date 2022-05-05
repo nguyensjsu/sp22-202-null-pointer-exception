@@ -286,7 +286,7 @@ public class GameBoard extends JPanel {
         var font = new Font("Verdana", Font.BOLD, 18);
         FontMetrics fontMetrics = this.getFontMetrics(font);
         // Gif Image
-        Image icon = new ImageIcon(ImageIO.read(getClass().getResource("/images/dog.gif"))).getImage();
+        Image icon = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/dog.gif"))).getImage();
 
         g2d.setColor(Color.BLACK);
         g2d.setFont(font);
@@ -529,9 +529,9 @@ public class GameBoard extends JPanel {
         }
 
         // check if the user caught a dropped item
-        checkCaught(racket1, keySelect1);
+        checkCaught(racket1, keySelect1, "1");
         if (currentMode == twoPlayerMode) {
-            checkCaught(racket2, keySelect2);
+            checkCaught(racket2, keySelect2, "2");
         }
 
         for (int i = 0; i < Configurations.N_OF_BRICKS; i++) {
@@ -605,7 +605,7 @@ public class GameBoard extends JPanel {
         }
     }
 
-    private void checkCaught(Racket racket, int keySelect) throws IOException {
+    private void checkCaught(Racket racket, int keySelect, String player) throws IOException {
         if (itemDrop && (drop.getRect()).intersects(racket.getRect())) {
             int random = (int) (Math.random() * 100) + 1;
 
@@ -620,8 +620,14 @@ public class GameBoard extends JPanel {
 
             // have new racket appear under ball
             double temp = ball.getX();
-            racket = new Racket(racketType, keySelect);
-            racket.setX(temp);
+            if (player.equals("1")) {
+                racket1 = new Racket(racketType, keySelect);
+                racket1.setX(temp);
+            } else if (player.equals("2")) {
+                racket2 = new Racket(racketType, keySelect);
+                racket2.setX(temp);
+            }
+
 
             // reset itemDrop condition
             itemDrop = false;
