@@ -71,6 +71,8 @@ public class GameBoard extends JPanel {
         ball = new Ball();
         racket1 = new Racket(racketType, keySelect1);
 
+        livesLeft.setState(3);
+
         int k = 0;
 
         for (int i = 0; i < 5; i++) {
@@ -95,6 +97,8 @@ public class GameBoard extends JPanel {
         ball = new Ball();
         racket1 = new Racket(racketType, keySelect1);
         racket2 = new Racket(racketType, keySelect2);
+
+        livesLeft.setState(3);
 
         int k = 0;
 

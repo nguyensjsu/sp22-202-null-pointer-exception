@@ -72,6 +72,8 @@ public class Brick extends Sprite {
         } else if (random == 3 || random == 2) {
             loadImage(5);
             getImageDimensions();
+            switchArrowDirction = true;
+
 
         } else if (random < 2) { // Possibility of creating a health brick (1% and only one brick can exist at
                                  // once)
@@ -82,8 +84,6 @@ public class Brick extends Sprite {
                 loadImage(6);
                 getImageDimensions();
             }
-
-            switchArrowDirction = true;
         }
     }
 
