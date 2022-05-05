@@ -1,7 +1,11 @@
 package main.java.Objects;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
@@ -10,14 +14,17 @@ import main.java.Interfaces.IKeyDirection;
 import main.java.com.NormalDirectionState;
 import main.java.com.SwitchedDirectionState;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
+
 public class Racket extends Sprite {
 
     private int dx;
     private IKeyDirection directionState ;
     NormalDirectionState normalDirectionState;
     SwitchedDirectionState switchedDirectionState;
+    private LinkedHashSet<Integer> activeKeys = new LinkedHashSet<>();
 
-    public Racket(int racket) throws IOException {
+    public Racket(int racket, int select) throws IOException {
         initRacket(racket);
         normalDirectionState = new NormalDirectionState();
         switchedDirectionState = new SwitchedDirectionState();
@@ -56,23 +63,31 @@ public class Racket extends Sprite {
     }
 
     public void keyPressed(KeyEvent e, int select) {
-        dx = directionState.specificMove(e.getKeyCode(), select);
+        activeKeys.add(e.getKeyCode());
+        directionState.specificMove(e.getKeyCode(), select, this);
     }
 
     public void keyReleased(KeyEvent e, int select) {
+        activeKeys.remove(e.getKeyCode());
         int key = e.getKeyCode();
         if (select == 0) {
             if (key == KeyEvent.VK_LEFT) {
                 dx = 0;
-            } else if (key == KeyEvent.VK_RIGHT) {
+            }
+            if (key == KeyEvent.VK_RIGHT) {
                 dx = 0;
             }
-        } else if (select == 1){
+        }
+        if (select == 1) {
             if (key == KeyEvent.VK_A) {
                 dx = 0;
-            } else if (key == KeyEvent.VK_D) {
+            }
+            if (key == KeyEvent.VK_D) {
                 dx = 0;
             }
+        }
+        if (!activeKeys.isEmpty()) {
+            directionState.specificMove((int)activeKeys.toArray()[activeKeys.size()-1], select, this);
         }
     }
 
@@ -88,5 +103,9 @@ public class Racket extends Sprite {
        // setLocation(Configurations.INIT_PADDLE_X, Configurations.INIT_PADDLE_Y);
        x = Configurations.INIT_PADDLE_X;
        y = Configurations.INIT_PADDLE_Y;
+    }
+
+    public void changeDx(int dx) {
+        this.dx = dx;
     }
 }
