@@ -8,16 +8,24 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import java.awt.Image;
+import java.awt.geom.Rectangle2D;
 
 import main.java.Config.Configurations;
 import main.java.Interfaces.IKeyDirection;
 import main.java.com.NormalDirectionState;
 import main.java.com.SwitchedDirectionState;
+import main.java.Interfaces.*;
 
 import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 
-public class Racket extends Sprite {
+public class Racket implements IRacket {
 
+    public double x;
+    public double y;
+    protected int imageWidth;
+    protected int imageHeight;
+    protected Image image;
     private int dx;
     private IKeyDirection directionState ;
     NormalDirectionState normalDirectionState;
@@ -32,21 +40,15 @@ public class Racket extends Sprite {
     }
 
     private void initRacket(int racket) throws IOException {
-        loadImage(racket);
+        loadImage();
         getImageDimensions();
         resetState();
     }
 
-    private void loadImage(int racket) throws IOException {
+    public void loadImage() throws IOException {
 
         ImageIcon ii;
-        if (racket == 1) {
-            ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/longPaddle.png")));
-        } else if (racket == 2) {
-            ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/shortPaddle.png")));
-        } else {
-            ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/paddle.png")));
-        }
+        ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/paddle.png")));
         image = ii.getImage();
     }
 
@@ -99,7 +101,7 @@ public class Racket extends Sprite {
         }
     }
 
-    private void resetState() {
+    public void resetState() {
        // setLocation(Configurations.INIT_PADDLE_X, Configurations.INIT_PADDLE_Y);
        x = Configurations.INIT_PADDLE_X;
        y = Configurations.INIT_PADDLE_Y;
@@ -107,5 +109,57 @@ public class Racket extends Sprite {
 
     public void changeDx(int dx) {
         this.dx = dx;
+    }
+
+
+    Rectangle2D rectangle2D = new Rectangle2D.Double();
+
+    public void setX(double x) {
+
+        this.x = x;
+    }
+
+    public double getX() {
+
+        return x;
+    }
+
+    public void setY(double y) {
+
+        this.y = y;
+    }
+
+    public double getY() {
+
+        return y;
+    }
+
+    public int getImageWidth() {
+
+        return imageWidth;
+    }
+
+    public int getImageHeight() {
+
+        return imageHeight;
+    }
+
+    public Image getImage() {
+
+        return image;
+    }
+
+    public Rectangle2D getRect() {
+        rectangle2D.setRect(x, y, image.getWidth(null), image.getHeight(null));
+
+        return rectangle2D;
+        // return new Rectangle(x, y,
+        // image.getWidth(null), image.getHeight(null));
+    }
+
+    public void getImageDimensions() {
+
+        imageWidth = image.getWidth(null);
+        imageHeight = image.getHeight(null);
     }
 }
