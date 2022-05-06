@@ -321,7 +321,7 @@ public class GameBoard extends JPanel {
         {
             System.out.println("Loading Victory Image...");
             Image icon = new ImageIcon(ImageIO.read(new File("./Brick-Breaker/src/images/victory_image.png"))).getImage();
-            g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 -40,
+            g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 -70,
             130, null);
             dataset.changeStrategy(new VictoryMusic());
             dataset.doSort();
@@ -598,6 +598,12 @@ public class GameBoard extends JPanel {
                 breakableBricksCount = breakableBricks;
                 message = "Victory";
                 stopGame();
+            }
+
+            else
+            {
+                message = "Game Over!";
+
             }
         }
 

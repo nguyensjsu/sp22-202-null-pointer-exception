@@ -59,7 +59,7 @@ public class Brick extends Sprite {
             dangerBrick = true;
             removeLife = true;
             try {
-                image = loadImageResource("Brick-Breaker/src/images/brick1.jpg");
+                image = loadImageResource("Brick-Breaker/src/images/redBrick.jpg");
             } catch (IOException e) {
                 System.out.println(e.toString());
             }
