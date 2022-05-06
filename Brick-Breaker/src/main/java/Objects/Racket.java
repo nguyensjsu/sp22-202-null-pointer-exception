@@ -1,11 +1,11 @@
 package main.java.Objects;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+//import java.awt.event.KeyListener;
 import java.io.IOException;
-import java.util.HashSet;
+//import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.Set;
+//import java.util.Set;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.awt.Image;
@@ -17,7 +17,7 @@ import main.java.com.NormalDirectionState;
 import main.java.com.SwitchedDirectionState;
 import main.java.Interfaces.*;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
+//import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 
 public class Racket implements IRacket {
 
@@ -46,7 +46,6 @@ public class Racket implements IRacket {
     }
 
     public void loadImage() throws IOException {
-
         ImageIcon ii;
         ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/paddle.png")));
         image = ii.getImage();
