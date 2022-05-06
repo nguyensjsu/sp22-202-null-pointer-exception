@@ -9,12 +9,16 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class DogMusic implements AudioStrategy{
-    public static BrickBreaker b ;
+public class VictoryMusic implements AudioStrategy{
+
+    BrickBreaker bb  ;
+
+    
+
     // public static  void playMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException
     // {
        
-    
+ 
     
        
     // }
@@ -22,8 +26,7 @@ public class DogMusic implements AudioStrategy{
     @Override
     public void sort() throws Exception {
         GameBoard.stopMusic();
-        GameBoard.playMusicForGameOver();
+        GameBoard.playMusicForVictory();
     }
     
 }
-

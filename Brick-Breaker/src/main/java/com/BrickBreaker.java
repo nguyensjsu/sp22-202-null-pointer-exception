@@ -20,7 +20,7 @@ public class BrickBreaker extends JFrame {
     private void initUI() throws IOException {
 
         add(new MenuScreen());
-        setTitle("Breakout");
+        setTitle("Smash Them!");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
