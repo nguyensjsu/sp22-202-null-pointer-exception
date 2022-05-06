@@ -41,11 +41,11 @@ public class Racket extends Sprite {
 
         ImageIcon ii;
         if (racket == 1) {
-            ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/longPaddle.png")));
+            ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/veryLongPaddle.jpg")));
         } else if (racket == 2) {
-            ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/shortPaddle.png")));
-        } else {
             ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/paddle.png")));
+        } else {
+            ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/longPaddle.png")));
         }
         image = ii.getImage();
     }

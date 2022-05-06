@@ -38,6 +38,7 @@ public class GameBoard extends JPanel {
     DataSet dataset = new DataSet() ;
     private static Timer timer;
     private String message = "Game Over!";
+    private String yourScore = "Your Score: ";
     private Ball ball;
     public Racket racket1;
     public Racket racket2;
@@ -298,21 +299,33 @@ public class GameBoard extends JPanel {
     private void gameFinished(Graphics2D g2d)
             throws Exception {
 
-        var font = new Font("Verdana", Font.BOLD, 18);
+        var font = new Font("Verdana", Font.BOLD, 30);
         FontMetrics fontMetrics = this.getFontMetrics(font);
         // Gif Image
         Image icon = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/dog.gif"))).getImage();
 
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(Color.red);
+
+        
+       
+        
         g2d.setFont(font);
         g2d.drawString(message,
                 (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2,
-                Configurations.WIDTH / 2);
+                100);
+
+
+              
+
+                
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 20,
-                Configurations.WIDTH / 2 + 20, null);
+        g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 + 10,
+                130, null);
+                yourScore = "Your Score: ";
+                yourScore += scoreObserver.getScore() ;
+                g2d.drawString(yourScore, (Configurations.WIDTH - fontMetrics.stringWidth(yourScore)) / 2, 330);
 
         FileWriter out = new FileWriter("ScoreList.txt", true);
         BufferedWriter bw = new BufferedWriter(out);
@@ -329,8 +342,8 @@ public class GameBoard extends JPanel {
         timer.stop();
         dataset.changeStrategy(new DogMusic());
         dataset.doSort();
-      timer = new Timer(Configurations.PERIOD, new GameCycle());
-      timer.start();
+     // timer = new Timer(Configurations.PERIOD, new GameCycle());
+     // timer.start();
     }
 
     private class TAdapter extends KeyAdapter {
@@ -748,7 +761,7 @@ c.open(as);
 //Plays audio once
 c.start();
 c.loop(Clip.LOOP_CONTINUOUSLY);
-    timer.stop() ;
+   // timer.stop() ;
       
    }
 
