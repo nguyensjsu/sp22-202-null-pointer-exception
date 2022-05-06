@@ -1,13 +1,13 @@
 package main.java.Interfaces;
 
-//import java.io.IOException;
+import java.io.IOException;
 import java.awt.event.KeyEvent;
 import java.awt.Image;
 import java.awt.geom.Rectangle2D;
 
 public interface IRacket {
     
-    //void loadImage() throws IOException ;
+    void loadImage() throws IOException ;
     void move() ;
     void keyPressed(KeyEvent e, int select);
     void keyReleased(KeyEvent e, int select);
