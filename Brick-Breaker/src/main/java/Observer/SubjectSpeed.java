@@ -1,24 +1,24 @@
-package main.Observer;
+package main.java.Observer;
 
 import java.util.ArrayList;
 import main.java.Interfaces.IObserver;
 import main.java.Interfaces.ISubject;
 
-public class SubjectScore implements ISubject {
+public class SubjectSpeed implements ISubject {
 
-    private int subjectState;
+    private String subjectState;
     private ArrayList<IObserver> observers = new ArrayList<IObserver>();
 
-    public SubjectScore(int str){
+    public SubjectSpeed(String str){
         subjectState = str;
     }
 
-    public void setState(int status) {
+    public void setState(String status) {
         subjectState = status;
         notifyObservers();
     }
 
-    public int getState(){
+    public String getState(){
         return this.subjectState;
     }
 
