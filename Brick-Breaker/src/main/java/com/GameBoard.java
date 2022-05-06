@@ -319,6 +319,7 @@ public class GameBoard extends JPanel {
 
         else
         {
+            System.out.println("Loading Victory Image...");
             Image icon = new ImageIcon(ImageIO.read(new File("./Brick-Breaker/src/images/victory_image.png"))).getImage();
             g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 -40,
             130, null);
