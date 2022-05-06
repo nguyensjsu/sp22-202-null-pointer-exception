@@ -8,8 +8,8 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
+//import javax.swing.JFileChooser;
+//import javax.swing.JFrame;
 
 import main.java.Config.Configurations;
 import main.java.Objects.*;
@@ -28,9 +28,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.*;
-import java.util.HashSet;
+//import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
+//import java.util.Set;
 
 public class GameBoard extends JPanel {
 
