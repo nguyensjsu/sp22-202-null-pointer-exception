@@ -1,6 +1,6 @@
 package main.java.Objects;
 
-//import java.io.IOException;
+import java.io.IOException;
 import java.awt.event.KeyEvent;
 import java.awt.Image;
 import java.awt.geom.Rectangle2D;
@@ -16,9 +16,10 @@ public class RacketDecorator implements IRacket{
         racket = R ;
     }
 
-    /*public void loadImage() throws IOException {
+    @Override
+    public void loadImage() throws IOException {
         racket.loadImage();
-    }*/
+    }
 
     public void move() {
         racket.move();
@@ -59,9 +60,11 @@ public class RacketDecorator implements IRacket{
     public double getY() {
         return racket.getY(); 
     }
+
     public int getImageWidth() {
         return racket.getImageWidth();
     }
+
     public int getImageHeight() {
         return racket.getImageHeight();
     }
@@ -73,6 +76,7 @@ public class RacketDecorator implements IRacket{
     public Rectangle2D getRect() {
         return racket.getRect();
     }
+    
     public void getImageDimensions() {
         racket.getImageDimensions();
     }
