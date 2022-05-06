@@ -1,18 +1,16 @@
 package main.java.Objects;
 
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 public class Sprite {
 
-//    int x;
-//    int y;
     public double x;
     public double y;
-    int imageWidth;
-    int imageHeight;
-    Image image;
+    protected int imageWidth;
+    protected int imageHeight;
+    protected Image image;
+
     Rectangle2D rectangle2D = new Rectangle2D.Double();
 
     public void setX(double x) {
@@ -54,8 +52,8 @@ public class Sprite {
         rectangle2D.setRect(x, y, image.getWidth(null), image.getHeight(null));
 
         return rectangle2D;
-//        return new Rectangle(x, y,
-//                image.getWidth(null), image.getHeight(null));
+        // return new Rectangle(x, y,
+        // image.getWidth(null), image.getHeight(null));
     }
 
     void getImageDimensions() {

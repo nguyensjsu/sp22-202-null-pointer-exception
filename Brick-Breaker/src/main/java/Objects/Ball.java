@@ -4,7 +4,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import main.java.Config.Configurations;
 
-import java.io.File;
 import java.io.IOException;
 
 public class Ball extends Sprite {

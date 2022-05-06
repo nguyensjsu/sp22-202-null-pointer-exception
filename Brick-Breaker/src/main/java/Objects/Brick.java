@@ -2,6 +2,10 @@ package main.java.Objects;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import java.awt.Image;
+
+import main.java.Interfaces.IBrick;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -17,6 +21,99 @@ public class Brick extends Sprite {
     private int createdHealthBrick = 0;
     int noOfDangerBricks = 0;
     private boolean switchArrowDirction;
+    private IBrick brickMode;
+
+    // ********************************************************************************************
+
+    private final IBrick FiftyBrick = () -> {
+        health += 50;
+    };
+
+    private final IBrick HundredBrick = () -> {
+        health += 100;
+    };
+
+    private final IBrick cementBrick = () -> {
+
+        cement = true;
+        try {
+            image = loadImageResource("Brick-Breaker/src/images/cement.jpg");
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+        getImageDimensions();
+    };
+
+    private final IBrick itemContainerBrick = () -> {
+        containsItem = true;
+        try {
+            image = loadImageResource("Brick-Breaker/src/images/itemBrick.jpg");
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    };
+
+    private final IBrick dangerousBrick = () -> {
+        if (noOfDangerBricks < 3) {
+            noOfDangerBricks += 1;
+            dangerBrick = true;
+            removeLife = true;
+            try {
+                image = loadImageResource("Brick-Breaker/src/images/redBrick.jpg");
+            } catch (IOException e) {
+                System.out.println(e.toString());
+            }
+        } else {
+            cement = true;
+            try {
+                image = loadImageResource("Brick-Breaker/src/images/cement.jpg");
+            } catch (IOException e) {
+                System.out.println(e.toString());
+            }
+            getImageDimensions();
+        }
+    };
+
+    private final IBrick switchArrowBrick = () -> {
+        try {
+            image = loadImageResource("Brick-Breaker/src/images/switchDirectionBrick.jpg");
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+        getImageDimensions();
+        switchArrowDirction = true;
+    };
+
+    private final IBrick lifeBrick = () -> {
+        if (createdHealthBrick < 1) {
+            createdHealthBrick++;
+            containsLife = true;
+            try {
+                image = loadImageResource("Brick-Breaker/src/images/greenBrick.jpg");
+            } catch (IOException e) {
+                System.out.println(e.toString());
+            }
+        } else {
+            try {
+                image = loadImageResource("Brick-Breaker/src/images/brick1.jpg");
+            } catch (IOException e) {
+                System.out.println(e.toString());
+            }
+        }
+        getImageDimensions();
+
+    };
+
+    private final IBrick defaultBrick = () -> {
+        try {
+            image = loadImageResource("Brick-Breaker/src/images/brick1.jpg");
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+        getImageDimensions();
+    };
+
+    // ********************************************************************************************
 
     public Brick(int x, int y) throws IOException {
         noOfDangerBricks = 0;
@@ -38,84 +135,106 @@ public class Brick extends Sprite {
         containsItem = false;
         removeLife = false;
 
-        loadImage(0);
+        try {
+        image = loadImageResource("Brick-Breaker/src/images/brick1.jpg");
+        } catch (IOException e) {
+        System.out.println(e.toString());
+        }
         getImageDimensions();
 
         int random = (int) (Math.random() * 100) + 1;
 
+        // Can keep the bricks if cases, but move the base operation into decorators?
+
         if (random > 50 && random <= 80) {
-            health += 50;
+            // health += 50;
+            brickMode = FiftyBrick;
 
         } else if (random > 80 && random <= 95) {
-            health += 100;
+            // health += 100;
+            brickMode = HundredBrick;
         } else if (random > 95) {
-            cement = true;
-            loadImage(3);
-            getImageDimensions();
+            brickMode = cementBrick;
+            // cement = true;
+            // loadImage(3);
+            // getImageDimensions();
         } else if (random > 5 && random < 20) {
-            containsItem = true;
-            loadImage(4);
+            // containsItem = true;
+            // loadImage(4);
+            brickMode = itemContainerBrick;
         } else if (random > 3 && random <= 5) {
+            brickMode = dangerousBrick;
+            // if (noOfDangerBricks < 3) {
+            // noOfDangerBricks += 1;
+            // dangerBrick = true;
+            // removeLife = true;
+            // loadImage(1);
+            // }
 
-            if (noOfDangerBricks < 3) {
-                noOfDangerBricks += 1;
-                dangerBrick = true;
-                removeLife = true;
-                loadImage(1);
-            }
-
-            else {
-                cement = true;
-                loadImage(3);
-                getImageDimensions();
-            }
+            // else {
+            // cement = true;
+            // loadImage(3);
+            // getImageDimensions();
+            // }
 
         } else if (random == 3 || random == 2) {
-            loadImage(5);
-            getImageDimensions();
-            switchArrowDirction = true;
+            brickMode = switchArrowBrick;
+            // loadImage(5);
+            // getImageDimensions();
+            // switchArrowDirction = true;
 
+        } else if (random < 2) {
 
-        } else if (random < 2) { // Possibility of creating a health brick (1% and only one brick can exist at
-                                 // once)
-
-            if (createdHealthBrick < 1) {
-                createdHealthBrick++;
-                containsLife = true;
-                loadImage(6);
-                getImageDimensions();
-            }
-        }
-    }
-
-    private void loadImage(int index) throws IOException {
-
-        if (index == 0) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/brick1.jpg")));
-            image = ii.getImage();
-        } else if (index == 1) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/redBrick.jpg")));
-            image = ii.getImage();
-        } else if (index == 2) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/brick_cracked_2_copy.jpg")));
-            image = ii.getImage();
-        } else if (index == 3) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/cement1.png")));
-            image = ii.getImage();
-        } else if (index == 4) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/itemBrick.jpg")));
-            image = ii.getImage();
-        } else if (index == 6) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/itemBrick2.jpg")));
-            image = ii.getImage();
-        } else if (index == 5) {
-            var ii = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/switchDirectionBrick.jpg")));
-            image = ii.getImage();
+            brickMode = lifeBrick;
+            // if (createdHealthBrick < 1) {
+            // createdHealthBrick++;
+            // containsLife = true;
+            // loadImage(6);
+            // getImageDimensions();
+            // }
         } else {
-            System.out.println("Bad index passed to Brick loadImage");
+            brickMode = defaultBrick;
         }
 
+        brickMode.setupBrick();
+
     }
+
+    // private void loadImage(int index) throws IOException {
+
+    // if (index == 0) {
+    // var ii = new ImageIcon(ImageIO.read(new
+    // File("Brick-Breaker/src/images/brick1.jpg")));
+    // image = ii.getImage();
+    // } else if (index == 1) {
+    // var ii = new ImageIcon(ImageIO.read(new
+    // File("Brick-Breaker/src/images/redBrick.jpg")));
+    // image = ii.getImage();
+    // } else if (index == 2) {
+    // var ii = new ImageIcon(ImageIO.read(new
+    // File("Brick-Breaker/src/images/brick_cracked_2_copy.jpg")));
+    // image = ii.getImage();
+    // } else if (index == 3) {
+    // var ii = new ImageIcon(ImageIO.read(new
+    // File("Brick-Breaker/src/images/cement.jpg")));
+    // image = ii.getImage();
+    // } else if (index == 4) {
+    // var ii = new ImageIcon(ImageIO.read(new
+    // File("Brick-Breaker/src/images/itemBrick.jpg")));
+    // image = ii.getImage();
+    // } else if (index == 6) {
+    // var ii = new ImageIcon(ImageIO.read(new
+    // File("Brick-Breaker/src/images/greenBrick.jpg")));
+    // image = ii.getImage();
+    // } else if (index == 5) {
+    // var ii = new ImageIcon(ImageIO.read(new
+    // File("Brick-Breaker/src/images/switchDirectionBrick.jpg")));
+    // image = ii.getImage();
+    // } else {
+    // System.out.println("Bad index passed to Brick loadImage");
+    // }
+
+    // }
 
     // 50% chance health = 0 (dies in one hit)
     // 30% change health = 50 (dies in two hits)
@@ -144,7 +263,11 @@ public class Brick extends Sprite {
             if (getHealth() <= 0) {
                 destroyed = true;
             } else if (getHealth() == 1) {
-                loadImage(2);
+                try {
+                    image = loadImageResource("Brick-Breaker/src/images/brick_cracked_2_copy.jpg");
+                } catch (IOException e) {
+                    System.out.println(e.toString());
+                }
                 getImageDimensions();
             } else if (getHealth() == 51) {
                 destroyed = true;
@@ -171,6 +294,16 @@ public class Brick extends Sprite {
 
     public boolean isSwitchDirectionBrick() {
         return switchArrowDirction;
+    }
+
+    private Image loadImageResource(String filePath) throws IOException {
+        try {
+            var ii = new ImageIcon(ImageIO.read(new File(filePath)));
+            return ii.getImage();
+        } catch (IOException e) {
+            System.out.println("Exception with reading file while reading from :" + filePath);
+            throw e;
+        }
     }
 
 }

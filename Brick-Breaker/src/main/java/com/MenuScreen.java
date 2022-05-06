@@ -25,10 +25,11 @@ public class MenuScreen extends JPanel {
         setPreferredSize(new Dimension(Configurations.WIDTH, Configurations.HEIGHT));
 
         setLayout(null);
-        StartButton.setBounds((Configurations.WIDTH - 120) / 2, 100, 120, 40);
-        HSButton.setBounds((Configurations.WIDTH - 120) / 2, 200, 120, 40);
-        ThemeButton.setBounds((Configurations.WIDTH - 120) / 2, 250, 120, 40);
-        TwoPlayerButton.setBounds((Configurations.WIDTH - 120) / 2, 150, 120, 40);
+        StartButton.setBounds((Configurations.WIDTH - 210) / 2, 200, 200, 60);
+        TwoPlayerButton.setBounds((Configurations.WIDTH - 210) / 2, 300, 200, 60);
+        HSButton.setBounds((Configurations.WIDTH - 210) / 2, 400, 200, 60);
+        ThemeButton.setBounds((Configurations.WIDTH - 210) / 2, 500, 200, 60);
+        
         add(StartButton);
         add(HSButton);
         add(ThemeButton);
@@ -143,24 +144,24 @@ public class MenuScreen extends JPanel {
     }
 
     private void drawTitle(Graphics2D g2d) {
-        var font = new Font("Verdana", Font.BOLD, 30);
+        var font = new Font("Verdana", Font.BOLD, 60);
         FontMetrics fontMetrics = this.getFontMetrics(font);
 
         g2d.setColor(Color.GRAY);
         g2d.setFont(font);
         g2d.drawString("Brick Breaker!",
                 (Configurations.WIDTH - fontMetrics.stringWidth("Brick Breaker!")) / 2,
-                50);
+                65);
         g2d.setColor(Color.DARK_GRAY);
         g2d.setFont(font);
         g2d.drawString("Brick Breaker!",
                 ((Configurations.WIDTH - fontMetrics.stringWidth("Brick Breaker!")) / 2) + 3,
-                52);
+                67);
         g2d.setColor(Color.BLACK);
         g2d.setFont(font);
         g2d.drawString("Brick Breaker!",
                 ((Configurations.WIDTH - fontMetrics.stringWidth("Brick Breaker!")) / 2) + 6,
-                54);
+                69);
     }
 
 }

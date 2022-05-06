@@ -10,7 +10,6 @@ import javax.swing.*;
 
 //import javax.swing.JFileChooser;
 //import javax.swing.JFrame;
-
 import main.java.Config.Configurations;
 import main.java.Objects.*;
 import main.java.Observer.LivesObserver;
@@ -313,9 +312,7 @@ public class GameBoard extends JPanel {
             g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 -25,
             130, null);
             dataset.changeStrategy(new DogMusic());
-            dataset.doSort();
-
-           
+            dataset.doSort();   
         }
 
         else
@@ -600,6 +597,12 @@ public class GameBoard extends JPanel {
                 message = "Victory";
                 stopGame();
             }
+
+            else
+            {
+                message = "Game Over!";
+
+            }
         }
 
         checkIntersects(racket1);
@@ -793,9 +796,7 @@ public class GameBoard extends JPanel {
     
     public static  void playMusicForGameOver() throws UnsupportedAudioFileException, IOException, LineUnavailableException
     {
-     
 f = new File("main/java/music/game_over_music.wav").getAbsoluteFile();
-
  as = AudioSystem.getAudioInputStream(f);
 c = AudioSystem.getClip();
 c.open(as);

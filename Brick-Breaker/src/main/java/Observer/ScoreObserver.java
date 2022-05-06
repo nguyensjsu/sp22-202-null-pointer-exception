@@ -1,4 +1,4 @@
-package main.Observer;
+package main.java.Observer;
 
 import main.java.Interfaces.IObserver;
 
