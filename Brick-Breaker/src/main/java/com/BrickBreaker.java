@@ -61,6 +61,7 @@ public class BrickBreaker extends JFrame {
         // Plays audio once
         clip.start();
         clip.loop(Clip.LOOP_CONTINUOUSLY);
+        
 
     }
 

@@ -7,6 +7,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicBorders.ToggleButtonBorder;
 
 //import javax.swing.JFileChooser;
 //import javax.swing.JFrame;
@@ -36,10 +37,11 @@ public class GameBoard extends JPanel {
     interface IGameModeStrategy {
         void gameInit() throws IOException;
     }
-    private static AudioInputStream as = null ;
+
+    private static AudioInputStream as = null;
     private static File f = null;
-    private static Clip c = null ;
-    DataSet dataset = new DataSet() ;
+    private static Clip c = null;
+    DataSet dataset = new DataSet();
     private static Timer timer;
     private String message = "Game Over!";
     private String yourScore = "Your Score: ";
@@ -51,6 +53,7 @@ public class GameBoard extends JPanel {
     private boolean itemDrop;
     public int racketType;
     private boolean inGame = true;
+    private static boolean musicIsPlaying = false;
     private int arrowDir = 0;
     double speed = 2;
     JButton pauseButton = new JButton("Pause");
@@ -59,6 +62,7 @@ public class GameBoard extends JPanel {
     boolean restartClicked = false;
     JButton arrowButton = new JButton("Arrow");
     JButton aswdButton = new JButton("ASWD");
+    JButton toggleMusic = new JButton("Music");
     private IGameModeStrategy currentMode;
     int keySelect1 = 0;
     int keySelect2 = 1;
@@ -145,6 +149,7 @@ public class GameBoard extends JPanel {
         RestartHandler restartHandler = new RestartHandler();
         ArrowKeyHandler arrowKeyHandler = new ArrowKeyHandler();
         ASWDKeyHandler aswdKeyHandler = new ASWDKeyHandler();
+        ToggleMusicHandler toggleMusicHandler = new ToggleMusicHandler();
         arrowDir = 0;
 
         // Read from BackGroundColor.txt to get background color
@@ -170,13 +175,14 @@ public class GameBoard extends JPanel {
         br.close();
 
         JPanel buttonPane = new JPanel();
-        buttonPane.setLayout(new GridLayout(0, 3));
-        buttonPane.setPreferredSize(new Dimension(250, 30));
+        buttonPane.setLayout(new GridLayout(0, 4));
+        buttonPane.setPreferredSize(new Dimension(400, 30));
         JPanel blank = new JPanel();
         blank.setVisible(false);
         buttonPane.add(pauseButton);
         buttonPane.add(restartButton);
         buttonPane.add(aswdButton);
+        buttonPane.add(toggleMusic);
 
         add(buttonPane);
 
@@ -185,12 +191,14 @@ public class GameBoard extends JPanel {
         restartButton.addActionListener(restartHandler);
         aswdButton.addActionListener(aswdKeyHandler);
         arrowButton.addActionListener(arrowKeyHandler);
+        toggleMusic.addActionListener(toggleMusicHandler);
 
         pauseButton.setFocusable(false);
         restartButton.setFocusable(false);
         resumeButton.setFocusable(false);
         arrowButton.setFocusable(false);
         aswdButton.setFocusable(false);
+        toggleMusic.setFocusable(false);
 
         addKeyListener(new TAdapter());
 
@@ -272,7 +280,7 @@ public class GameBoard extends JPanel {
         }
 
         /** Change this part to get the speedLevel from observer */
-        g2d.drawString("Speed: " + speedObserver.getSpeed(),  120, 620);
+        g2d.drawString("Speed: " + speedObserver.getSpeed(), 120, 620);
 
         g2d.drawImage(ball.getImage(), (int) ball.getX(), (int) ball.getY(),
                 ball.getImageWidth(), ball.getImageHeight(), this);
@@ -293,7 +301,7 @@ public class GameBoard extends JPanel {
 
             if (!bricks[i].isDestroyed()) {
 
-                g2d.drawImage(bricks[i].getImage(), (int) bricks[i].getX() - 8  ,
+                g2d.drawImage(bricks[i].getImage(), (int) bricks[i].getX() - 8,
                         (int) bricks[i].getY(), bricks[i].getImageWidth(),
                         bricks[i].getImageHeight(), this);
             }
@@ -306,48 +314,39 @@ public class GameBoard extends JPanel {
         var font = new Font("Verdana", Font.BOLD, 30);
         FontMetrics fontMetrics = this.getFontMetrics(font);
         // Gif Image
-        if(message == "Game Over!")
-        {
+        if (message == "Game Over!") {
             Image icon = new ImageIcon(ImageIO.read(new File("images/game_over.png"))).getImage();
-            g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 -25,
-            130, null);
+            g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 25,
+                    130, null);
             dataset.changeStrategy(new DogMusic());
-            dataset.doSort();   
+            dataset.doSort();
         }
 
-        else
-        {
+        else {
             System.out.println("Loading Victory Image...");
             Image icon = new ImageIcon(ImageIO.read(new File("images/victory_image.png"))).getImage();
-            g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 -40,
-            130, null);
+            g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 40,
+                    130, null);
             dataset.changeStrategy(new VictoryMusic());
             dataset.doSort();
         }
-        
 
         g2d.setColor(Color.red);
 
         setLayout(new BorderLayout());
 
-        
         g2d.setFont(font);
         g2d.drawString(message,
                 (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2,
                 100);
 
-
-              
-
-                
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-       
-                yourScore = "Your Score: ";
-                yourScore += scoreObserver.getScore() ;
-                g2d.drawString(yourScore, (Configurations.WIDTH - fontMetrics.stringWidth(yourScore)) / 2, 455);
 
+        yourScore = "Your Score: ";
+        yourScore += scoreObserver.getScore();
+        g2d.drawString(yourScore, (Configurations.WIDTH - fontMetrics.stringWidth(yourScore)) / 2, 455);
 
         FileWriter out = new FileWriter("ScoreList.txt", true);
         BufferedWriter bw = new BufferedWriter(out);
@@ -362,9 +361,9 @@ public class GameBoard extends JPanel {
         out.close();
 
         timer.stop();
-       
-     // timer = new Timer(Configurations.PERIOD, new GameCycle());
-     // timer.start();
+
+        // timer = new Timer(Configurations.PERIOD, new GameCycle());
+        // timer.start();
     }
 
     private class TAdapter extends KeyAdapter {
@@ -481,7 +480,7 @@ public class GameBoard extends JPanel {
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } 
+        }
         parent.add(pauseButton, 0, 0);
         parent.remove(resumeButton);
         parent.revalidate();
@@ -503,7 +502,7 @@ public class GameBoard extends JPanel {
                 timer.stop();
                 currentMode.gameInit();
                 dataset.changeStrategy(new GameMusic());
-                message = "Game Over!" ;
+                message = "Game Over!";
                 try {
                     dataset.doSort();
                 } catch (Exception e1) {
@@ -513,7 +512,7 @@ public class GameBoard extends JPanel {
             } catch (IOException er) {
                 er.printStackTrace();
             }
-           
+
         }
     }
 
@@ -535,6 +534,32 @@ public class GameBoard extends JPanel {
         key.remove(arrowButton);
         key.revalidate();
         key.repaint();
+    }
+
+    private class ToggleMusicHandler implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            if(musicIsPlaying){
+                try {
+                    GameBoard.stopMusic();
+                } catch (Exception io_E) {
+                    // TODO Auto-generated catch block
+                    io_E.printStackTrace();
+                }
+            }
+            else{
+                try {
+                    GameBoard.playMusic();
+                } catch (Exception io_E) {
+                    // TODO Auto-generated catch block
+                    io_E.printStackTrace();
+                }
+            }
+            
+        }
+        
     }
 
     private class ASWDKeyHandler implements ActionListener {
@@ -598,8 +623,7 @@ public class GameBoard extends JPanel {
                 stopGame();
             }
 
-            else
-            {
+            else {
                 message = "Game Over!";
 
             }
@@ -703,29 +727,26 @@ public class GameBoard extends JPanel {
             // have new racket appear under ball
             double temp = ball.getX();
             if (player.equals("1")) {
-                if ( racketType == 1 ) {
-                    racket1 = new LargeRacket(new Racket(racketType, keySelect) ) ; 
-                    racket1.setX( temp ) ;
+                if (racketType == 1) {
+                    racket1 = new LargeRacket(new Racket(racketType, keySelect));
+                    racket1.setX(temp);
+                } else if (racketType == 2) {
+                    racket1 = new SmallRacket(new Racket(racketType, keySelect));
+                    racket1.setX(temp);
                 }
-                else if ( racketType == 2 ) {
-                    racket1 = new SmallRacket( new Racket(racketType, keySelect) ) ;
-                    racket1.setX( temp ) ;
-                }
-                //racket1 = new Racket(racketType, keySelect);
-                //racket1.setX(temp);
+                // racket1 = new Racket(racketType, keySelect);
+                // racket1.setX(temp);
             } else if (player.equals("2")) {
-                if ( racketType == 1 ) {
-                    racket1 = new LargeRacket(new Racket(racketType, keySelect) ) ; 
-                    racket1.setX( temp ) ;
+                if (racketType == 1) {
+                    racket1 = new LargeRacket(new Racket(racketType, keySelect));
+                    racket1.setX(temp);
+                } else if (racketType == 2) {
+                    racket1 = new SmallRacket(new Racket(racketType, keySelect));
+                    racket1.setX(temp);
                 }
-                else if ( racketType == 2 ) {
-                    racket1 = new SmallRacket( new Racket(racketType, keySelect) ) ;
-                    racket1.setX( temp ) ;
-                }
-                //racket2 = new Racket(racketType, keySelect);
-                //racket2.setX(temp);
+                // racket2 = new Racket(racketType, keySelect);
+                // racket2.setX(temp);
             }
-
 
             // reset itemDrop condition
             itemDrop = false;
@@ -792,60 +813,52 @@ public class GameBoard extends JPanel {
 
     }
 
+    public static void playMusicForGameOver()
+            throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        f = new File("main/java/music/game_over_music.wav").getAbsoluteFile();
+        as = AudioSystem.getAudioInputStream(f);
+        c = AudioSystem.getClip();
+        c.open(as);
+        // Plays audio once
+        c.start();
+        c.loop(Clip.LOOP_CONTINUOUSLY);
+        // timer.stop() ;
 
-    
-    public static  void playMusicForGameOver() throws UnsupportedAudioFileException, IOException, LineUnavailableException
-    {
-f = new File("main/java/music/game_over_music.wav").getAbsoluteFile();
- as = AudioSystem.getAudioInputStream(f);
-c = AudioSystem.getClip();
-c.open(as);
-//Plays audio once
-c.start();
-c.loop(Clip.LOOP_CONTINUOUSLY);
-   // timer.stop() ;
-      
-   }
+    }
 
-   public static  void playMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException
-   {
-      f = new File("main/java/music/music_bg.wav").getAbsoluteFile();
-as = AudioSystem.getAudioInputStream(f);
-c = AudioSystem.getClip();
-c.open(as);
-//Plays audio once
-c.start();
-c.loop(Clip.LOOP_CONTINUOUSLY);
-   
-   
-      
-   }
+    public static void playMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        f = new File("Brick-Breaker/src/main/java/music/music_bg.wav").getAbsoluteFile();
+        as = AudioSystem.getAudioInputStream(f);
+        c = AudioSystem.getClip();
+        c.open(as);
+        // Plays audio once
+        c.start();
+        c.loop(Clip.LOOP_CONTINUOUSLY);
+        musicIsPlaying = true;
 
-   public static  void playMusicForVictory() throws UnsupportedAudioFileException, IOException, LineUnavailableException
-   {
-      f = new File("main/java/music/victory_music.wav").getAbsoluteFile();
-as = AudioSystem.getAudioInputStream(f);
-c = AudioSystem.getClip();
-c.open(as);
-//Plays audio once
-c.start();
-c.loop(Clip.LOOP_CONTINUOUSLY);
-   
-   
-      
-   }
+    }
 
+    public static void playMusicForVictory()
+            throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        f = new File("main/java/music/victory_music.wav").getAbsoluteFile();
+        as = AudioSystem.getAudioInputStream(f);
+        c = AudioSystem.getClip();
+        c.open(as);
+        // Plays audio once
+        c.start();
+        c.loop(Clip.LOOP_CONTINUOUSLY);
 
-   
-   public static  void stopMusic() throws Exception
-   {
-      
-       if (c!=null) //do not nest it to the previous condition ...
-       {
-         c.stop();
-         c.flush();
-         c.close();
-       }
-   }
+    }
+
+    public static void stopMusic() throws Exception {
+
+        if (c != null) // do not nest it to the previous condition ...
+        {
+            musicIsPlaying = false;
+            c.stop();
+            c.flush();
+            c.close();
+        }
+    }
 
 }
