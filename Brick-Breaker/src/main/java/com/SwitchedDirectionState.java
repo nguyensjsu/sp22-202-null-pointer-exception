@@ -2,7 +2,6 @@ package main.java.com ;
 
 import main.java.Interfaces.IKeyDirection;
 import main.java.Interfaces.IRacket;
-import main.java.Objects.Racket;
 
 import java.awt.event.KeyEvent;
 
