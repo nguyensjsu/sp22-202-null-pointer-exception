@@ -3,7 +3,6 @@ package main.java.com;
 import java.awt.event.KeyEvent ;
 import main.java.Interfaces.IKeyDirection ;
 import main.java.Interfaces.IRacket ;
-import main.java.Objects.Racket;
 
 public class NormalDirectionState implements IKeyDirection {
 
