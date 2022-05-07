@@ -7,7 +7,7 @@ public interface Configurations {
     int BOTTOM_EDGE = 640;
     int N_OF_BRICKS = 30;
     int INIT_PADDLE_X = 200;
-    int INIT_PADDLE_Y = 580;
+    int INIT_PADDLE_Y = 565;
     int INIT_BALL_X = 230;
     int INIT_BALL_Y = 355;
     int INIT_ITEM_X = 400;

@@ -19,7 +19,7 @@ public class SmallRacket extends RacketDecorator {
     @Override
     public void loadImage() throws IOException {
         ImageIcon ii;
-        ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/shortPaddle.png")));
+        ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/shortPaddle1.png")));
         image = ii.getImage();
     }
 
@@ -27,4 +27,6 @@ public class SmallRacket extends RacketDecorator {
     public Image getImage() {
         return image ;
     }
+    
+  
 }

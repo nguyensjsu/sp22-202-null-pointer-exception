@@ -47,6 +47,9 @@ public class GameBoard extends JPanel {
     private String yourScore = "Your Score: ";
     private Ball ball;
     public IRacket racket1;
+    public IImageDisplay gameOverImage;
+    public IImageDisplay victoryImage;
+    public IImageDisplay I ;
     public IRacket racket2;
     public Brick[] bricks;
     private Item drop;
@@ -85,6 +88,7 @@ public class GameBoard extends JPanel {
 
         ball = new Ball();
         racket1 = new Racket(racketType, keySelect1);
+       
 
         livesLeft.setState(3);
 
@@ -112,7 +116,8 @@ public class GameBoard extends JPanel {
         ball = new Ball();
         racket1 = new Racket(racketType, keySelect1);
         racket2 = new Racket(racketType, keySelect2);
-
+        gameOverImage = new GameOverImage(I) ;
+       
         livesLeft.setState(3);
 
         int k = 0;
@@ -274,6 +279,7 @@ public class GameBoard extends JPanel {
             itemDrop = false;
             restartClicked = false;
             racket1 = new Racket(racketType, keySelect1);
+          
             if (currentMode == twoPlayerMode) {
                 racket2 = new Racket(racketType, keySelect2);
             }
@@ -315,8 +321,9 @@ public class GameBoard extends JPanel {
         FontMetrics fontMetrics = this.getFontMetrics(font);
         // Gif Image
         if (message == "Game Over!") {
-            Image icon = new ImageIcon(ImageIO.read(new File("images/game_over.png"))).getImage();
-            g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 25,
+            gameOverImage = new GameOverImage(I) ;
+           // Image icon = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/game_over.png"))).getImage();
+            g2d.drawImage(gameOverImage.getImage(), (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 25,
                     130, null);
             dataset.changeStrategy(new DogMusic());
             dataset.doSort();
@@ -324,8 +331,9 @@ public class GameBoard extends JPanel {
 
         else {
             System.out.println("Loading Victory Image...");
-            Image icon = new ImageIcon(ImageIO.read(new File("images/victory_image.png"))).getImage();
-            g2d.drawImage(icon, (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 40,
+            victoryImage = new VictoryImage(I) ;
+            //Image icon = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/victory_image.png"))).getImage();
+            g2d.drawImage(victoryImage.getImage(), (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 40,
                     130, null);
             dataset.changeStrategy(new VictoryMusic());
             dataset.doSort();
@@ -734,6 +742,8 @@ public class GameBoard extends JPanel {
                     racket1 = new SmallRacket(new Racket(racketType, keySelect));
                     racket1.setX(temp);
                 }
+                 
+                
                 // racket1 = new Racket(racketType, keySelect);
                 // racket1.setX(temp);
             } else if (player.equals("2")) {
@@ -815,7 +825,7 @@ public class GameBoard extends JPanel {
 
     public static void playMusicForGameOver()
             throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        f = new File("main/java/music/game_over_music.wav").getAbsoluteFile();
+        f = new File("Brick-Breaker/src/main/java/music/game_over_music.wav").getAbsoluteFile();
         as = AudioSystem.getAudioInputStream(f);
         c = AudioSystem.getClip();
         c.open(as);
@@ -840,7 +850,7 @@ public class GameBoard extends JPanel {
 
     public static void playMusicForVictory()
             throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        f = new File("main/java/music/victory_music.wav").getAbsoluteFile();
+        f = new File("Brick-Breaker/src/main/java/music/victory_music.wav").getAbsoluteFile();
         as = AudioSystem.getAudioInputStream(f);
         c = AudioSystem.getClip();
         c.open(as);
