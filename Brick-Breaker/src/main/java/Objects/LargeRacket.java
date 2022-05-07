@@ -3,7 +3,6 @@ package main.java.Objects;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import java.awt.Image;
 import main.java.Interfaces.*;
 
 public class LargeRacket extends RacketDecorator {
@@ -23,8 +22,4 @@ public class LargeRacket extends RacketDecorator {
         image = ii.getImage();
     }
 
-    @Override
-    public Image getImage() {
-        return image;
-    }
 }

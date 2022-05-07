@@ -2,11 +2,11 @@ package main.java.com;
 
 import java.awt.event.KeyEvent ;
 import main.java.Interfaces.IKeyDirection ;
-import main.java.Objects.Racket;
+import main.java.Interfaces.IRacket ;
 
 public class NormalDirectionState implements IKeyDirection {
 
-    public void specificMove(int key, int select, Racket racket) {
+    public void specificMove(int key, int select, IRacket racket) {
         if (select == 0) {
             if (key == KeyEvent.VK_LEFT) {
                 racket.changeDx(-2);
