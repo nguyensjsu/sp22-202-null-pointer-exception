@@ -36,11 +36,12 @@ public class GameBoard extends JPanel {
 
     interface IGameModeStrategy {
         void gameInit() throws IOException;
+        
     }
 
-    private static AudioInputStream as = null;
-    private static File f = null;
-    private static Clip c = null;
+    // private static AudioInputStream as = null;
+    // private static File f = null;
+    // private static Clip c = null;
     DataSet dataset = new DataSet();
     private static Timer timer;
     private String message = "Game Over!";
@@ -51,12 +52,17 @@ public class GameBoard extends JPanel {
     public IImageDisplay victoryImage;
     public IImageDisplay I ;
     public IRacket racket2;
+       static AudioInputStream as = null;
+   static File f = null;
+   static Clip c = null;
+
+
     public Brick[] bricks;
     private Item drop;
     private boolean itemDrop;
     public int racketType;
     private boolean inGame = true;
-    private static boolean musicIsPlaying = false;
+     static boolean musicIsPlaying = false;
     private int arrowDir = 0;
     double speed = 2;
     JButton pauseButton = new JButton("Pause");
@@ -83,8 +89,9 @@ public class GameBoard extends JPanel {
     private final IGameModeStrategy onePlayerMode = () -> {
 
         initializeDisplayInfo();
-
+        toggleMusic.setText("Turn Off Music");
         bricks = new Brick[Configurations.N_OF_BRICKS];
+      
 
         ball = new Ball();
         racket1 = new Racket(racketType, keySelect1);
@@ -139,6 +146,7 @@ public class GameBoard extends JPanel {
     };
 
     public GameBoard(String gameMode) throws IOException {
+        
         if (gameMode.equalsIgnoreCase("two")) {
             currentMode = twoPlayerMode;
         } else {
@@ -181,7 +189,7 @@ public class GameBoard extends JPanel {
 
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new GridLayout(0, 4));
-        buttonPane.setPreferredSize(new Dimension(400, 30));
+        buttonPane.setPreferredSize(new Dimension(480, 30));
         JPanel blank = new JPanel();
         blank.setVisible(false);
         buttonPane.add(pauseButton);
@@ -325,6 +333,8 @@ public class GameBoard extends JPanel {
            // Image icon = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/game_over.png"))).getImage();
             g2d.drawImage(gameOverImage.getImage(), (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 25,
                     130, null);
+                    dataset.changeStrategy(new StopMusic());
+                    dataset.doSort();
             dataset.changeStrategy(new DogMusic());
             dataset.doSort();
         }
@@ -461,7 +471,7 @@ public class GameBoard extends JPanel {
     private void pauseGame() {
         Container parent = pauseButton.getParent();
         try {
-            GameBoard.stopMusic();
+          //  GameBoard.stopMusic();
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -484,7 +494,7 @@ public class GameBoard extends JPanel {
     private void resumeGame() {
         Container parent = resumeButton.getParent();
         try {
-            dataset.doSort();
+           // dataset.doSort();
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -503,12 +513,15 @@ public class GameBoard extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
+                dataset.changeStrategy(new StopMusic());
+                dataset.doSort();
                 speed = 2;
                 speedLevel.setState("x1");
                 restartClicked = true;
                 inGame = true;
                 timer.stop();
                 currentMode.gameInit();
+                
                 dataset.changeStrategy(new GameMusic());
                 message = "Game Over!";
                 try {
@@ -519,6 +532,9 @@ public class GameBoard extends JPanel {
                 }
             } catch (IOException er) {
                 er.printStackTrace();
+            } catch (Exception e2) {
+                // TODO Auto-generated catch block
+                e2.printStackTrace();
             }
 
         }
@@ -551,7 +567,9 @@ public class GameBoard extends JPanel {
             
             if(musicIsPlaying){
                 try {
-                    GameBoard.stopMusic();
+                    toggleMusic.setText("Turn On Music");
+                    dataset.changeStrategy(new StopMusic());
+                    dataset.doSort();
                 } catch (Exception io_E) {
                     // TODO Auto-generated catch block
                     io_E.printStackTrace();
@@ -559,7 +577,11 @@ public class GameBoard extends JPanel {
             }
             else{
                 try {
-                    GameBoard.playMusic();
+                    toggleMusic.setText("Turn Off Music");
+                    dataset.changeStrategy(new StopMusic());
+                    dataset.doSort();
+                    dataset.changeStrategy(new GameMusic());
+                    dataset.doSort();
                 } catch (Exception io_E) {
                     // TODO Auto-generated catch block
                     io_E.printStackTrace();
@@ -823,52 +845,52 @@ public class GameBoard extends JPanel {
 
     }
 
-    public static void playMusicForGameOver()
-            throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        f = new File("Brick-Breaker/src/main/java/music/game_over_music.wav").getAbsoluteFile();
-        as = AudioSystem.getAudioInputStream(f);
-        c = AudioSystem.getClip();
-        c.open(as);
-        // Plays audio once
-        c.start();
-        c.loop(Clip.LOOP_CONTINUOUSLY);
-        // timer.stop() ;
+    // public static void playMusicForGameOver()
+    //         throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    //     f = new File("Brick-Breaker/src/main/java/music/game_over_music.wav").getAbsoluteFile();
+    //     as = AudioSystem.getAudioInputStream(f);
+    //     c = AudioSystem.getClip();
+    //     c.open(as);
+    //     // Plays audio once
+    //     c.start();
+    //     c.loop(Clip.LOOP_CONTINUOUSLY);
+    //     // timer.stop() ;
 
-    }
+    // }
 
-    public static void playMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        f = new File("Brick-Breaker/src/main/java/music/music_bg.wav").getAbsoluteFile();
-        as = AudioSystem.getAudioInputStream(f);
-        c = AudioSystem.getClip();
-        c.open(as);
-        // Plays audio once
-        c.start();
-        c.loop(Clip.LOOP_CONTINUOUSLY);
-        musicIsPlaying = true;
+    // public static void playMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    //     f = new File("Brick-Breaker/src/main/java/music/music_bg.wav").getAbsoluteFile();
+    //     as = AudioSystem.getAudioInputStream(f);
+    //     c = AudioSystem.getClip();
+    //     c.open(as);
+    //     // Plays audio once
+    //     c.start();
+    //     c.loop(Clip.LOOP_CONTINUOUSLY);
+    //     musicIsPlaying = true;
 
-    }
+    // }
 
-    public static void playMusicForVictory()
-            throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        f = new File("Brick-Breaker/src/main/java/music/victory_music.wav").getAbsoluteFile();
-        as = AudioSystem.getAudioInputStream(f);
-        c = AudioSystem.getClip();
-        c.open(as);
-        // Plays audio once
-        c.start();
-        c.loop(Clip.LOOP_CONTINUOUSLY);
+    // public static void playMusicForVictory()
+    //         throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    //     f = new File("Brick-Breaker/src/main/java/music/victory_music.wav").getAbsoluteFile();
+    //     as = AudioSystem.getAudioInputStream(f);
+    //     c = AudioSystem.getClip();
+    //     c.open(as);
+    //     // Plays audio once
+    //     c.start();
+    //     c.loop(Clip.LOOP_CONTINUOUSLY);
 
-    }
+    // }
 
-    public static void stopMusic() throws Exception {
+    // public static void stopMusic() throws Exception {
 
-        if (c != null) // do not nest it to the previous condition ...
-        {
-            musicIsPlaying = false;
-            c.stop();
-            c.flush();
-            c.close();
-        }
-    }
+    //     if (c != null) // do not nest it to the previous condition ...
+    //     {
+    //         musicIsPlaying = false;
+    //         c.stop();
+    //         c.flush();
+    //         c.close();
+    //     }
+    // }
 
 }

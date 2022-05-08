@@ -13,9 +13,18 @@ public class StopMusic implements AudioStrategy {
 
     BrickBreaker bb;
 
+    // private static AudioInputStream as = null;
+    // private static File f = null;
+    // private static Clip c = null;
+
     @Override
     public void sort() throws Exception {
-        GameBoard.stopMusic();
+
+        GameBoard.musicIsPlaying = false;
+        GameBoard.c.stop();
+        GameBoard.c.flush();
+        GameBoard.c.close();
+       // AudioFiles.stopMusic();
     }
 
 }
