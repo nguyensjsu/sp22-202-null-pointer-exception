@@ -20,6 +20,7 @@ public class MenuScreen extends JPanel {
         initMenu();
     }
 
+    // Menu initialization
     private void initMenu() {
         setFocusable(true);
         setPreferredSize(new Dimension(Configurations.WIDTH, Configurations.HEIGHT));
@@ -134,6 +135,7 @@ public class MenuScreen extends JPanel {
         }
     }
 
+    // Paint components
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -142,7 +144,7 @@ public class MenuScreen extends JPanel {
 
         drawTitle(g2d);
     }
-
+// Draw titles
     private void drawTitle(Graphics2D g2d) {
         var font = new Font("Verdana", Font.BOLD, 60);
         FontMetrics fontMetrics = this.getFontMetrics(font);

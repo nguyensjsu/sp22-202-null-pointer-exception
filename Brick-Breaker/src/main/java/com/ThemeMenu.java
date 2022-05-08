@@ -18,6 +18,7 @@ public class ThemeMenu extends JPanel {
         initMenu();
     }
 
+    // Menu Initialization
     private void initMenu() throws IOException {
         setFocusable(true);
         setPreferredSize(new Dimension(Configurations.WIDTH, Configurations.HEIGHT));
@@ -47,7 +48,7 @@ public class ThemeMenu extends JPanel {
         rtnMenuButton.addActionListener(rtnHandler);
 
     }
-
+// Return handler
     private class returnHandler implements ActionListener {
 
         @Override
@@ -63,7 +64,7 @@ public class ThemeMenu extends JPanel {
 
         }
     }
-
+// Background edit for game
     private void EditBackgroundFile(String colorChosen) {
         FileWriter fw;
         try {
@@ -78,6 +79,7 @@ public class ThemeMenu extends JPanel {
         }
     }
 
+    // Paint components
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -91,6 +93,7 @@ public class ThemeMenu extends JPanel {
         }
     }
 
+    // Draw text method
     private void drawText(Graphics2D g2d) throws IOException {
         g2d.drawString("Choose background color below:", 70, 50);
         g2d.drawString("Current Background Color", 70, 80);

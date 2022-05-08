@@ -21,23 +21,14 @@ public class GameOverImage extends ImageDecorator {
         
     }
 
-    // public GameOverImage(int imageType) throws IOException
-    // {
-    //    // initImage(imageType);
-    // }
-    // private void initImage(int imageCount) throws IOException {
-    //     loadImage();
-       
-    // }
-
+ // Load Image
 
     @Override
     public void loadImage() throws IOException {
         ImageIcon ii;
         ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/game_over.png")));
         image = ii.getImage();
-    //    Image icon = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/game_over.png"))).getImage();
-    //     image = icon.getImage();
+   
     }
 
     @Override

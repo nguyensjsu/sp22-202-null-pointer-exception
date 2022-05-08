@@ -1,5 +1,6 @@
 package main.java.Config;
 
+// Screen components size configurations
 public interface Configurations {
     int WIDTH = 550;
     int HEIGHT = 650;

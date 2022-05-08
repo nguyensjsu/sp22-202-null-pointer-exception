@@ -12,11 +12,14 @@ import java.io.File;
 
 public class BrickBreaker extends JFrame {
 
+    // Constructor
+
     public BrickBreaker() throws IOException {
 
         initUI();
     }
 
+    // UI initialization
     private void initUI() throws IOException {
 
         add(new MenuScreen());
@@ -52,6 +55,8 @@ public class BrickBreaker extends JFrame {
         });
     }
 
+    // Play background music for the game
+
     public static void playMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
         File audioFile = new File("Brick-Breaker/src/main/java/music/music_bg.wav").getAbsoluteFile();
@@ -65,7 +70,5 @@ public class BrickBreaker extends JFrame {
 
     }
 
-    public static void stopMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-
-    }
+    
 }

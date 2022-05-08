@@ -1,6 +1,5 @@
 package main.java.Objects;
 
-import java.io.File;
 import java.io.IOException;
 
 import java.awt.Image;
@@ -21,23 +20,14 @@ public class VictoryImage extends ImageDecorator {
         
     }
 
-    // public GameOverImage(int imageType) throws IOException
-    // {
-    //    // initImage(imageType);
-    // }
-    // private void initImage(int imageCount) throws IOException {
-    //     loadImage();
-       
-    // }
-
+   
 
     @Override
     public void loadImage() throws IOException {
         ImageIcon ii;
         ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/victory_image.png")));
         image = ii.getImage();
-    //    Image icon = new ImageIcon(ImageIO.read(new File("Brick-Breaker/src/images/game_over.png"))).getImage();
-    //     image = icon.getImage();
+    
     }
 
     @Override

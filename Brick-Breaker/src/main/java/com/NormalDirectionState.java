@@ -6,6 +6,7 @@ import main.java.Interfaces.IRacket ;
 
 public class NormalDirectionState implements IKeyDirection {
 
+    // Method for specific movement
     public void specificMove(int key, int select, IRacket racket) {
         if (select == 0) {
             if (key == KeyEvent.VK_LEFT) {

@@ -23,14 +23,16 @@ public class Brick extends Sprite {
     private boolean switchArrowDirction;
     private IBrick brickMode;
 
+
+    // Fifty Brick
     private final IBrick FiftyBrick = () -> {
         health += 50;
     };
-
+// Hundred brick
     private final IBrick HundredBrick = () -> {
         health += 100;
     };
-
+// Cement brick
     private final IBrick cementBrick = () -> {
 
         cement = true;
@@ -42,6 +44,7 @@ public class Brick extends Sprite {
         getImageDimensions();
     };
 
+    // Item brick
     private final IBrick itemContainerBrick = () -> {
         containsItem = true;
         try {
@@ -51,6 +54,7 @@ public class Brick extends Sprite {
         }
     };
 
+    // Dangerous brick
     private final IBrick dangerousBrick = () -> {
         if (noOfDangerBricks < 3) {
             noOfDangerBricks += 1;
@@ -72,6 +76,7 @@ public class Brick extends Sprite {
         }
     };
 
+    // Arrow switch brick
     private final IBrick switchArrowBrick = () -> {
         try {
             image = loadImageResource("Brick-Breaker/src/images/switchDirectionBrick.jpg");
@@ -82,6 +87,7 @@ public class Brick extends Sprite {
         switchArrowDirction = true;
     };
 
+    // Life brick
     private final IBrick lifeBrick = () -> {
         if (createdHealthBrick < 1) {
             createdHealthBrick++;
@@ -102,6 +108,7 @@ public class Brick extends Sprite {
 
     };
 
+    // Default brick
     private final IBrick defaultBrick = () -> {
         try {
             image = loadImageResource("Brick-Breaker/src/images/brick1.jpg");
@@ -116,6 +123,7 @@ public class Brick extends Sprite {
         initBrick(x, y);
     }
 
+    // Brick Init
     private void initBrick(int x, int y) throws IOException {
         this.x = x;
         this.y = y;
@@ -177,10 +185,12 @@ public class Brick extends Sprite {
         return health;
     }
 
+    // Set brick health
     private void setHealth() {
         health -= 50;
     }
 
+    
     public boolean isCement() {
         return cement;
     }
@@ -189,6 +199,7 @@ public class Brick extends Sprite {
         return dangerBrick;
     }
 
+    // Damage brick
     public void doDamage() throws IOException {
 
         if (!isCement()) {
@@ -229,6 +240,7 @@ public class Brick extends Sprite {
         return switchArrowDirction;
     }
 
+    // Load Image
     private Image loadImageResource(String filePath) throws IOException {
         try {
             var ii = new ImageIcon(ImageIO.read(new File(filePath)));

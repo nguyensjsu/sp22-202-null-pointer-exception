@@ -2,7 +2,6 @@ package main.java.Objects;
 
 import java.io.IOException;
 
-import javax.imageio.IIOImage;
 import java.awt.Image;
 
 import main.java.Interfaces.*;

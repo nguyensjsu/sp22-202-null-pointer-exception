@@ -11,11 +11,13 @@ public class Ball extends Sprite {
     private double xdir;
     private double ydir;
 
+
     public Ball() throws IOException {
 
         initBall();
     }
 
+    // Ball Init
     private void initBall() throws IOException {
 
         xdir = 1;
@@ -25,14 +27,14 @@ public class Ball extends Sprite {
         getImageDimensions();
         resetState();
     }
-
+// Load Image
     private void loadImage() throws IOException {
 
         var ii = new ImageIcon(ImageIO.read(getClass().getResource("/images/ball.png")));
         image = ii.getImage();
 
     }
-
+// Move method
     public void move() {
 
         x += xdir;
@@ -54,22 +56,24 @@ public class Ball extends Sprite {
             y = ydir;
         }
     }
-
+// Reset state
     private void resetState() {
         x = Configurations.INIT_BALL_X;
         y = Configurations.INIT_BALL_Y;
     }
 
+    // Set X dir
     public void setXDir(double x) {
 
         xdir = x;
     }
-
+// Set Y dir
     public void setYDir(double y) {
 
         ydir = y;
     }
 
+    // get Y dir
     public double getYDir() {
 
         return ydir;

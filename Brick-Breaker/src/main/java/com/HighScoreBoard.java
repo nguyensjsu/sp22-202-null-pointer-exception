@@ -20,6 +20,7 @@ public class HighScoreBoard extends JPanel {
         initBoard();
     }
 
+    // Initialization of board
     private void initBoard() {
         setFocusable(true);
         setPreferredSize(new Dimension(Configurations.WIDTH, Configurations.HEIGHT));
@@ -46,7 +47,7 @@ public class HighScoreBoard extends JPanel {
 
         }
     }
-
+// Paint components
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -60,6 +61,7 @@ public class HighScoreBoard extends JPanel {
         }
     }
 
+    // Draw scores of players
     private void drawScores(Graphics2D g2d) throws IOException {
         FileReader in = new FileReader("ScoreList.txt");
         BufferedReader br = new BufferedReader(in);
