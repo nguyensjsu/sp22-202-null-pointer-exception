@@ -7,7 +7,7 @@ A regular brick disappears when it’s hit by the ball, or breaks a little if it
 
 ### **Link to your team's project Videos**
 
---- Link to video here ---
+https://drive.google.com/drive/folders/1HMNFoW9TjGAdcdK2f4IM94VUPI1yE3SH?usp=sharing
 
 ### **Our Team**
 * Anshul Kumar Shandilya
@@ -18,9 +18,9 @@ A regular brick disappears when it’s hit by the ball, or breaks a little if it
 ### **Individual Journals**
 
 * Anshul Kumar Shandilya's Journal - [Week 1](Journals/Anshul/Week1.md), [Week 2](Journals/Anshul/Week2.md), [Week 3](Journals/Anshul/Week3.md), [Week 4](Journals/Anshul/Week4.md)
-* Boteng Yuan's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week1.md), [Week 2](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week2.md), [Week 3](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week3.md)
+* Boteng Yuan's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week1.md), [Week 2](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week2.md), [Week 3](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week3.md), [Week 4](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week4.md)
 * Rafic Hasbini's Journal - [Week1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Rafic/Week1.md), [Week 2](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Rafic/Week2.md), [Week 3](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Rafic/Week3.md), [Week 4](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Rafic/Week4.md).
-* Varun Teja Maguluri's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week1.md), [Week 2](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week2.md), [Week 3](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week3.md)
+* Varun Teja Maguluri's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week1.md), [Week 2](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week2.md), [Week 3](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week3.md), [Week 4](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week4.md).
 
 ### **Summarizing our game**
 The game that we as a team developing is Brick Breaker. So, the main concept of this game is, the player will be given a ball and all the time the ball will be in motion. And the player will just be controlling the paddle at the bottom which he can just move that paddle left and right. The main task of the player is to hit the ball with paddle and also make sure the ball hits the bricks at top. If he fails to hit any brick or fails to hit the ball with his paddle, then one life of the player will be lost. By default, each player will be given 3 lives. So, in this game, there were extended features like special bricks whose functionality is whenever the user hits this special brick, a new ball will be added to the game and if he managed to hit that ball, his paddle length will be increased. And also another extra feature that is planned to implement in this game is background music for this game.
@@ -32,12 +32,12 @@ The game that we as a team developing is Brick Breaker. So, the main concept of 
 
 ### **A summary of the key features (include any special design ideas implemented)**
 
-Change racket size bricks: When the blue bricks are broken, they will drop an item. If the item is picked up, then the racket will change size: 
+Change racket size bricks: When the blue bricks are broken, they will drop an item. If the item is picked up, then the racket will change size:
 <br>
   - Long Racket
   - Short Racket
 <br>
-Rainbow brick : Switch arrow direction brick. 
+Rainbow brick : Switch arrow direction brick.
 <br>
   - changes the direction of arrows once this brick is destroyed
 <br>
@@ -54,6 +54,11 @@ Two player mode:
 <br>
   - Allow for two players to play together to beat the game on the same team.
   - Two rackets are present in two player mode.
-
-
- 
+<br>
+Blue Brick : Special Brick
+<br>
+  - Drops a special ball, which may increase or decrease the racket size.
+ <br>
+ Background Sounds :
+ <br>
+  - Audio implementation for both winning and losing game.
