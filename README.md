@@ -32,4 +32,28 @@ The game that we as a team developing is Brick Breaker. So, the main concept of 
 
 ### **A summary of the key features (include any special design ideas implemented)**
 
------- IN PROGRESS ------
+Change racket size bricks: When the blue bricks are broken, they will drop an item. If the item is picked up, then the racket will change size: 
+<br>
+  - Long Racket
+  - Short Racket
+<br>
+Rainbow brick : Switch arrow direction brick. 
+<br>
+  - changes the direction of arrows once this brick is destroyed
+<br>
+Green brick: Additional life brick.
+<br>
+  - By destorying this brick: the player is awarded an additional life/chance.
+<br>
+Red brick: removes a life.
+<br>
+  - By destroying this brick the player loses a life
+  - If player is on their last life, they lose the game.
+<br>
+Two player mode:
+<br>
+  - Allow for two players to play together to beat the game on the same team.
+  - Two rackets are present in two player mode.
+
+
+ 
