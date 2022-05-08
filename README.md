@@ -18,7 +18,7 @@ https://drive.google.com/drive/folders/1HMNFoW9TjGAdcdK2f4IM94VUPI1yE3SH?usp=sha
 ### **Individual Journals**
 
 * Anshul Kumar Shandilya's Journal - [Week 1](Journals/Anshul/Week1.md), [Week 2](Journals/Anshul/Week2.md), [Week 3](Journals/Anshul/Week3.md), [Week 4](Journals/Anshul/Week4.md)
-* Boteng Yuan's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week1.md), [Week 2](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week2.md), [Week 3](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week3.md)
+* Boteng Yuan's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week1.md), [Week 2](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week2.md), [Week 3](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week3.md), [Week 4](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Boteng/Week4.md)
 * Rafic Hasbini's Journal - [Week1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Rafic/Week1.md), [Week 2](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Rafic/Week2.md), [Week 3](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Rafic/Week3.md), [Week 4](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Rafic/Week4.md).
 * Varun Teja Maguluri's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week1.md), [Week 2](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week2.md), [Week 3](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week3.md)
 
@@ -32,12 +32,12 @@ The game that we as a team developing is Brick Breaker. So, the main concept of 
 
 ### **A summary of the key features (include any special design ideas implemented)**
 
-Change racket size bricks: When the blue bricks are broken, they will drop an item. If the item is picked up, then the racket will change size: 
+Change racket size bricks: When the blue bricks are broken, they will drop an item. If the item is picked up, then the racket will change size:
 <br>
   - Long Racket
   - Short Racket
 <br>
-Rainbow brick : Switch arrow direction brick. 
+Rainbow brick : Switch arrow direction brick.
 <br>
   - changes the direction of arrows once this brick is destroyed
 <br>
@@ -59,8 +59,6 @@ Blue Brick : Special Brick
 <br>
   - Drops a special ball, which may increase or decrease the racket size.
  <br>
- Background Sounds : 
+ Background Sounds :
  <br>
   - Audio implementation for both winning and losing game.
-
- 
