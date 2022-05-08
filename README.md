@@ -55,9 +55,12 @@ Two player mode:
   - Allow for two players to play together to beat the game on the same team.
   - Two rackets are present in two player mode.
 <br>
-Blue Brick : Drops a special ball, which may increase or decrease the racket size.
+Blue Brick : Special Brick
+<br>
+  - Drops a special ball, which may increase or decrease the racket size.
  <br>
- Background Sounds :
+ Background Sounds : 
+ <br>
   - Audio implementation for both winning and losing game.
 
  
