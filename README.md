@@ -29,6 +29,11 @@ The game that we as a team developing is Brick Breaker. So, the main concept of 
 
 ![Class_UML](Diagrams/uml_final.jpg)
 
+- Strategy pattenr for switching music
+![Class_UML](Diagrams\AudioStrategy.png)
+
+
+
 
 ### **A summary of the key features (include any special design ideas implemented)**
 
