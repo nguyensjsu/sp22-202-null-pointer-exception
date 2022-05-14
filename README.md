@@ -59,7 +59,7 @@ IGameModeStrategy is an interface for implementing two players mode. The game wi
 ![ScoreObserver](Diagrams/ScoreObserver.png)
 
 #### Observer pattern for speed:
-![SpeedObserver](Diagrams/ScoreObserver.png)
+![SpeedObserver](Diagrams/SpeedObserver.png)
 
 
 ### **Burndown Chart**
