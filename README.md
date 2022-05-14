@@ -7,8 +7,8 @@ A regular brick disappears when it’s hit by the ball, or breaks a little if it
 
 ### **Link to your team's project Videos**
 
-[User Story - Brick Breaker](https://youtu.be/Q427z0tCDHA)
-[Week 1](Journals/Anshul/Week1.md)
+[User Story - Brick Breaker](https://youtu.be/Q427z0tCDHA),
+[Brick Breaker - Demo](https://youtu.be/S3eHdaPgxro)
 
 ### **Our Team**
 * Anshul Kumar Shandilya
