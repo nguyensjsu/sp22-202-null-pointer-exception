@@ -31,34 +31,34 @@ The game that we as a team developing is Brick Breaker. So, the main concept of 
 
 ![Class_UML](Diagrams/uml_final.jpg)
 
-#### Strategy pattern for switching music
+#### Strategy pattern for switching music:
 ![Strategy Pattern](https://user-images.githubusercontent.com/98674002/168416783-9e2013d6-861b-4587-bb89-c36364cfbe9b.png)
 
-#### Strategy pattern for different Bricks
+#### Strategy pattern for different Bricks:
 ![BrickStrategy](Diagrams/BrickStrategy.png)
 
-#### Strategy pattern for different game mode
+#### Strategy pattern for different game mode:
 
 IGameModeStrategy is an interface for implementing two players mode. The game will be initialized based on what mode the player selected. One player mode strategy and two players strategy are implemented in GameBoard.java using lambda functions becasue there are only one method called gameInit in this object. The differences between two strategies are the number of rackets that was created, the functionalities of buttons at top, and also the keys that used for moving the rackets. Also, I used a variable called currentMode to memorize what the current game mode is becasue the game logic may vary based on the game mode.
 
 ![GameStrategy](Diagrams/GameStrategy.png)
 
-#### State machine pattern for change racket move direction
+#### State machine pattern for change racket move direction:
 ![DirectionStateDiagram](Diagrams/DirectionStateDiagram.png)
 
-#### Decorator pattern for game ending images
+#### Decorator pattern for game ending images:
 ![ImageDecorator](Diagrams/ImageDecorator.png)
 
-#### Decorator pattern for different racket types
+#### Decorator pattern for different racket types:
 ![RacketDecoratorDiagram](Diagrams/RacketDecoratorDiagram.png)
 
-#### Observer pattern for lives
+#### Observer pattern for lives:
 ![LivesObserver](Diagrams/LivesObserver.png)
 
-#### Observer pattenr for score
+#### Observer pattenr for score:
 ![ScoreObserver](Diagrams/ScoreObserver.png)
 
-#### Observer pattern for speed
+#### Observer pattern for speed:
 ![SpeedObserver](Diagrams/ScoreObserver.png)
 
 
