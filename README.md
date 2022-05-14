@@ -30,7 +30,8 @@ The game that we as a team developing is Brick Breaker. So, the main concept of 
 ![Class_UML](Diagrams/uml_final.jpg)
 
 - Strategy pattern for switching music
-![AudioStrategy](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Diagrams/AudioStrategy.png)
+![Strategy Pattern](https://user-images.githubusercontent.com/98674002/168416783-9e2013d6-861b-4587-bb89-c36364cfbe9b.png)
+
 
 - Strategy pattern for different Bricks
 ![BrickStrategy](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Diagrams/BrickStrategy.png)
