@@ -56,6 +56,15 @@ The game that we as a team developing is Brick Breaker. So, the main concept of 
 - Observer pattern for speed
 ![SpeedObserver](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Diagrams/SpeedObserver.png)
 
+
+### **Burndown Chart**
+
+![500_F_222159309_r17sMh7YurdVFbpkqPI9QZ6PwaJFySlg](https://user-images.githubusercontent.com/98674002/168414320-00263328-98eb-434f-b683-7d478509ae10.jpeg)
+
+### **UI Wireframes**
+
+<img width="678" alt="Screen Shot 2022-05-13 at 11 48 07 PM" src="https://user-images.githubusercontent.com/98674002/168414399-1b2dda4e-57cc-461c-999d-7e9f43599042.png">
+
 ### **A summary of the key features (include any special design ideas implemented)**
 
 Change racket size bricks: When the blue bricks are broken, they will drop an item. If the item is picked up, then the racket will change size:
