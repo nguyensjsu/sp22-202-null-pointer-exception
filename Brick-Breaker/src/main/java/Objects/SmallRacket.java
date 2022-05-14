@@ -29,9 +29,9 @@ public class SmallRacket extends RacketDecorator {
     
     public SmallRacket( IRacket R ) throws IOException {
         super(R) ;
-        this.loadImage();
-        super.getImageDimensions();
-        super.resetState();
+        loadImage();
+        getImageDimensions();
+        resetState();
         normalDirectionState = new NormalDirectionState();
         switchedDirectionState = new SwitchedDirectionState();
         directionState = normalDirectionState;
