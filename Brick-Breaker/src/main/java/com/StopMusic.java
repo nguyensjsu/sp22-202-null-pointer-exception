@@ -8,7 +8,7 @@ public class StopMusic implements AudioStrategy {
   // Set strategy to stop music
 
     @Override
-    public void sort() throws Exception {
+    public void changeAudio() throws Exception {
 
         GameBoard.musicIsPlaying = false;
         GameBoard.c.stop();

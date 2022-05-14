@@ -10,7 +10,7 @@ public class GameMusic implements AudioStrategy{
 
 // Set strategy to play game music
     @Override
-    public void sort() throws Exception {
+    public void changeAudio() throws Exception {
 
         
         GameBoard.f = new File("Brick-Breaker/src/main/java/music/music_bg.wav").getAbsoluteFile();

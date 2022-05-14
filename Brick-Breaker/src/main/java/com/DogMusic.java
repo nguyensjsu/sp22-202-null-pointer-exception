@@ -9,7 +9,7 @@ public class DogMusic implements AudioStrategy{
     
 // Perform strategy
     @Override
-    public void sort() throws Exception {
+    public void changeAudio() throws Exception {
 
         GameBoard.f = new File("Brick-Breaker/src/main/java/music/game_over_music.wav").getAbsoluteFile();
         GameBoard.as = AudioSystem.getAudioInputStream(GameBoard.f);

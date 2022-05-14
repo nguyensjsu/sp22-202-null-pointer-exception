@@ -3,11 +3,11 @@ package main.java.com;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DataSet {
+public class AudioChanger {
 	private AudioStrategy strategy;
 
     // Constructor
-    public DataSet() throws IOException
+    public AudioChanger() throws IOException
     {
         strategy = new GameMusic() ;
     }
@@ -18,9 +18,9 @@ public class DataSet {
 	}
 
     // Perform strategy
-    public void doSort() throws Exception {
+    public void setAudioOutput() throws Exception {
        
-            strategy.sort();
+            strategy.changeAudio();
             
 	
 }

@@ -35,7 +35,7 @@ public class GameBoard extends JPanel {
     }
 
     
-    DataSet dataset = new DataSet();
+    AudioChanger ac = new AudioChanger();
     private static Timer timer;
     private String message = "Game Over!";
     private String yourScore = "Your Score: ";
@@ -189,7 +189,7 @@ public class GameBoard extends JPanel {
 
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new GridLayout(0, 4));
-        buttonPane.setPreferredSize(new Dimension(480, 30));
+        buttonPane.setPreferredSize(new Dimension(500, 30));
         JPanel blank = new JPanel();
         blank.setVisible(false);
         buttonPane.add(pauseButton);
@@ -334,10 +334,12 @@ public class GameBoard extends JPanel {
             gameOverImage = new GameOverImage(I) ;
             g2d.drawImage(gameOverImage.getImage(), (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 25,
                     130, null);
-                    dataset.changeStrategy(new StopMusic());
-                    dataset.doSort();
-            dataset.changeStrategy(new DogMusic());
-            dataset.doSort();
+                    ac.changeStrategy(new StopMusic());
+                    ac.setAudioOutput();
+                    ac.changeStrategy(new DogMusic());
+                    ac.setAudioOutput();
+                    toggleMusic.setText("On Game Music");
+                    
         }
 
         else {
@@ -345,8 +347,11 @@ public class GameBoard extends JPanel {
             victoryImage = new VictoryImage(I) ;
             g2d.drawImage(victoryImage.getImage(), (Configurations.WIDTH - fontMetrics.stringWidth(message)) / 2 - 40,
                     130, null);
-            dataset.changeStrategy(new VictoryMusic());
-            dataset.doSort();
+                    ac.changeStrategy(new StopMusic());
+                    ac.setAudioOutput();
+                    ac.changeStrategy(new VictoryMusic());
+                    ac.setAudioOutput();
+                    toggleMusic.setText("On Game Music");
         }
 
         g2d.setColor(Color.red);
@@ -519,8 +524,8 @@ public class GameBoard extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                dataset.changeStrategy(new StopMusic());
-                dataset.doSort();
+                ac.changeStrategy(new StopMusic());
+                ac.setAudioOutput();
                 speed = 2;
                 speedLevel.setState("x1");
                 restartClicked = true;
@@ -528,10 +533,10 @@ public class GameBoard extends JPanel {
                 timer.stop();
                 currentMode.gameInit();
                 
-                dataset.changeStrategy(new GameMusic());
+                ac.changeStrategy(new GameMusic());
                 message = "Game Over!";
                 try {
-                    dataset.doSort();
+                    ac.setAudioOutput();
                 } catch (Exception e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
@@ -576,8 +581,8 @@ public class GameBoard extends JPanel {
             if(musicIsPlaying){
                 try {
                     toggleMusic.setText("Turn On Music");
-                    dataset.changeStrategy(new StopMusic());
-                    dataset.doSort();
+                    ac.changeStrategy(new StopMusic());
+                    ac.setAudioOutput();
                 } catch (Exception io_E) {
                     // TODO Auto-generated catch block
                     io_E.printStackTrace();
@@ -586,10 +591,10 @@ public class GameBoard extends JPanel {
             else{
                 try {
                     toggleMusic.setText("Turn Off Music");
-                    dataset.changeStrategy(new StopMusic());
-                    dataset.doSort();
-                    dataset.changeStrategy(new GameMusic());
-                    dataset.doSort();
+                    ac.changeStrategy(new StopMusic());
+                    ac.setAudioOutput();
+                    ac.changeStrategy(new GameMusic());
+                    ac.setAudioOutput();
                 } catch (Exception io_E) {
                     // TODO Auto-generated catch block
                     io_E.printStackTrace();

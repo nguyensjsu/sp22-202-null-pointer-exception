@@ -36,10 +36,10 @@ public class BrickBreaker extends JFrame {
 
             BrickBreaker game = null;
             try {
-                DataSet dataset = new DataSet() ;
+                AudioChanger ac = new AudioChanger() ;
                 //playMusic();
-     dataset.changeStrategy(new GameMusic());
-    dataset.doSort();
+                 ac.changeStrategy(new GameMusic());
+                ac.setAudioOutput();
                 game = new BrickBreaker();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -55,20 +55,7 @@ public class BrickBreaker extends JFrame {
         });
     }
 
-    // Play background music for the game
-
-    public static void playMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-
-        File audioFile = new File("Brick-Breaker/src/main/java/music/music_bg.wav").getAbsoluteFile();
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        // Plays audio once
-        clip.start();
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-        
-
-    }
+    
 
     
 }
