@@ -29,11 +29,32 @@ The game that we as a team developing is Brick Breaker. So, the main concept of 
 
 ![Class_UML](Diagrams/uml_final.jpg)
 
-- Strategy pattenr for switching music
-![Class_UML](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Diagrams/AudioStrategy.png)
+- Strategy pattern for switching music
+![AudioStrategy](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Diagrams/AudioStrategy.png)
 
+- Strategy pattern for different Bricks
+![BrickStrategy](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Diagrams/BrickStrategy.png)
 
+- Strategy pattern for different game mode
+![GameStrategy](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Diagrams/GameStrategy.png)
 
+- State machine pattern for change racket move direction
+![DirectionStateDiagram](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Diagrams/DirectionStateDiagram.png)
+
+- Decorator pattern for game ending images
+![ImageDecorator](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Diagrams/ImageDecorator.png)
+
+- Decorator pattern for different racket types
+![RacketDecoratorDiagram](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Diagrams/RacketDecoratorDiagram.png)
+
+- Observer pattern for lives
+![LivesObserver](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Diagrams/LivesObserver.png)
+
+- Observer pattenr for score
+![ScoreObserver](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Diagrams/ScoreObserver.png)
+
+- Observer pattern for speed
+![SpeedObserver](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Diagrams/SpeedObserver.png)
 
 ### **A summary of the key features (include any special design ideas implemented)**
 
