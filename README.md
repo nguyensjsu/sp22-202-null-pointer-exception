@@ -62,6 +62,8 @@ To change the different background music for the game based on the player's perf
 ![Strategy Pattern](https://user-images.githubusercontent.com/98674002/168416783-9e2013d6-861b-4587-bb89-c36364cfbe9b.png)
 
 #### Strategy pattern for different Bricks:
+
+The strategy pattern is implemented for showing the different bricks in the game. As the bricks will be generated randomly for each game, the strategy pattern excatly fits for this scenario. Here IBrick is the interface and Brick class is the base class which handles all the brick features. Here, we have different brick styles like cement brick, green brick, red brick, blue brick, multi-colored brick and normal brick. So, for each and every brick, there is one purpose. So, each brick will have its feature to implement bases on the color. So, it will be easy to change the strategies in runtime based on the color fo the brick. And we also have different methods in our Brick class like initBrick(x,y), getHealth(), setHealth(), isCement(), isDangerBrick(), doDamage(), isDestroyed(), hasItem(),removeLife(), containsLife() and isSwitchDirectionBrick(). These methods will have their features to implement based on the players performance.
 ![BrickStrategy](Diagrams/BrickStrategy.png)
 
 #### Strategy pattern for different game mode:
