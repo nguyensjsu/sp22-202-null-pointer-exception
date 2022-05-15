@@ -10,7 +10,7 @@ Once design patterns were implemented and a good code base was complete, the tea
 
 ### **Link to your team's project Videos**
 
-[User Story - Brick Breaker](https://youtu.be/Q427z0tCDHA)
+[Brick Breaker - User Story](https://youtu.be/Q427z0tCDHA)
 
 [Brick Breaker - Demo](https://youtu.be/S3eHdaPgxro)
 
