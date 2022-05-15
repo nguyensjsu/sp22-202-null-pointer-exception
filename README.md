@@ -58,6 +58,7 @@ In the home screen menu, the player is also able to select single player or two 
 #### Strategy pattern for switching music:
 
 To change the different background music for the game based on the player's performance, the strategy pattern was implemented. It will be easy to switch the audio in runtime using strategy pattern. The AudioStrategy is the interface for this pattern. AudioChanger is the class which is having the changeStrategy() and setAudioOutput() methods to perform the change for different strategies for different scenarios. The four classes which implements AudioStrategy interface are DogMusic, VictoryMusic, GameMusic and StopMusic. So, by default, the strategy is set to GameMusic because whenever the game starts, this will the music that should be played. Then when the player tries to hit the bricks with ball and succeeds the task and wins, then the strategy is set to StopMusic which will stop all audio inputs and then sets the strategy to VictoryMusic. Similarly, if the player loses all his lives and loses the game, then the strategy is set to StopMusic and then it is set to DogMusic. And finally , when the uses restarts the game, then the strategy is set to GameMusic again.
+
 ![Strategy Pattern](https://user-images.githubusercontent.com/98674002/168416783-9e2013d6-861b-4587-bb89-c36364cfbe9b.png)
 
 #### Strategy pattern for different Bricks:
@@ -70,15 +71,20 @@ IGameModeStrategy is an interface for implementing two players mode. The game wi
 ![GameStrategy](Diagrams/GameStrategy.png)
 
 #### State machine pattern for change racket move direction:
-![DirectionStateDiagram](Diagrams/DirectionStateDiagram.png)
+
 To switch user input direction for the paddle, a state machine was implemented. The initialized racket class includes a parameter to identify the direction state (either normal or switched). The parameter will alternate between the two states if the switch input direction brick is destroyed. The two state classes SwicthedDirectionState and NormalDirectionState implement the move method in the interface class IKeyDirection. The specific state move method is then called based on the current state in the initialized racket.
+
+![DirectionStateDiagram](Diagrams/DirectionStateDiagram.png)
 
 #### Decorator pattern for game ending images:
 ![ImageDecorator](Diagrams/ImageDecorator.png)
 
 #### Decorator pattern for different racket types:
-![RacketDecoratorDiagram](Diagrams/RacketDecoratorDiagram.png)
+
 A decorator design pattern has been implemented for the racket. An interface class for racket, IRacket, defines the methods to be used in the racket implementation. The base Racket class implements the all methods from the interface. An abstract decorator class RacketDecorator also implements the methods in IRacket. Finally all the different rackets with additional features extend the RacketDecorator class as concrete decorators. This implementation allows for even more features to be implemented for the racket with ease. For the current two racket decorators implemented, since the size of the racket changes, these interfered with the base object variables and needed re-implementation of many methods. However in the case where the racket size stays the same as the original and only additional behavior is implemented, this re-implementation is not needed.
+
+![RacketDecoratorDiagram](Diagrams/RacketDecoratorDiagram.png)
+
 
 #### Observer pattern for lives:
 ![LivesObserver](Diagrams/LivesObserver.png)
