@@ -32,9 +32,22 @@ The game that we as a team developing is Brick Breaker. So, the main concept of 
 ![Class_UML](Diagrams/uml_final.jpg)
 
 #### Strategy pattern for switching music:
+
 ![Strategy Pattern](https://user-images.githubusercontent.com/98674002/168416783-9e2013d6-861b-4587-bb89-c36364cfbe9b.png)
 
 #### Strategy pattern for different Bricks:
+
+For implementing various types of bricks that exist in the game, different attributes of the brick class had to be instantiated. For each of the bricks, let's say cement brick, health brick, had to be setup diferently than each other. For example, the regular health brick has health 50 and is descrictible, whereas for comparision, the cement brick is configured differently, as it's health attribute should not be initialized as it is supposed to be indestructible. So, here arises the need to configure different bricks, using different strategies. 
+For initializing the bricks, Strategy pattern was used (diagram provided below). For the strategy pattern, The IBrick interface was created, which provides the abstract method called ```setupBrick()```, to initialize the bricks. The Brick class then acts as a concrete strategy as various lambda implementations for the different bricks are provided. The implementations are provided in the brick class as: (for each type of brick)
+```
+    private final IBrick <brick_type> = () -> {
+        //Config brick
+        //...
+        //...
+    };
+```
+The brick class also acts as the context. Upon initialization of a brick object, the ```initBrick(...)``` function is called which then choses what type of brick the current object sha;l be. Based on generated random number, the ```initBrick()``` function decides the type of the brick for the object, and then configures the brick strategy called ```brickMode``` using whatever strategy it chose via the RNG. 
+
 ![BrickStrategy](Diagrams/BrickStrategy.png)
 
 #### Strategy pattern for different game mode:
@@ -52,15 +65,15 @@ IGameModeStrategy is an interface for implementing two players mode. The game wi
 #### Decorator pattern for different racket types:
 ![RacketDecoratorDiagram](Diagrams/RacketDecoratorDiagram.png)
 
-#### Observer pattern for lives:
+#### Observer pattern for lives, score and speed:
+
+For the score, speed and lives part of the game, Observer pattern was implemented. The score, life and speed of the gameplay is important for the user to know, as it improves the gameplay by giving the user some information about the game state. However this information can also be used somewhere else in the game, for example, updating the score board using score, using current lives left for the player to determine how the game progresses (0 lives means game over) and speed variable for the game to increase the speed of the ball in action. All of this is done in different classes, and it would prove to be a security threat to change the visibility of these attributes to public for access across the codebase. Also, it would prove to be a challenge to maintain the same variable state once changed by any entity in the code. So observer pattern was implemented to solve these issues. 
+All three attributes for the game lives, score and speed were made to be subjects separately. They all implement the interface ```ISubject.java``` which provides abstract methods for attach, detach and notify. For this, new classes were created, which act as concrete subject. They are SubjectLives, SubjectScore and SubjectSpeed. Then the observers were created. The observers implement an interface ```IObserver.java``` that provides the abstract method for updating the observer. The lives, score and speed are always changed using their respective subject class , ie SubjectLives, SubjectScore and SubjectSpeed. This ensures that wherever the observer lies in the code, it will be updated of the change of state in the above attributes. This includes on the score board, on the GUI information to the user and so on. **The UML diagrams for each observer pattern is provided below.**
+
+##### Lives, score and speed Observer:
 ![LivesObserver](Diagrams/LivesObserver.png)
-
-#### Observer pattenr for score:
 ![ScoreObserver](Diagrams/ScoreObserver.png)
-
-#### Observer pattern for speed:
 ![SpeedObserver](Diagrams/SpeedObserver.png)
-
 
 ### **Burndown Chart**
 
