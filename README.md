@@ -15,7 +15,7 @@ Once design patterns were implemented and a good code base was complete, the tea
 [Brick Breaker - Demo](https://youtu.be/S3eHdaPgxro)
 
 ### **Our Team**
-* Anshul Kumar Shandilya
+* Anshul Kumar Shandilya | 
 * Boteng Yuan
 * Rafic Hasbini
 * Varun Teja Maguluri
