@@ -91,12 +91,21 @@ A decorator design pattern has been implemented for the racket. An interface cla
 
 
 #### Observer pattern for lives:
+
+Observer pattern is implemented for handling the number of lives of a player in each game. So, we have our interface IObserver and also two classes LivesObserver and SubjectLives. The LivesObserver will be implementing the IObserver interface. The LivesObserver class will be having the variable LivesState which handles the count of number of lives at present. And we have getLives() and update() methods which handles getting the number of lives and updates the lives to increment or decrement based on the player's game. In SubjectLives class, we have SubjectState variable which keeps track of lives. And also we have setState() to set the current state of the life and getState() to get the current life status. We have attach() method to attach the observer and in the same way detatch() metho to detach the observer and finally notifyObservers() to notify the observers regarding its status.
+
 ![LivesObserver](Diagrams/LivesObserver.png)
 
-#### Observer pattenr for score:
+#### Observer pattern for score:
+
+Observer pattern is implemented to keep track of the score for each player. So, basically we have IObserver as interface and ScoreObserver class as our base class to handle the score mechanism. Here, we have scoreState variable which will handle the current score status. And we have update() which will update the player's score based on the bricks that he hits as for every brick there will be different scenario of adding score. I mean if the user hits the cement brick, no score will be incremented for the player. And we have getScore() which will be handling the score content and keeps track of score for each time incremented. We have SubjectScore class which will be having a variable SubjectState which handles the count of scores.  And also we have setState() to set the current state of the score and getState() to get the current score status. We have attach() method to attach the observer and in the same way detatch() metho to detach the observer and finally notifyObservers() to notify the observers regarding its status. 
+
 ![ScoreObserver](Diagrams/ScoreObserver.png)
 
 #### Observer pattern for speed:
+
+For handling the different levels of speed for the ball, we have implemented the observer pattern for it. As we were maintaining 3 levels of speed for the game and will be changed based on the player's score. We have IObserver as interface and SpeedObserver which implements the IObserver interface. Here, we have SpeedState variable which keeos track of speed of the ball everytime it hits the bricks. So, we have update() which will update the ball speed based on the score of the player in the game. And we have getSpeed() whcih will get the current speed level of the ball in current scenario. We have SubjectSpeed class which will be having a variable SubjectState which handles the speed level of ball.  And also we have setState() to set the current state of the speed and getState() to get the current speed status. We have attach() method to attach the observer and in the same way detatch() metho to detach the observer and finally notifyObservers() to notify the observers regarding its status. 
+
 ![SpeedObserver](Diagrams/SpeedObserver.png)
 
 
