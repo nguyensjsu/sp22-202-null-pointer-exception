@@ -123,6 +123,30 @@ For handling the different levels of speed for the ball, we have implemented the
 
 <img width="678" alt="Screen Shot 2022-05-13 at 11 48 07 PM" src="https://user-images.githubusercontent.com/98674002/168414399-1b2dda4e-57cc-461c-999d-7e9f43599042.png">
 
+### **Game Screenshots**
+
+### **Main Screen**
+
+<img width="548" alt="Screen Shot 2022-05-14 at 10 58 44 PM" src="https://user-images.githubusercontent.com/98674002/168459540-72f9cb81-70d3-45df-8040-f1a78f44ca69.png">
+
+### **Game Screen**
+
+<img width="559" alt="Screen Shot 2022-05-14 at 10 59 56 PM" src="https://user-images.githubusercontent.com/98674002/168459557-36fb1e76-f290-4120-ad23-81c45383659f.png">
+
+### **Game Over Screen**
+
+<img width="554" alt="Screen Shot 2022-05-14 at 10 59 41 PM" src="https://user-images.githubusercontent.com/98674002/168459576-82a16c94-7e9c-4d6a-8812-bace5b6758b2.png">
+
+### **Victory Screen**
+
+<img width="549" alt="Screen Shot 2022-05-14 at 11 03 18 PM" src="https://user-images.githubusercontent.com/98674002/168459583-bbd4255c-dd6e-405d-8074-3603a3dae581.png">
+
+
+### **Two Player Mode Screen**
+
+<img width="552" alt="Screen Shot 2022-05-14 at 11 03 58 PM" src="https://user-images.githubusercontent.com/98674002/168459594-da51663f-b908-482c-86db-d9a796250f4c.png">
+
+
 ### **A summary of the key features (include any special design ideas implemented)**
 
 Change racket size bricks: When the blue bricks are broken, they will drop an item. If the item is picked up, then the racket will change size:
