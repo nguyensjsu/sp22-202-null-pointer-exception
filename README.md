@@ -77,6 +77,8 @@ To switch user input direction for the paddle, a state machine was implemented. 
 ![DirectionStateDiagram](Diagrams/DirectionStateDiagram.png)
 
 #### Decorator pattern for game ending images:
+
+The decoratod pattern is implemented for changing the background images inside the game based on the players performance in the game. In here IImageDisplay is the interface and ImageDecorator is the decorator class which handles the remaining part. Here, basically we have two classes, GameOverImage and VictoryImage which extends the ImageDecorator class. So, basically we have two methods in it. loadImage() and getImage(). So, each and every time if the player wins the game, then the image intended to show victory sign is loaded and then displayed on the game console. Similarly if the user loses the game, the image sign for losing the game will be loaded using loadImage() and then displayed on the game console.
 ![ImageDecorator](Diagrams/ImageDecorator.png)
 
 #### Decorator pattern for different racket types:
