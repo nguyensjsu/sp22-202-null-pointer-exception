@@ -1,9 +1,12 @@
 # **Team Project - BrickBreaker (Null Pointer Exception)**
 
 ### Game Introduction and Plan
-We are implementing a  simple brick breaker game which will be having layers of bricks and ball with which to break the layers. The player moves the paddle from left to right to keep the ball from falling. A life is used when the player fails to hit the ball with paddle. The paddle doesn’t bounce the ball like a mirror, although it does so when the ball hits right in the middle. The closer the bounce take place to the left end of the paddle, a more significant left turn is added to an expected mirror bouncing.
 
-A regular brick disappears when it’s hit by the ball, or breaks a little if it’s a bulkier brick. At the same time, for every brick hit, there will be increase in the score. And by default the player will be given 3 lives. If the user finishes off these 3 lives, then the game will be over. In addition to that, there will be some special bricks in the game. If the player hits those bricks, a new ball will be added into game. When the user hits this new ball with paddle, the paddle size increases. We are also planning to implement background music for our brick breaker game.
+Our team has implemented a brick-breaker game using java. The game will include the traditional bricks, ball, and racket components. The objective of the game is to destroy all the bricks in the window and achieve the highest score possible of 30 points. The player is able to move the paddle from left to right to induce a collision between the ball and paddle to keep the ball in motion and prevent it from falling into the lava. The player is granted three lives to try and complete the game. Since taking part in team activities is fun we also implemented a two player mode which allows players to collaborate in beating the game.
+
+Our plan to implement the game included finding source code, refactoring the code, and implementing features to create a fun and interactive game. Keeping a growth developement mindset, we planned to refactor the code into a system that can be expanded. The source code provided a solid base logic for ball movement, paddle movement, and brick collision, however, the source was very closly coupled and did the system was not implemented in an ideal way for easy and organic growth. The source code also included many gameplay logic errors and gaps which we later addressed and corrected in our own implemenatation. Refactoring included implementing a loosely coupled base, organise various components into packages, and integrate the sourced functions with design patterns.
+
+Once design patterns were implemented and a good code base was complete, the team moved into completing features which enhanced gameplay. These features are highlighted and discussed below along with implementation notes.
 
 ### **Link to your team's project Videos**
 
@@ -24,30 +27,38 @@ A regular brick disappears when it’s hit by the ball, or breaks a little if it
 * Rafic Hasbini's Journal - [Week1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Rafic/Week1.md), [Week 2](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Rafic/Week2.md), [Week 3](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Rafic/Week3.md), [Week 4](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Rafic/Week4.md).
 * Varun Teja Maguluri's Journal - [Week 1](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week1.md), [Week 2](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week2.md), [Week 3](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week3.md), [Week 4](https://github.com/nguyensjsu/sp22-202-null-pointer-exception/blob/main/Journals/Varun/Week4.md).
 
-### **Summarizing our game**
-The game that we as a team developing is Brick Breaker. So, the main concept of this game is, the player will be given a ball and all the time the ball will be in motion. And the player will just be controlling the paddle at the bottom which he can just move that paddle left and right. The main task of the player is to hit the ball with paddle and also make sure the ball hits the bricks at top. If he fails to hit any brick or fails to hit the ball with his paddle, then one life of the player will be lost. By default, each player will be given 3 lives. So, in this game, there were extended features like special bricks whose functionality is whenever the user hits this special brick, a new ball will be added to the game and if he managed to hit that ball, his paddle length will be increased. And also another extra feature that is planned to implement in this game is background music for this game.
+### **Summarizing Brick-Breaker gameplay**
+
+The traditional rules of brick-breaker were conserved allowing for the ball to bounce off the players paddle if a collision between the two occured. Movement of the paddle is possible through player input of the keyboard arrow keys or the AWSD keys. The ball is able to bounce on the side borders and top border of the window, but not the bottom border. If the player fails to collide the ball with the paddle, the ball will fall below the bottom screen and a life will be taken. The ball will then re-initialize and gameplay can continue. 
+
+As bricks are destroyed, each destructable brick is worth one point. Different types of bricks have been implemented to enhance gameplay and making the game more challenging. The bricks implemented include: a non-destructable cement brick, a paddle level-up/level-down brick, a red lose life brick, a green add life brick, and a switch arrow input direction brick for paddle movement.
+
+If a ball collides with a cement brick, the ball will bounce using its normal angled movement. 
+If a ball collides with a paddle level-up/level-down brick, an item will be dropped. If the paddle collects the item, then the paddle size will either increase or decrease. 
+If the ball collides with the add life brick, the player will gain a life.
+If the ball collides with the lose life brick, the player will lose a life.
+If the ball collides with the switch paddle input direction brick, the movement key direction will be reversed.
+
+Since the game only consists of a single level, when the game is launched, the bricks are initialized randomly using a numbering system from 1-100. If the number is greater than 95 then a cement brick will be initialized. If the number is in the range 80 - 95 then a full life brick will be initialized.If the number is in the range 50 - 80 then a half life brick will be initialized. If the number is in the range 5 - 20 then a paddle level-up/level-down brick will be initialized. If the number is 4 then a red lose life brick will be initialized. If the number is 2 or 3 then a switch arrow input direction brick will be initialized. If the number is 1 then a green add life brick will be initialized.
+
+Ball movement includes an algorithm to calculate x and y coordinates and switch the direction of the ball after a collision with both the bricks and the paddle. Depending on the direction of ball movement the x or y value is inverted by multiplying the value by -1.
+
+Additional features to enhance the game inlcude adding sound effects including background music, which may be switched on or off, laughing sound effects to tease the player if they lose, and horray sound effects if the game is won. As gameplay advances and more bricks are destroyed, the speed of the ball increases gradually to increase the challenge for the player. 
+
+The player also has the ability to customize background color themes from the main menu, as well as view the top 5 scores achieved.
+
+The player also has the ability to pause and resume the game during gameplay, as well as restart the game at any time using buttons displayed at the top of the screen.
+
+In the home screen menu, the player is also able to select single player or two player modes. For two player mode, the single player game rules and features apply.
 
 ### **A High Level Architecture Diagram**
 
 ![Class_UML](Diagrams/uml_final.jpg)
 
 #### Strategy pattern for switching music:
-
 ![Strategy Pattern](https://user-images.githubusercontent.com/98674002/168416783-9e2013d6-861b-4587-bb89-c36364cfbe9b.png)
 
 #### Strategy pattern for different Bricks:
-
-For implementing various types of bricks that exist in the game, different attributes of the brick class had to be instantiated. For each of the bricks, let's say cement brick, health brick, had to be setup diferently than each other. For example, the regular health brick has health 50 and is descrictible, whereas for comparision, the cement brick is configured differently, as it's health attribute should not be initialized as it is supposed to be indestructible. So, here arises the need to configure different bricks, using different strategies. 
-For initializing the bricks, Strategy pattern was used (diagram provided below). For the strategy pattern, The IBrick interface was created, which provides the abstract method called ```setupBrick()```, to initialize the bricks. The Brick class then acts as a concrete strategy as various lambda implementations for the different bricks are provided. The implementations are provided in the brick class as: (for each type of brick)
-```
-    private final IBrick <brick_type> = () -> {
-        //Config brick
-        //...
-        //...
-    };
-```
-The brick class also acts as the context. Upon initialization of a brick object, the ```initBrick(...)``` function is called which then choses what type of brick the current object sha;l be. Based on generated random number, the ```initBrick()``` function decides the type of the brick for the object, and then configures the brick strategy called ```brickMode``` using whatever strategy it chose via the RNG. 
-
 ![BrickStrategy](Diagrams/BrickStrategy.png)
 
 #### Strategy pattern for different game mode:
@@ -58,22 +69,24 @@ IGameModeStrategy is an interface for implementing two players mode. The game wi
 
 #### State machine pattern for change racket move direction:
 ![DirectionStateDiagram](Diagrams/DirectionStateDiagram.png)
+To switch user input direction for the paddle, a state machine was implemented. The initialized racket class includes a parameter to identify the direction state (either normal or switched). The parameter will alternate between the two states if the switch input direction brick is destroyed. The two state classes SwicthedDirectionState and NormalDirectionState implement the move method in the interface class IKeyDirection. The specific state move method is then called based on the current state in the initialized racket.
 
 #### Decorator pattern for game ending images:
 ![ImageDecorator](Diagrams/ImageDecorator.png)
 
 #### Decorator pattern for different racket types:
 ![RacketDecoratorDiagram](Diagrams/RacketDecoratorDiagram.png)
+A decorator design pattern has been implemented for the racket. An interface class for racket, IRacket, defines the methods to be used in the racket implementation. The base Racket class implements the all methods from the interface. An abstract decorator class RacketDecorator also implements the methods in IRacket. Finally all the different rackets with additional features extend the RacketDecorator class as concrete decorators. This implementation allows for even more features to be implemented for the racket with ease. For the current two racket decorators implemented, since the size of the racket changes, these interfered with the base object variables and needed re-implementation of many methods. However in the case where the racket size stays the same as the original and only additional behavior is implemented, this re-implementation is not needed.
 
-#### Observer pattern for lives, score and speed:
-
-For the score, speed and lives part of the game, Observer pattern was implemented. The score, life and speed of the gameplay is important for the user to know, as it improves the gameplay by giving the user some information about the game state. However this information can also be used somewhere else in the game, for example, updating the score board using score, using current lives left for the player to determine how the game progresses (0 lives means game over) and speed variable for the game to increase the speed of the ball in action. All of this is done in different classes, and it would prove to be a security threat to change the visibility of these attributes to public for access across the codebase. Also, it would prove to be a challenge to maintain the same variable state once changed by any entity in the code. So observer pattern was implemented to solve these issues. 
-All three attributes for the game lives, score and speed were made to be subjects separately. They all implement the interface ```ISubject.java``` which provides abstract methods for attach, detach and notify. For this, new classes were created, which act as concrete subject. They are SubjectLives, SubjectScore and SubjectSpeed. Then the observers were created. The observers implement an interface ```IObserver.java``` that provides the abstract method for updating the observer. The lives, score and speed are always changed using their respective subject class , ie SubjectLives, SubjectScore and SubjectSpeed. This ensures that wherever the observer lies in the code, it will be updated of the change of state in the above attributes. This includes on the score board, on the GUI information to the user and so on. **The UML diagrams for each observer pattern is provided below.**
-
-##### Lives, score and speed Observer:
+#### Observer pattern for lives:
 ![LivesObserver](Diagrams/LivesObserver.png)
+
+#### Observer pattenr for score:
 ![ScoreObserver](Diagrams/ScoreObserver.png)
+
+#### Observer pattern for speed:
 ![SpeedObserver](Diagrams/SpeedObserver.png)
+
 
 ### **Burndown Chart**
 
@@ -115,3 +128,6 @@ Blue Brick : Special Brick
  Background Sounds :
  <br>
   - Audio implementation for both winning and losing game.
+
+### **Final Analysis**
+This project was fun to implement and really nurtured our abilities to design a good software system and follow agile/scrum methodologies. While we are happy with the final product, there is always room for expaning with more features and correcting some minor bugs. One bug which may be corrected is the angle of reflection from the paddle once the ball collides with it. At certain points on the paddle, the angle is not correct. Also, additional features to enhance the game may include a racket with a gun to shoot bricks. 
