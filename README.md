@@ -56,6 +56,8 @@ In the home screen menu, the player is also able to select single player or two 
 ![Class_UML](Diagrams/uml_final.jpg)
 
 #### Strategy pattern for switching music:
+
+To change the different background music for the game based on the player's performance, the strategy pattern was implemented. It will be easy to switch the audio in runtime using strategy pattern. The AudioStrategy is the interface for this pattern. AudioChanger is the class which is having the changeStrategy() and setAudioOutput() methods to perform the change for different strategies for different scenarios. The four classes which implements AudioStrategy interface are DogMusic, VictoryMusic, GameMusic and StopMusic. So, by default, the strategy is set to GameMusic because whenever the game starts, this will the music that should be played. Then when the player tries to hit the bricks with ball and succeeds the task and wins, then the strategy is set to StopMusic which will stop all audio inputs and then sets the strategy to VictoryMusic. Similarly, if the player loses all his lives and loses the game, then the strategy is set to StopMusic and then it is set to DogMusic. And finally , when the uses restarts the game, then the strategy is set to GameMusic again.
 ![Strategy Pattern](https://user-images.githubusercontent.com/98674002/168416783-9e2013d6-861b-4587-bb89-c36364cfbe9b.png)
 
 #### Strategy pattern for different Bricks:
