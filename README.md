@@ -15,10 +15,11 @@ Once design patterns were implemented and a good code base was complete, the tea
 [Brick Breaker - Demo](https://youtu.be/S3eHdaPgxro)
 
 ### **Our Team**
-* Anshul Kumar Shandilya | 
-* Boteng Yuan
-* Rafic Hasbini
-* Varun Teja Maguluri
+### Name               | Student ID   |  Core XP value
+Anshul Kumar Shandilya | 016039894    |  Communication
+Boteng Yuan            |              |  Courage
+Rafic Hasbini          | 011243466    |  Simplicity
+Varun Teja Maguluri    | 016018964    |  Feedback
 
 ### **Individual Journals**
 
