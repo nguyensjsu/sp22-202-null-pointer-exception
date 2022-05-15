@@ -17,13 +17,13 @@ Once design patterns were implemented and a good code base was complete, the tea
 ### **Our Team**
 
 Name | Student ID | Core XP Value  
---- | --- | --- | ---  
+--- | ---   
 Anshul Kumar Shandilya | 016039894 | Communication 
---- | --- | --- | --- 
+--- | --- 
 Boteng Yuan | 012183951 | Courage 
---- | --- | ---  | --- 
+--- | ---   
 Rafic Hasbini | 011243466 | Simplicity 
---- | --- | ---  | --- 
+--- | ---   
 Varun Teja Maguluri | 016018964 | Feedback 
 ### **Individual Journals**
 
